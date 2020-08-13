@@ -1,2 +1,2 @@
 # progra-2-2c
-Prueba 1
+Prueba 2
