@@ -8,6 +8,13 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Bullet.cs" t="Include" />
+          <e p="Manager.cs" t="Include" />
+          <e p="PlayerController.cs" t="Include" />
+        </e>
+        <e p="Sprites" t="Include">
+          <e p="Template" t="Include">
+            <e p="Readme.txt" t="Include" />
+          </e>
         </e>
       </e>
       <e p="Node-Defense.sln" t="IncludeFlat" />

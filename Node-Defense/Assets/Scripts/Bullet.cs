@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        this.transform.Translate(Vector3.up);
+        this.transform.Translate(Vector3.right);
 
         if (this.transform.position.y > 100)
         {
