@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5347178840658042734}
   - component: {fileID: 3342964836171471820}
   m_Layer: 0
-  m_Name: SSL
+  m_Name: Internet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd0cae5dc6fb8343ac432aeb8729fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 6
+  treePosition: 0
+  powerUp: {fileID: 0}
+  Type: 1
+  life: 100
+  virus: []
 --- !u!1 &5347178840860487844
 GameObject:
   m_ObjectHideFlags: 0

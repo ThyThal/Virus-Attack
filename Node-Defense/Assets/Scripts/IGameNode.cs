@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IGameNode 
 {
     int TreePosition { get; set; }
-    int Type { get; set; }
+    PowerUp PowerUp { get; set; }
 }

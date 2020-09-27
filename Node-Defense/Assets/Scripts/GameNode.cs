@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GameNode : MonoBehaviour, IGameNode
 {
-    private int treePosition;
-    public int type;
+    [SerializeField] private int treePosition;
+    [SerializeField] private PowerUp powerUp;
+    [SerializeField] int Type;
+    [SerializeField] int life;
+    [SerializeField] List<Virus> virus;
 
     public int TreePosition
     {
@@ -20,16 +23,16 @@ public class GameNode : MonoBehaviour, IGameNode
         }
     }
 
-    public int Type
+    public PowerUp PowerUp
     {
         get
         {
-            return type;
+            return powerUp;
         }
 
         set
         {
-            type = value;
+            powerUp = value;
         }
     }
     
