@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2006766797194465186}
   - component: {fileID: 3610831877144066217}
   m_Layer: 0
-  m_Name: Internet
+  m_Name: BasicNode 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treePosition: 0
   powerUp: {fileID: 0}
-  Type: 1
-  life: 0
+  Type: 0
+  life: 100
   virus: []
 --- !u!212 &3610831877144066217
 SpriteRenderer:
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.51985353, b: 0.043137252, a: 1}
+  m_Color: {r: 0.042452812, g: 0.17356244, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
