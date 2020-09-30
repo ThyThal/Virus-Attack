@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - Virus
+  - Node
   layers:
   - Default
   - TransparentFX

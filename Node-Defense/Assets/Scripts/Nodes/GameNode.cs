@@ -8,7 +8,8 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private PowerUp powerUp;
     [SerializeField] int Type;
     [SerializeField] int life;
-    [SerializeField] List<Virus> virus;
+    [SerializeField] public bool isInfected;
+    [SerializeField] public List<Virus> virus;
 
     public int TreePosition
     {
@@ -45,6 +46,10 @@ public class GameNode : MonoBehaviour, IGameNode
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (var v in virus)
+        {
+            v.Exe();
+            //v.target = this.GameObject;
+        }
     }
 }
