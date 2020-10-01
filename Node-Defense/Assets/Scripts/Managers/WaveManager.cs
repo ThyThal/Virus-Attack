@@ -7,7 +7,6 @@ public class WaveManager : MonoBehaviour
     [Header("Current Wave Info")]
     [SerializeField] private GameObject virus;
     [SerializeField] private int totalVirus;
-    [SerializeField] private LevelManager levelManager;
 
     [Header("Variables")]
     [SerializeField] private int currentWave;
@@ -33,7 +32,6 @@ public class WaveManager : MonoBehaviour
     public void Start()
     {
         originalTimer = searchTimer;
-        levelManager = GetComponent<LevelManager>();
     }
 
     public void Update()
@@ -78,7 +76,7 @@ public class WaveManager : MonoBehaviour
 
     public void SpawnEnemy(GameObject virus)
     {
-        levelManager.SpawnVirus(virus);
+        LevelManager.instance.SpawnVirus(virus);
         totalVirus = totalVirus - 1;
     }
 

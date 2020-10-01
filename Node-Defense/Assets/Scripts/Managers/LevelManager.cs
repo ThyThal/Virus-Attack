@@ -16,41 +16,50 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         nodes = new BinaryTree();
         int i = 0;
         var internet = Instantiate(nodesPrefabs[1], nodesParent);
         Vector2 position = new Vector2(-6, 0);
         ((GameObject)internet).transform.localPosition = position;
+        internet.GetComponent<GameNode>().TreePosition = i;
         nodeInternet = internet;
-        nodes.Add(i, internet.GetComponent<GameNode>());
-        for (; i < 1; i++)
+        nodes.Add(i, (GameObject)internet);
+        i++;
+        for (; i < 5; i++)
         {
             position.x += NODE_POSITION_DIFERENCESS;
             position.y = Random.Range(-5, 5);
             var basicNode = Instantiate(nodesPrefabs[0], nodesParent);
             ((GameObject)basicNode).transform.localPosition = position;
-            nodes.Add(i, basicNode.GetComponent<GameNode>());
+            basicNode.GetComponent<GameNode>().TreePosition = i;
+            nodes.Add(i, (GameObject)basicNode);
         }
         i++;
         position.x += NODE_POSITION_DIFERENCESS;
         position.y = 0;
         var server = Instantiate(nodesPrefabs[2], nodesParent);
         ((GameObject)server).transform.localPosition = position;
+        server.GetComponent<GameNode>().TreePosition = i;
         nodeServer = server;
-        nodes.Add(i, server.GetComponent<GameNode>());
-
+        nodes.Add(i, (GameObject)server);
     }
 
     public void SpawnVirus(GameObject enemyToSpawn)
     {
         Instantiate(enemyToSpawn, nodeInternet.transform);
         var gameNode = (GameNode) nodeInternet.GetComponent<GameNode>();
-        gameNode.virus.Add(enemyToSpawn.GetComponent<Virus>());
+        gameNode.virus.Add(enemyToSpawn);
+    }
+
+    public void RemoveVirus(GameObject virus)
+    {
+        nodeInternet.GetComponent<GameNode>().virus.Remove(virus);
     }
 
     private void Update()
     {
-        Debug.Log(nodeInternet.GetComponent<GameNode>().virus);
+
     }
 
     public void Win()

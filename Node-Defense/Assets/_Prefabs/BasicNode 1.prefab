@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1010564230831599628}
   - component: {fileID: 2006766797194465186}
   - component: {fileID: 3610831877144066217}
+  - component: {fileID: 1107815579838642064}
   m_Layer: 9
   m_Name: BasicNode 1
   m_TagString: Node
@@ -50,6 +51,8 @@ MonoBehaviour:
   life: 100
   isInfected: 0
   virus: []
+  timer: 0.5
+  damage: 5
 --- !u!212 &3610831877144066217
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,3 +103,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &1107815579838642064
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2377144227498012651}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6557143

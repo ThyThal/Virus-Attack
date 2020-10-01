@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUp : MonoBehaviour
+public class NewBehaviourScript1 : MonoBehaviour
 {
-
-    int type;
-
-
-
     // Start is called before the first frame update
     void Start()
     {

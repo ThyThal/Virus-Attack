@@ -594,7 +594,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1752745970}
-  - component: {fileID: 1752745973}
   - component: {fileID: 1752745972}
   - component: {fileID: 1752745971}
   m_Layer: 0
@@ -632,10 +631,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virus: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53, type: 3}
   totalVirus: 0
-  levelManager: {fileID: 1752745972}
   currentWave: 0
   nextWave: 0
-  searchTimer: 3
+  searchTimer: 5
   originalTimer: 0
   state: 1
   foundEnemy: 0
@@ -643,9 +641,9 @@ MonoBehaviour:
   waves:
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
-    minVirus: 2
-    maxVirus: 5
-    spawnerRate: 1
+    minVirus: 1
+    maxVirus: 4
+    spawnerRate: 2
 --- !u!114 &1752745972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,7 +656,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c321a91ef2dd8644b9f9baaa51650cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodes: {fileID: 0}
   nodeInternet: {fileID: 0}
   nodeServer: {fileID: 0}
   nodesParent: {fileID: 930547521}
@@ -666,18 +663,6 @@ MonoBehaviour:
   - {fileID: 2377144227498012651, guid: e634d2a014b660e469b3c71f37d43f8c, type: 3}
   - {fileID: 2377144227498012651, guid: 5e1d17de39e41d34192df17acc4288ed, type: 3}
   - {fileID: 2377144227498012651, guid: ebc8901985e81f74b9b7be74f0d96461, type: 3}
---- !u!114 &1752745973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752745969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cdc2cc716ce1914ebeaf925f0c38d80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2026270705
 GameObject:
   m_ObjectHideFlags: 0

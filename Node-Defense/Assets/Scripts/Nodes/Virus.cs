@@ -5,19 +5,24 @@ using UnityEngine;
 public class Virus : MonoBehaviour
 {
     [SerializeField] private ITree init;
-    [SerializeField] public GameObject target;
+    public GameObject target;
     [SerializeField] private Vector2 direction;
+    [SerializeField] private float distance;
     [SerializeField] private float speed;
+    [SerializeField] private int damage;
+    [SerializeField] private float timer;
+    [SerializeField] int life;
 
     // Start is called before the first frame update
     void Start()
     {
         ActionNode findNext = new ActionNode(FindNext);
-        ActionNode sendAttack = new ActionNode(Attack);
+        ActionNode move = new ActionNode(Move);
+        ActionNode attack = new ActionNode(Attack);
 
-        QuestionNode isInfected = new QuestionNode(IsTargetInfected, findNext, sendAttack);
+        QuestionNode isColliding = new QuestionNode(IsColliding, attack, move);
+        QuestionNode isInfected = new QuestionNode(IsTargetInfected, findNext, isColliding);
         QuestionNode hasTarget = new QuestionNode(HasTarget, isInfected , findNext);
-        //QuestionNode isInfected = new QuestionNode(IsInfected, findNear, sendAttack);
 
         init = hasTarget;
     }
@@ -25,25 +30,47 @@ public class Virus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer -= Time.deltaTime;
+        if (target != null)
+            distance = (target.transform.position - transform.position).magnitude;
         init.Execute();
-    }
-
-    public void Exe()
-    {
-        target = GameObject.FindGameObjectWithTag("Node");
     }
 
     private void FindNext()
     {
-        //target = levelManager.nodes.;
+        target = target.GetComponent<GameNode>().NextNode().gameNode;
+    }
+
+    private void Move()
+    {
+        direction = target.transform.position - transform.position;
+        var distance = direction.magnitude;
+        var move = direction * speed * Time.deltaTime;
+        transform.position += Vector3.ClampMagnitude(move, distance);
+
     }
 
     private void Attack()
     {
-        direction = target.transform.position - transform.position;
-        var distance = direction.magnitude;
-        var move = transform.right * speed * Time.deltaTime;
-        transform.position += Vector3.ClampMagnitude(move, distance);
+        if (timer <= 0)
+        {
+            target.GetComponent<GameNode>().GetDamage(damage);
+            timer = 2;
+        }
+    }
+
+    public bool IsColliding()
+    {
+
+        if (distance <= 0.5)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     public bool HasTarget()
@@ -55,6 +82,7 @@ public class Virus : MonoBehaviour
 
         else
         {
+            target = GameObject.FindGameObjectWithTag("Node");
             return false;
         }
     }
@@ -70,5 +98,21 @@ public class Virus : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void GetDamage(int damage)
+    {
+
+        Debug.Log("getdanmg");
+        if (life > 0)
+            life -= damage;
+        else if (life <= 0)
+            HasDied();
+    }
+
+    public void HasDied()
+    {
+        LevelManager.instance.RemoveVirus(gameObject);
+        Destroy(gameObject);
     }
 }
