@@ -1,12 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
+public enum GameNodeType
+{
+    BasicNode = 1,
+    Internet = 2,
+    Server = 3
+};
 
 public class GameNode : MonoBehaviour, IGameNode
 {
-    [SerializeField] private int treePosition;
+    private int treePosition;
     [SerializeField] private PowerUp powerUp;
-    [SerializeField] int Type;
+    [SerializeField] GameNodeType Type;
     [SerializeField] int life;
     [SerializeField] public bool isInfected;
     [SerializeField] public List<GameObject> virus;
@@ -15,7 +24,9 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private float originalTimer;
     [SerializeField] private int damage;
     [SerializeField] private GameObject targetVirus;
+    [SerializeField] private Transform render;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Vector3 vector;
 
     public int TreePosition
     {
@@ -46,8 +57,10 @@ public class GameNode : MonoBehaviour, IGameNode
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        lineRenderer = GetComponent<LineRenderer>();
+        if (Type != GameNodeType.Internet)
+            lineRenderer = GetComponent<LineRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        render = GetComponentInChildren<Transform>();
         originalTimer = timer;
     }
 
@@ -55,12 +68,15 @@ public class GameNode : MonoBehaviour, IGameNode
     void Update()
     {
         timer -= Time.deltaTime;
-        lineRenderer.SetPosition(1, Vector3.zero);
+        if(Type != GameNodeType.Internet)
+            lineRenderer.SetPosition(1, Vector3.zero);
         targetVirus = GameObject.FindGameObjectWithTag("Virus");
         if (targetVirus != null && !isInfected)
         {
-            var vector = targetVirus.transform.position - transform.position;
-            lineRenderer.SetPosition(1, vector);
+            vector = targetVirus.transform.position - render.position;
+            Debug.Log(targetVirus.transform.position+" "+render.position);
+            if (Type != GameNodeType.Internet)
+                lineRenderer.SetPosition(1, vector);
             if (timer <= 0)
             {
                 Attack(targetVirus.GetComponent<Virus>());
@@ -99,7 +115,7 @@ public class GameNode : MonoBehaviour, IGameNode
 
     public Node NextNode()
     {
-        if (Type == 2) return null;
+        if (Type == GameNodeType.Server) return null;
         Node nextNode = LevelManager.instance.nodes.Find(treePosition++); 
         /*Node actualNode = LevelManager.instance.nodes.Find(treePosition);
         bool Boolean = (Random.value > 0.5f);*/
@@ -125,6 +141,7 @@ public class GameNode : MonoBehaviour, IGameNode
     public void HasDied()
     {
         isInfected = true;
+
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
     }
 }
