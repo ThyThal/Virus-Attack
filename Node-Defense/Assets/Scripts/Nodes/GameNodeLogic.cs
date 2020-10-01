@@ -6,8 +6,7 @@ public class GameNodeLogic : MonoBehaviour
 {
     public void Selection()
     {
-        Debug.Log("SELECTION");
-        if (PowerUpManager.instance.activePowerUp != null)
+        if (PowerUpManager.instance.activePowerUp != null && this.GetComponent<GameNode>().Type != GameNodeType.Internet)
         {
             PowerUpManager.instance.activePowerUp.transform.position = (Vector2)this.transform.position + (Vector2.up);
             this.GetComponent<GameNode>().PowerUp = PowerUpManager.instance.activePowerUp;

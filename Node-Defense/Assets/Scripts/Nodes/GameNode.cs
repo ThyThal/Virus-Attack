@@ -15,7 +15,7 @@ public class GameNode : MonoBehaviour, IGameNode
 {
     private int treePosition;
     [SerializeField] private PowerUp powerUp;
-    [SerializeField] GameNodeType Type;
+    [SerializeField] public GameNodeType Type;
     [SerializeField] int life;
     [SerializeField] public bool isInfected;
     [SerializeField] public List<GameObject> virus;
@@ -74,7 +74,6 @@ public class GameNode : MonoBehaviour, IGameNode
         if (targetVirus != null && !isInfected)
         {
             vector = targetVirus.transform.position - render.position;
-            Debug.Log(targetVirus.transform.position+" "+render.position);
             if (Type != GameNodeType.Internet)
                 lineRenderer.SetPosition(1, vector);
             if (timer <= 0)
@@ -109,8 +108,10 @@ public class GameNode : MonoBehaviour, IGameNode
 
     private void Attack(Virus v)
     {
-
-        v.GetDamage(damage);
+        int damageDone = damage;
+        if (powerUp != null && powerUp.type == PowerUpType.Antivirus)
+            damage = damage * 2;
+        v.GetDamage(damageDone);
     }
 
     public Node NextNode()
@@ -133,7 +134,11 @@ public class GameNode : MonoBehaviour, IGameNode
     public void GetDamage(int damage)
     {
         if (life > 0)
+        {
+            if (powerUp != null && powerUp.type == PowerUpType.FireWall)
+                damage = damage / 2;
             life -= damage;
+        }
         else if(life <= 0)
             HasDied();
     }
@@ -141,7 +146,12 @@ public class GameNode : MonoBehaviour, IGameNode
     public void HasDied()
     {
         isInfected = true;
-
+        if (powerUp != null)
+        {
+            Destroy(powerUp.gameObject);
+            powerUp = null;
+        }
+        this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
     }
 }
