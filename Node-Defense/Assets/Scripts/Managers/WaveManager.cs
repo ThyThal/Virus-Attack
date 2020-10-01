@@ -6,7 +6,7 @@ public class WaveManager : MonoBehaviour
 {
     [Header("Current Wave Info")]
     [SerializeField] private GameObject virus;
-    [SerializeField] private int totalVirus;
+    [SerializeField] public int totalVirus;
 
     [Header("Variables")]
     [SerializeField] private int currentWave;
@@ -60,7 +60,6 @@ public class WaveManager : MonoBehaviour
     {
         state = SpawnState.SPAWNING;
         newWave = true;
-
         totalVirus = Random.Range(waveNumber.minVirus, waveNumber.maxVirus);
 
         for (int i = 0; i < totalVirus; i++)
@@ -77,7 +76,6 @@ public class WaveManager : MonoBehaviour
     public void SpawnEnemy(GameObject virus)
     {
         LevelManager.instance.SpawnVirus(virus);
-        totalVirus = totalVirus - 1;
     }
 
     public bool EnemyIsAlive()

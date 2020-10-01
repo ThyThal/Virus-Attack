@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Virus
   - Node
+  - Server
+  - Internet
   layers:
   - Default
   - TransparentFX

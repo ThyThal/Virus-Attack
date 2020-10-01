@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4279666085030470209}
   m_Layer: 9
   m_Name: Server
-  m_TagString: Untagged
+  m_TagString: Server
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,9 @@ MonoBehaviour:
   life: 200
   isInfected: 0
   virus: []
+  timer: 0
+  originalTimer: 0
+  damage: 0
 --- !u!212 &3610831877144066217
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] public List<GameObject> virus;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float timer;
+    [SerializeField] private float originalTimer;
     [SerializeField] private int damage;
 
     public int TreePosition
@@ -44,6 +45,7 @@ public class GameNode : MonoBehaviour, IGameNode
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalTimer = timer;
     }
 
     // Update is called once per frame
@@ -57,7 +59,7 @@ public class GameNode : MonoBehaviour, IGameNode
             if (timer <= 0)
             {
                 Attack(targetVirus.GetComponent<Virus>());
-                timer = 2;
+                timer = originalTimer;
             }
         }
         /*foreach (GameObject v in virus)
@@ -86,15 +88,16 @@ public class GameNode : MonoBehaviour, IGameNode
 
     private void Attack(Virus v)
     {
-        Debug.Log("attack");
+
         v.GetDamage(damage);
     }
 
     public Node NextNode()
     {
+        if (Type == 2) return null;
+        Node nextNode = LevelManager.instance.nodes.Find(treePosition++); 
         /*Node actualNode = LevelManager.instance.nodes.Find(treePosition);
         bool Boolean = (Random.value > 0.5f);*/
-        Node nextNode = LevelManager.instance.nodes.Find(treePosition++); 
         /*if (Boolean)
         {
             nextNode = actualNode.leftNode != null ? actualNode.leftNode : actualNode.rightNode;

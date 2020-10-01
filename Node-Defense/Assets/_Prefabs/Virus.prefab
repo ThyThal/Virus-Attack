@@ -99,7 +99,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   distance: 0
   speed: 2
-  damage: 25
+  damage: 50
   timer: 2
   life: 100
 --- !u!58 &-380780106429623434

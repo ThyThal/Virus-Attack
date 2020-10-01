@@ -51,7 +51,8 @@ MonoBehaviour:
   life: 100
   isInfected: 0
   virus: []
-  timer: 0.5
+  timer: 4
+  originalTimer: 0
   damage: 5
 --- !u!212 &3610831877144066217
 SpriteRenderer:
