@@ -40,12 +40,12 @@ public class Virus : MonoBehaviour
     {
         if (LevelManager.instance.isServerInfected == false)
         {
-            Debug.Log("Find Next");
-            target = target.GetComponent<GameNode>().NextNode().gameNode;
+            var targetNode = target.GetComponent<GameNode>().NextNode();
+            if(targetNode != null)
+                target = targetNode.gameNode; 
         }
         if (LevelManager.instance.isServerInfected == true)
         {
-            Debug.Log("Finish");
             HasDied();
         }
     }
@@ -63,7 +63,6 @@ public class Virus : MonoBehaviour
     {
         if (timer <= 0)
         {
-            Debug.Log("Attack");
             target.GetComponent<GameNode>().GetDamage(damage);
             timer = 2;
         }
@@ -87,14 +86,12 @@ public class Virus : MonoBehaviour
     {
         if (target != null)
         {
-            Debug.Log("Has Target");
             return true;
         }
 
         else
         {
             target = GameObject.FindGameObjectWithTag("Node");
-            Debug.Log("No Target");
             return false;
         }
     }
@@ -103,13 +100,11 @@ public class Virus : MonoBehaviour
     {
         if (target.GetComponent<GameNode>().isInfected)
         {
-            Debug.Log("Is Infected");
             return true;
         }
 
         else
         {
-            Debug.Log("Not Infected");
             return false;
         }
     }
