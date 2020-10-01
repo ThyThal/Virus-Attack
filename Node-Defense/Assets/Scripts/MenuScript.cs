@@ -9,6 +9,7 @@ public class MenuScript : MonoBehaviour
 {
     [Header("Scene")]
     [SerializeField] public string conditionText;
+    [SerializeField] public List<Text> scoresPositions;
 
     [Header("Buttons")]
     [SerializeField] private Button playButton;
@@ -17,13 +18,15 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button menuButton;
     [SerializeField] private Text text;
-    [SerializeField] public List<Text>[] scores;
 
 
     [SerializeField] private AudioSource soundButton;
     [SerializeField] private AudioClip hoverAudio;
     [SerializeField] private AudioClip clickAudio;
     [SerializeField] public bool hasClicked;
+
+
+    public Queue scores;
 
     private void Awake()
     {

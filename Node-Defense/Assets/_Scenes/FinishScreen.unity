@@ -1319,6 +1319,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditionText: 
+  scoresPositions:
+  - {fileID: 65447046}
+  - {fileID: 568894305}
+  - {fileID: 2057827403}
+  - {fileID: 1877121474}
+  - {fileID: 262482539}
   playButton: {fileID: 377168374}
   helpButton: {fileID: 0}
   exitButton: {fileID: 790650676}

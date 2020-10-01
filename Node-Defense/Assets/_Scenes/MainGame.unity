@@ -155,6 +155,7 @@ MonoBehaviour:
   conditionScene: FinishScreen
   hasWon: 0
   menuScript: {fileID: 0}
+  score: 0
 --- !u!4 &140428942
 Transform:
   m_ObjectHideFlags: 0
@@ -828,6 +829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1752745970}
   - component: {fileID: 1752745972}
+  - component: {fileID: 1752745974}
   - component: {fileID: 1752745971}
   - component: {fileID: 1752745973}
   m_Layer: 0
@@ -876,17 +878,17 @@ MonoBehaviour:
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
     minVirus: 1
-    maxVirus: 1
+    maxVirus: 2
     spawnerRate: 1
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
-    minVirus: 1
-    maxVirus: 1
+    minVirus: 2
+    maxVirus: 3
     spawnerRate: 1
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
-    minVirus: 1
-    maxVirus: 1
+    minVirus: 3
+    maxVirus: 5
     spawnerRate: 1
 --- !u!114 &1752745972
 MonoBehaviour:
@@ -924,3 +926,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activePowerUp: {fileID: 0}
   stackPositions: []
+--- !u!114 &1752745974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752745969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c26fda7d9e11e4693cf0136acef996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsCount: 0
+  queuePositions: []
+  prefabs:
+  - {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53, type: 3}
+  parent: {fileID: 1101965576}

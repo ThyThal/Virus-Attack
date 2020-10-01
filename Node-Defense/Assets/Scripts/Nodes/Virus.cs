@@ -121,6 +121,7 @@ public class Virus : MonoBehaviour
 
     public void HasDied()
     {
+        GameManager.Instance.score += 100;
         LevelManager.instance.RemoveVirus(gameObject);
         Destroy(gameObject);
     }

@@ -156,6 +156,7 @@ public class GameNode : MonoBehaviour, IGameNode
             Destroy(powerUp.gameObject);
             powerUp = null;
         }
+        GameManager.Instance.score -= 17;
         this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
     }

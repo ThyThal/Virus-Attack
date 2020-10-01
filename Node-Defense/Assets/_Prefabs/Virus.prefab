@@ -100,9 +100,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   distance: 0
   speed: 2
-  damage: 50
+  damage: 30
   timer: 2
-  life: 100
+  life: 50
 --- !u!58 &-380780106429623434
 CircleCollider2D:
   m_ObjectHideFlags: 0

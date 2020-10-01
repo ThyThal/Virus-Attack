@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        GameManager.Instance.score = 0;
         waveManager = GetComponent<WaveManager>();
         instance = this;
         nodes = new BinaryTree();
@@ -54,7 +55,8 @@ public class LevelManager : MonoBehaviour
     public void SpawnVirus(GameObject enemyToSpawn)
     {
         Instantiate(enemyToSpawn, nodeInternet.transform);
-        var gameNode = (GameNode) nodeInternet.GetComponent<GameNode>();
+        //enemyToSpawn.transform.position = nodeInternet.transform.position;
+        var gameNode = nodeInternet.GetComponent<GameNode>();
         gameNode.virus.Add(enemyToSpawn);
     }
 

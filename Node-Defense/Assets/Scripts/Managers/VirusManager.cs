@@ -13,6 +13,8 @@ public class VirusManager : MonoBehaviour
     //public QueueTF items;
     public int itemsCount;
     public List<Vector2> queuePositions;
+    public List<GameObject> prefabs;
+    public Transform parent;
 
     void Awake()
     {
@@ -24,7 +26,7 @@ public class VirusManager : MonoBehaviour
 
         for (int i = 0; i < QUEUE_LIMIT; i++)
         {
-            queuePositions.Add(new Vector3(-400, queuePositions.Count == 0 ? 260 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS, -1));
+            queuePositions.Add(new Vector2(-400, queuePositions.Count == 0 ? 260 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
         }
     }
 
@@ -46,16 +48,22 @@ public class VirusManager : MonoBehaviour
     }
 
     /* Setea el último power up en la cola a activo para aplicar */
-    public void GetItem()
+    public GameObject GetItem()
     {
-        var tempItem = items.Peek(); /* OBTIENE OBJETO Y REMUEVE DE LA COLA */
+        GameObject item = (GameObject)items.Peek(); /* OBTIENE OBJETO Y REMUEVE DE LA COLA */
         items.Dequeue();
         itemsCount--;
 
-        activeItem = tempItem.GetComponent<Virus>();
-        activeItem.transform.localPosition = itemActivePosition;
+        /*activeItem = tempItem.GetComponent<Virus>();
+        activeItem.transform.localPosition = itemActivePosition;*/
 
-        UpdatePositions();
+        //UpdatePositions();
+        for (int i = 0; i < items.Count; i++)
+        {
+            ((GameObject)(items.ToArray())[i]).transform.localPosition = queuePositions[i];
+        }
+
+        return item;
     }
 
     /* Posiciona el power up en pantalla según la dimensión de la pila */
@@ -64,18 +72,18 @@ public class VirusManager : MonoBehaviour
         return queuePositions[itemsCount - 1];
     }
 
-    /* Recorre la cola actualizando las posiciones de los objetos restantes tras sacar el primer objeto */
-    private void UpdatePositions()
+    public void InstanstiateQueue(int totalItems)
     {
-        var count = 0;
-        var tempNode = items.PeekNode();
-
-        while (tempNode != null)
+        for(int i = 0; i< totalItems ; i++)
         {
-            tempNode.data.transform.localPosition = queuePositions[count];
-            count++;
-            tempNode = tempNode.next;
+            var newItem = Instantiate(prefabs[Random.Range(0, prefabs.Count)], parent);
+            EnqueueItem(newItem);
         }
+    }
+
+    public void DepleteQueue()
+    {
+        items.Clear();
     }
 
 }

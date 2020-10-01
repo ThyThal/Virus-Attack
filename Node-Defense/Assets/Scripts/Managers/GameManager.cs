@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string conditionScene;
     [SerializeField] public bool hasWon;
     [SerializeField] public MenuScript menuScript;
+    public int score;
 
     public static GameManager Instance;
     private void Awake()

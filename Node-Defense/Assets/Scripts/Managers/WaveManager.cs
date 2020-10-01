@@ -61,9 +61,11 @@ public class WaveManager : MonoBehaviour
         state = SpawnState.SPAWNING;
         newWave = true;
         totalVirus = Random.Range(waveNumber.minVirus, waveNumber.maxVirus);
+        //VirusManager.instance.InstanstiateQueue(totalVirus);
 
         for (int i = 0; i < totalVirus; i++)
         {
+            //SpawnEnemy(VirusManager.instance.GetItem());
             SpawnEnemy(virus);
             yield return new WaitForSeconds(1f * waveNumber.spawnerRate);
         }
