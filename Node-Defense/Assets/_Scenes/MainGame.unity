@@ -825,7 +825,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c321a91ef2dd8644b9f9baaa51650cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicNodes: 5
   nodeInternet: {fileID: 0}
   nodeServer: {fileID: 0}
   waveManager: {fileID: 0}

@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private float basicNodes;
     public BinaryTree nodes;
     public GameObject nodeInternet;
     public GameObject nodeServer;
@@ -32,7 +31,7 @@ public class LevelManager : MonoBehaviour
         nodeInternet = internet;
         nodes.Add(i, internet);
         i++;
-        for (; i < basicNodes; i++)
+        for (; i < 5; i++)
         {
             position.x += NODE_POSITION_DIFERENCESS;
             position.y = Random.Range(-200, 200);

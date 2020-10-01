@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3047225443992268514}
+  - component: {fileID: 1831571131393464868}
   - component: {fileID: 1831571131393464859}
   - component: {fileID: 1831571131393464857}
   - component: {fileID: 1831571131393464856}
+  - component: {fileID: 1831571131393464858}
   - component: {fileID: 1831571131393464869}
   - component: {fileID: -119316314279381111}
   m_Layer: 5
@@ -21,8 +22,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3047225443992268514
-Transform:
+--- !u!224 &1831571131393464868
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -36,6 +37,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 80, y: 80}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1831571131393464859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66,10 +72,6 @@ MonoBehaviour:
   damage: 5
   targetVirus: {fileID: 0}
   lineRenderer: {fileID: 0}
-  vectorToTarget: {x: 0, y: 0, z: 0}
-  targetPos: {x: 0, y: 0, z: 0}
-  nodePos: {x: 0, y: 0, z: 0}
-  scale: 50
 --- !u!114 &1831571131393464856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +84,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06a02880485d1f4197aa2ff43999e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1831571131393464858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831571131393464871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1831571131393464869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +152,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1831571131393464858}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -261,7 +292,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 18, y: 18, z: 1}
   m_Children: []
-  m_Father: {fileID: 3047225443992268514}
+  m_Father: {fileID: 1831571131393464868}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7563968022991360164

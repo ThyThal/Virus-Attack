@@ -24,14 +24,9 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private float originalTimer;
     [SerializeField] private int damage;
     [SerializeField] private GameObject targetVirus;
+    [SerializeField] private Transform render;
     [SerializeField] private LineRenderer lineRenderer;
-
-
-    [Header("Line Renderer")]
-    [SerializeField] private Vector3 vectorToTarget;
-    [SerializeField] private Vector3 targetPos;
-    [SerializeField] private Vector3 nodePos;
-    [SerializeField] private float scale;
+    [SerializeField] private Vector3 vector;
 
     public int TreePosition
     {
@@ -65,6 +60,7 @@ public class GameNode : MonoBehaviour, IGameNode
         if (Type != GameNodeType.Internet)
             lineRenderer = GetComponent<LineRenderer>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        render = GetComponentInChildren<Transform>();
         originalTimer = timer;
     }
 
@@ -72,21 +68,14 @@ public class GameNode : MonoBehaviour, IGameNode
     void Update()
     {
         timer -= Time.deltaTime;
-
         if(Type != GameNodeType.Internet)
             lineRenderer.SetPosition(1, Vector3.zero);
-
         targetVirus = GameObject.FindGameObjectWithTag("Virus");
-
         if (targetVirus != null && !isInfected)
         {
-            targetPos = targetVirus.transform.position;
-            Debug.Log(targetVirus.transform.position);
-            nodePos = transform.position;
-            Debug.Log(nodePos);
-            vectorToTarget = (targetPos - nodePos) * scale;
+            vector = targetVirus.transform.position - render.position;
             if (Type != GameNodeType.Internet)
-                lineRenderer.SetPosition(1, vectorToTarget);
+                lineRenderer.SetPosition(1, vector);
             if (timer <= 0)
             {
                 Attack(targetVirus.GetComponent<Virus>());
