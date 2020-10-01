@@ -19,12 +19,14 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] int life;
     [SerializeField] public bool isInfected;
     [SerializeField] public List<GameObject> virus;
-    private Image image;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] private float timer;
     [SerializeField] private float originalTimer;
     [SerializeField] private int damage;
     [SerializeField] private GameObject targetVirus;
+    [SerializeField] private Transform render;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Vector3 vector;
 
     public int TreePosition
     {
@@ -55,8 +57,10 @@ public class GameNode : MonoBehaviour, IGameNode
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        image = GetComponent<Image>();
+        if (Type != GameNodeType.Internet)
+            lineRenderer = GetComponent<LineRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        render = GetComponentInChildren<Transform>();
         originalTimer = timer;
     }
 
@@ -64,12 +68,15 @@ public class GameNode : MonoBehaviour, IGameNode
     void Update()
     {
         timer -= Time.deltaTime;
-        lineRenderer.SetPosition(1, Vector3.zero);
+        if(Type != GameNodeType.Internet)
+            lineRenderer.SetPosition(1, Vector3.zero);
         targetVirus = GameObject.FindGameObjectWithTag("Virus");
         if (targetVirus != null && !isInfected)
         {
-            var vector = targetVirus.transform.position - transform.position;
-            lineRenderer.SetPosition(1, vector);
+            vector = targetVirus.transform.position - render.position;
+            Debug.Log(targetVirus.transform.position+" "+render.position);
+            if (Type != GameNodeType.Internet)
+                lineRenderer.SetPosition(1, vector);
             if (timer <= 0)
             {
                 Attack(targetVirus.GetComponent<Virus>());
@@ -135,6 +142,6 @@ public class GameNode : MonoBehaviour, IGameNode
     {
         isInfected = true;
 
-        image.color = new Color(1f, 0.47f, 0.47f);
+        spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
     }
 }
