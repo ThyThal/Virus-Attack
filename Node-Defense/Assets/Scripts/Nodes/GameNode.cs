@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
+public enum GameNodeType
+{
+    BasicNode = 1,
+    Internet = 2,
+    Server = 3
+};
 
 public class GameNode : MonoBehaviour, IGameNode
 {
-    [SerializeField] private int treePosition;
+    private int treePosition;
     [SerializeField] private PowerUp powerUp;
-    [SerializeField] int Type;
+    [SerializeField] GameNodeType Type;
     [SerializeField] int life;
     [SerializeField] public bool isInfected;
     [SerializeField] public List<GameObject> virus;
-    private SpriteRenderer spriteRenderer;
+    private Image image;
     [SerializeField] private float timer;
     [SerializeField] private float originalTimer;
     [SerializeField] private int damage;
@@ -46,8 +55,8 @@ public class GameNode : MonoBehaviour, IGameNode
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         lineRenderer = GetComponent<LineRenderer>();
+        image = GetComponent<Image>();
         originalTimer = timer;
     }
 
@@ -99,7 +108,7 @@ public class GameNode : MonoBehaviour, IGameNode
 
     public Node NextNode()
     {
-        if (Type == 2) return null;
+        if (Type == GameNodeType.Server) return null;
         Node nextNode = LevelManager.instance.nodes.Find(treePosition++); 
         /*Node actualNode = LevelManager.instance.nodes.Find(treePosition);
         bool Boolean = (Random.value > 0.5f);*/
@@ -125,6 +134,7 @@ public class GameNode : MonoBehaviour, IGameNode
     public void HasDied()
     {
         isInfected = true;
-        spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
+
+        image.color = new Color(1f, 0.47f, 0.47f);
     }
 }

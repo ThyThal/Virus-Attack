@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public GameObject nodeServer;
     public WaveManager waveManager;
     public bool isServerInfected;
-    private const int NODE_POSITION_DIFERENCESS = 2;
+    private const int NODE_POSITION_DIFERENCESS = 100;
     public Transform nodesParent;
     private bool gameFinished;
     public Dictionary<string, string> dictionary;
@@ -25,29 +25,29 @@ public class LevelManager : MonoBehaviour
         nodes = new BinaryTree();
         int i = 0;
         var internet = Instantiate(nodesPrefabs[1], nodesParent);
-        Vector2 position = new Vector2(-6, 0);
-        ((GameObject)internet).transform.localPosition = position;
+        Vector2 position = new Vector2(-300, 0);
+        internet.transform.localPosition = position;
         internet.GetComponent<GameNode>().TreePosition = i;
         nodeInternet = internet;
-        nodes.Add(i, (GameObject)internet);
+        nodes.Add(i, internet);
         i++;
         for (; i < 5; i++)
         {
             position.x += NODE_POSITION_DIFERENCESS;
-            position.y = Random.Range(-5, 5);
+            position.y = Random.Range(-200, 200);
             var basicNode = Instantiate(nodesPrefabs[0], nodesParent);
-            ((GameObject)basicNode).transform.localPosition = position;
+            basicNode.transform.localPosition = position;
             basicNode.GetComponent<GameNode>().TreePosition = i;
-            nodes.Add(i, (GameObject)basicNode);
+            nodes.Add(i, basicNode);
         }
         i++;
         position.x += NODE_POSITION_DIFERENCESS;
         position.y = 0;
         var server = Instantiate(nodesPrefabs[2], nodesParent);
-        ((GameObject)server).transform.localPosition = position;
+        server.transform.localPosition = position;
         server.GetComponent<GameNode>().TreePosition = i;
         nodeServer = server;
-        nodes.Add(i, (GameObject)server);
+        nodes.Add(i, server);
     }
 
     public void SpawnVirus(GameObject enemyToSpawn)
