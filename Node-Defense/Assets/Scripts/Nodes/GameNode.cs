@@ -14,6 +14,8 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private float timer;
     [SerializeField] private float originalTimer;
     [SerializeField] private int damage;
+    [SerializeField] private GameObject targetVirus;
+    [SerializeField] private LineRenderer lineRenderer;
 
     public int TreePosition
     {
@@ -45,6 +47,7 @@ public class GameNode : MonoBehaviour, IGameNode
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
         originalTimer = timer;
     }
 
@@ -52,10 +55,12 @@ public class GameNode : MonoBehaviour, IGameNode
     void Update()
     {
         timer -= Time.deltaTime;
-
-        GameObject targetVirus = GameObject.FindGameObjectWithTag("Virus");
-        if (targetVirus != null)
+        lineRenderer.SetPosition(1, Vector3.zero);
+        targetVirus = GameObject.FindGameObjectWithTag("Virus");
+        if (targetVirus != null && !isInfected)
         {
+            var vector = targetVirus.transform.position - transform.position;
+            lineRenderer.SetPosition(1, vector);
             if (timer <= 0)
             {
                 Attack(targetVirus.GetComponent<Virus>());
