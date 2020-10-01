@@ -17,6 +17,8 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Button backButton;
     [SerializeField] private Button menuButton;
     [SerializeField] private Text text;
+    [SerializeField] public List<Text>[] scores;
+
 
     [SerializeField] private AudioSource soundButton;
     [SerializeField] private AudioClip hoverAudio;
