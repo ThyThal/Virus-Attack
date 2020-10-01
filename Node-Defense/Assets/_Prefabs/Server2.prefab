@@ -153,6 +153,10 @@ MonoBehaviour:
   damage: 6
   targetVirus: {fileID: 0}
   lineRenderer: {fileID: 0}
+  vectorToTarget: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  nodePos: {x: 0, y: 0, z: 0}
+  scale: 50
 --- !u!114 &1831571131393464856
 MonoBehaviour:
   m_ObjectHideFlags: 0
