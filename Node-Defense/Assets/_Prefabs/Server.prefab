@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1010564230831599628}
   - component: {fileID: 2006766797194465186}
   - component: {fileID: 3610831877144066217}
+  - component: {fileID: 4279666085030470209}
   m_Layer: 9
   m_Name: Server
-  m_TagString: Untagged
+  m_TagString: Server
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +49,11 @@ MonoBehaviour:
   powerUp: {fileID: 0}
   Type: 2
   life: 200
+  isInfected: 0
   virus: []
+  timer: 0
+  originalTimer: 0
+  damage: 0
 --- !u!212 &3610831877144066217
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86,7 +91,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -85032595
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 384f0fd331d4ac74e8721e9f43fdf97b, type: 3}
   m_Color: {r: 0.374466, g: 0.9339623, b: 0.44959903, a: 1}
@@ -99,3 +104,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &4279666085030470209
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2377144227498012651}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6557143

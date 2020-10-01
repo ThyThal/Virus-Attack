@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BinaryTree : MonoBehaviour
+public class BinaryTree
 {
     public Node Root { get; set; }
 
-    public bool Add(int value, IGameNode gameNode)
+    public bool Add(int value, GameObject gameNode)
     {
         Node before = null, after = this.Root;
 

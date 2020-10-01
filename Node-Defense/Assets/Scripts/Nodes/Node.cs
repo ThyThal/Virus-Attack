@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public class Node
 {
-    public IGameNode gameNode { get; set; }
+    public GameObject gameNode { get; set; }
     public int value { get; set; }
     public Node leftNode { get; set; }
     public Node rightNode { get; set; }
 
-    public Node (IGameNode gameNode, int value, Node left, Node right)
+    public Node (GameObject gameNode, int value, Node left, Node right)
     {
         this.gameNode = gameNode;
         this.value = value;
@@ -17,7 +17,7 @@ public class Node : MonoBehaviour
         rightNode = right;
     }
 
-    public Node(IGameNode gameNode, int value)
+    public Node(GameObject gameNode, int value)
     {
         this.gameNode = gameNode;
         this.value = value;

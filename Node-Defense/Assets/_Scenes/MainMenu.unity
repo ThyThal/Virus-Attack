@@ -330,11 +330,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a8cf2fdea2d8f4c9c749a654de02f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: MainGame
+  conditionText: 
   playButton: {fileID: 823588508}
-  helpButton: {fileID: 0}
-  exitButton: {fileID: 0}
+  helpButton: {fileID: 919736647}
+  exitButton: {fileID: 211196986}
   backButton: {fileID: 0}
+  menuButton: {fileID: 0}
+  text: {fileID: 0}
   soundButton: {fileID: 616072712}
   hoverAudio: {fileID: 8300000, guid: b9bbfae2490fe4d4db95b22f17d9e6a7, type: 3}
   clickAudio: {fileID: 8300000, guid: 2adfd0679ec6ebf48b978c66fe3b0c73, type: 3}
@@ -452,7 +454,7 @@ RectTransform:
   - {fileID: 919736645}
   - {fileID: 211196984}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -619,7 +621,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &798022146
 GameObject:
@@ -857,7 +859,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 2
+          m_CallState: 1
   - eventID: 4
     callback:
       m_PersistentCalls:
@@ -872,7 +874,55 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 2
+          m_CallState: 1
+--- !u!1 &871936493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871936495}
+  - component: {fileID: 871936494}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &871936494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871936493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdc2cc716ce1914ebeaf925f0c38d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameScene: MainGame
+  menuScene: MainMenu
+  conditionScene: FinishScreen
+  hasWon: 0
+  menuScript: {fileID: 0}
+--- !u!4 &871936495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871936493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 247.00569, y: 370.58444, z: -448.70184}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &919736644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,7 +1178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1151354514
 GameObject:

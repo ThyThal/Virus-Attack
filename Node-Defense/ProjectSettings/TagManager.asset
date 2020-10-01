@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - Virus
+  - Node
+  - Server
+  - Internet
   layers:
   - Default
   - TransparentFX
@@ -46,9 +50,15 @@ TagManager:
   - name: Background
     uniqueID: 2827391067
     locked: 0
+  - name: UI
+    uniqueID: 712936265
+    locked: 0
   - name: Nodes
     uniqueID: 4209934701
     locked: 0
   - name: Virus
     uniqueID: 456017553
+    locked: 0
+  - name: PowerUp
+    uniqueID: 2508676461
     locked: 0

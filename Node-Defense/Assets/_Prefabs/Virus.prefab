@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1354829341643481215}
   - component: {fileID: 997687643288848707}
-  - component: {fileID: 6891239919462921697}
-  m_Layer: 0
-  m_Name: Bullet 1
-  m_TagString: Untagged
+  - component: {fileID: 1291134048}
+  - component: {fileID: -380780106429623434}
+  m_Layer: 10
+  m_Name: Virus
+  m_TagString: Virus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6714575073109414554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.087014, y: 0.43944672, z: -0.31835938}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 456017553
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e0d8345b2eeb1e04f9c06b6f22a9860e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6891239919462921697
+--- !u!114 &1291134048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,6 +92,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 6714575073109414554}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e51472b93e6b848478b70ddb269bf136, type: 3}
+  m_Script: {fileID: 11500000, guid: 8512d291e73acec46872f92c573f1d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  direction: {x: 0, y: 0}
+  distance: 0
+  speed: 2
+  damage: 50
+  timer: 2
+  life: 100
+--- !u!58 &-380780106429623434
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6714575073109414554}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.24
