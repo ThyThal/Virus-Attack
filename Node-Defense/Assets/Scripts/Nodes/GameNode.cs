@@ -144,8 +144,11 @@ public class GameNode : MonoBehaviour, IGameNode
                 damage = damage / 2;
             life -= damage;
         }
-        else if(life <= 0)
+
+        if (life <= 0)
+        {
             HasDied();
+        }
     }
 
     public void HasDied()
