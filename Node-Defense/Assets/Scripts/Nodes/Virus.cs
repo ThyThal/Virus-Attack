@@ -5,7 +5,7 @@ using UnityEngine;
 public class Virus : MonoBehaviour
 {
     [SerializeField] private ITree init;
-    public GameObject target;
+    [SerializeField] public GameObject target;
     [SerializeField] private Vector2 direction;
     [SerializeField] private float distance;
     [SerializeField] private float speed;
@@ -111,11 +111,10 @@ public class Virus : MonoBehaviour
 
     public void GetDamage(int damage)
     {
-
-
         if (life > 0)
             life -= damage;
-        else if (life <= 0)
+
+        if (life <= 0)
             HasDied();
     }
 
