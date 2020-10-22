@@ -4,11 +4,11 @@ using UnityEngine;
 
 public interface IGrafo
 {
-    private void Initialization();
-    private void AddVertex(int v);
-    private void RemoveVertex(int v);
-    private void AddEdge(int v1, int v2, int weight);
-    private void RemoveEdge(int v1, int v2);
-    private bool HasEdge(int v1, int v2);
-    private int WeightEdge(int v1, int v2);
+    void Initialization();
+    void AddVertex(int v);
+    void RemoveVertex(int v);
+    void AddEdge(int v1, int v2, int weight);
+    void RemoveEdge(int v1, int v2);
+    bool HasEdge(int v1, int v2);
+    int WeightEdge(int v1, int v2);
 }
