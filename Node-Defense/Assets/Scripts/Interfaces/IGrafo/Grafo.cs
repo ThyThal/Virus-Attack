@@ -7,6 +7,7 @@ public class Grafo : IGrafo
 {
     NodeGraph origin;
 
+
     // Inicializar el grafo.
     public void Initialization()
     {
@@ -54,6 +55,7 @@ public class Grafo : IGrafo
         NodeGraph n2 = VertexToNode(v2);
 
         NodeEdge aux = new NodeEdge();
+
         aux.edgeWeight = weight;
         aux.nodeDestination = n2;
         aux.nextEdge = n1.edge;
