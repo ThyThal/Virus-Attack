@@ -49,13 +49,14 @@ public class Grafo : IGrafo
 
     /*
      */
-    public void AddEdge(int v1, int v2, int weight)
+    public void AddEdge(int id, int v1, int v2, int weight)
     {
         NodeGraph n1 = VertexToNode(v1);
         NodeGraph n2 = VertexToNode(v2);
 
         NodeEdge aux = new NodeEdge();
 
+        aux.id = id;
         aux.edgeWeight = weight;
         aux.nodeDestination = n2;
         aux.nextEdge = n1.edge;

@@ -40,9 +40,10 @@ public class Virus : MonoBehaviour
     {
         if (LevelManager.instance.isServerInfected == false)
         {
-            var targetNode = target.GetComponent<GameNode>().NextNode();
+            // TODO algoritmo para buscar siguiente
+            /*var targetNode = target.GetComponent<GameNode>().NextNode();
             if(targetNode != null)
-                target = targetNode.gameNode; 
+                target = targetNode.gameNode; */
         }
         if (LevelManager.instance.isServerInfected == true)
         {

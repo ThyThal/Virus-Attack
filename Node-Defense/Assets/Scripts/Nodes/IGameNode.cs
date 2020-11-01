@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IGameNode 
 {
-    int TreePosition { get; set; }
+    int Vertex { get; set; }
     PowerUp PowerUp { get; set; }
 }

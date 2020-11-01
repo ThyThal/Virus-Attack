@@ -13,8 +13,8 @@ public enum GameNodeType
 
 public class GameNode : MonoBehaviour, IGameNode
 {
-    private int treePosition;
-    [SerializeField] private PowerUp powerUp;
+    private int vertex;
+    private PowerUp powerUp;
     [SerializeField] public GameNodeType Type;
     [SerializeField] int life;
     [SerializeField] public bool isInfected;
@@ -32,16 +32,16 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private Vector3 nodePos;
     [SerializeField] private float scale;
 
-    public int TreePosition
+    public int Vertex
     {
         get
         {
-            return treePosition;
+            return vertex;
         }
 
         set
         {
-            treePosition = value;
+            vertex = value;
         }
     }
 
@@ -119,21 +119,10 @@ public class GameNode : MonoBehaviour, IGameNode
         v.GetDamage(damageDone);
     }
 
-    public Node NextNode()
+    public GameNode NextNode()
     {
-        if (Type == GameNodeType.Server) return null;
-        Node nextNode = LevelManager.instance.nodes.Find(treePosition++); 
-        /*Node actualNode = LevelManager.instance.nodes.Find(treePosition);
-        bool Boolean = (Random.value > 0.5f);*/
-        /*if (Boolean)
-        {
-            nextNode = actualNode.leftNode != null ? actualNode.leftNode : actualNode.rightNode;
-        }
-        else
-        {
-            nextNode = actualNode.rightNode != null ? actualNode.rightNode : actualNode.leftNode;
-        }*/
-        return nextNode;
+        //Node nextNode = LevelManager.instance.FindNext(); 
+        return null;
     }
 
     public void GetDamage(int damage)

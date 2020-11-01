@@ -213,6 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915362909}
+  - component: {fileID: 1915362910}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -234,6 +235,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915362910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915362908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdc2cc716ce1914ebeaf925f0c38d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameScene: DevGrafo
+  menuScene: MainMenu
+  conditionScene: FinishScreen
+  hasWon: 0
+  menuScript: {fileID: 0}
+  score: 0
 --- !u!1 &1917069705
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,8 +296,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321cb4ff88bece242a309ea1e251fc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  random: 0
+  vertexInit: 
   vertex: 
+  edges: []
+  minRandom: 3
+  maxRandom: 10
+  minEdges: 1
+  maxEdges: 3
+  edgeAmount: 0
   nodeInternet: {fileID: 1831571131393464871, guid: 8554d8a47f8b5474f821ea893f35fda8,
     type: 3}
   nodeBasic: {fileID: 1831571131393464871, guid: c2517f40904fedf4698b77077c9c0352,

@@ -26,7 +26,7 @@ public class VirusManager : MonoBehaviour
 
         for (int i = 0; i < QUEUE_LIMIT; i++)
         {
-            queuePositions.Add(new Vector2(-400, queuePositions.Count == 0 ? 260 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
+            queuePositions.Add(new Vector2(-200, queuePositions.Count == 0 ? 260 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
         }
     }
 

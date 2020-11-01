@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] public int nodeAmount;
-    public BinaryTree nodes;
-    public GameObject nodeInternet;
-    public GameObject nodeServer;
+    public Grafo nodesGraph;
+    public GameNode nodeInternet;
+    public GameNode nodeServer;
     public WaveManager waveManager;
     public bool isServerInfected;
+    private const int NODES_FOR_Y = 3;
     private const int NODE_POSITION_DIFERENCESS = 100;
     public Transform nodesParent;
     private bool gameFinished;
@@ -21,35 +22,44 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+    }
+    void Start()
+    {
         GameManager.Instance.score = 0;
         waveManager = GetComponent<WaveManager>();
-        instance = this;
-        nodes = new BinaryTree();
+        nodesGraph = new Grafo();
         int i = 0;
         var internet = Instantiate(nodesPrefabs[1], nodesParent);
         Vector2 position = new Vector2(-300, 0);
         internet.transform.localPosition = position;
-        internet.GetComponent<GameNode>().TreePosition = i;
-        nodeInternet = internet;
-        nodes.Add(i, internet);
+        internet.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[0];
+        nodeInternet = internet.GetComponent<GameNode>();
+        nodesGraph.AddVertex(nodeInternet.Vertex);
         i++;
-        for (; i < nodeAmount; i++)
+        int j = NODES_FOR_Y;
+        for (; i < NodeManager.instance.vertex.Length-1; i++)
         {
-            position.x += NODE_POSITION_DIFERENCESS;
+            j++;
+            if (j >= NODES_FOR_Y)
+            {
+                position.x += NODE_POSITION_DIFERENCESS;
+                j = 0;
+            }
             position.y = Random.Range(-200, 200);
             var basicNode = Instantiate(nodesPrefabs[0], nodesParent);
             basicNode.transform.localPosition = position;
-            basicNode.GetComponent<GameNode>().TreePosition = i;
-            nodes.Add(i, basicNode);
+            basicNode.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[i];
+            nodesGraph.AddVertex(basicNode.GetComponent<GameNode>().Vertex);
         }
         i++;
         position.x += NODE_POSITION_DIFERENCESS;
         position.y = 0;
         var server = Instantiate(nodesPrefabs[2], nodesParent);
         server.transform.localPosition = position;
-        server.GetComponent<GameNode>().TreePosition = i;
-        nodeServer = server;
-        nodes.Add(i, server);
+        server.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[i];
+        nodeServer = server.GetComponent<GameNode>();
+        nodesGraph.AddVertex(nodeServer.Vertex);
     }
 
     public void SpawnVirus(GameObject enemyToSpawn)
