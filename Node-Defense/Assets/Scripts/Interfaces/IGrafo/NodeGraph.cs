@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeGraph : MonoBehaviour
+public class NodeGraph
 {
-    public int id;
     public int nodeValue;
     public NodeEdge edge;
     public NodeGraph nextNode;

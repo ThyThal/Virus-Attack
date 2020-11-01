@@ -6,11 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] public int nodeAmount;
     public Grafo nodesGraph;
-    public GameNode nodeInternet;
-    public GameNode nodeServer;
-    public WaveManager waveManager;
+    private GameNode nodeInternet;
+    private GameNode nodeServer;
+    private WaveManager waveManager;
     public bool isServerInfected;
     private const int NODES_FOR_Y = 3;
     private const int NODE_POSITION_DIFERENCESS = 100;
@@ -52,7 +51,6 @@ public class LevelManager : MonoBehaviour
             basicNode.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[i];
             nodesGraph.AddVertex(basicNode.GetComponent<GameNode>().Vertex);
         }
-        i++;
         position.x += NODE_POSITION_DIFERENCESS;
         position.y = 0;
         var server = Instantiate(nodesPrefabs[2], nodesParent);
@@ -82,7 +80,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (nodeServer.GetComponent<GameNode>().isInfected == true)
+        if (nodeServer.isInfected == true)
         {
             isServerInfected = true;
             GameManager.Instance.GameOver();

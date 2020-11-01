@@ -26,10 +26,7 @@ public class NodeManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
 
-    private void Start()
-    {
         for (int i = 0; i < Random.Range(minRandom, maxRandom); i++)
         {
             vertexInit.Add(i + 1);
@@ -52,8 +49,8 @@ public class NodeManager : MonoBehaviour
             edgeAmount = Random.Range(minEdges, maxEdges);
             for (int i = 0; i < edgeAmount; i++)
             {
-                print("index " + index);
-                print(string.Join(", " ,vertexInit));
+                //Debug.Log("index " + index);
+                //Debug.Log(string.Join(", " ,vertexInit));
                 edges.Add(new Vector3(currentVertex, vertexInit[index], 1)); // From, To, Weight.
                 if (vertexInit.Count <= 1) break;
                 int aux1 = index;
