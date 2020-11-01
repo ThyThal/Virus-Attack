@@ -60,6 +60,11 @@ public class LevelManager : MonoBehaviour
         server.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[i];
         nodeServer = server.GetComponent<GameNode>();
         nodesGraph.AddVertex(nodeServer.Vertex);
+
+        for (int k = 0; k < NodeManager.instance.edges.Count; k++)
+        {
+            nodesGraph.AddEdge(k, (int)NodeManager.instance.edges[k].x, (int)NodeManager.instance.edges[k].y, (int)NodeManager.instance.edges[k].z);// Id, From, To, Weight.
+        }
     }
 
     public void SpawnVirus(GameObject enemyToSpawn)
