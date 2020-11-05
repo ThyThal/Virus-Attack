@@ -391,8 +391,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1592136133}
-  - component: {fileID: 1592136138}
   - component: {fileID: 1592136137}
+  - component: {fileID: 1592136138}
   - component: {fileID: 1592136136}
   - component: {fileID: 1592136135}
   - component: {fileID: 1592136134}
@@ -429,10 +429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c321a91ef2dd8644b9f9baaa51650cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeAmount: 0
-  nodeInternet: {fileID: 0}
-  nodeServer: {fileID: 0}
-  waveManager: {fileID: 0}
   isServerInfected: 0
   nodesParent: {fileID: 1917069706}
   nodesPrefabs:
@@ -454,14 +450,17 @@ MonoBehaviour:
   vertexInit: 
   vertex: 
   edges: []
-  minRandom: 0
-  maxRandom: 0
-  minEdges: 0
-  maxEdges: 0
+  minRandom: 2
+  maxRandom: 5
+  minEdges: 1
+  maxEdges: 3
   edgeAmount: 0
-  nodeInternet: {fileID: 0}
-  nodeBasic: {fileID: 0}
-  nodeServer: {fileID: 0}
+  nodeInternet: {fileID: 1831571131393464871, guid: 8554d8a47f8b5474f821ea893f35fda8,
+    type: 3}
+  nodeBasic: {fileID: 1831571131393464871, guid: c2517f40904fedf4698b77077c9c0352,
+    type: 3}
+  nodeServer: {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db,
+    type: 3}
 --- !u!114 &1592136136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,8 +489,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsCount: 0
   queuePositions: []
-  prefabs: []
-  parent: {fileID: 0}
+  prefabs:
+  - {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53, type: 3}
+  parent: {fileID: 2112651894}
 --- !u!114 &1592136138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,16 +504,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a87b8bce6af03489f767f72e28fa17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virus: {fileID: 0}
+  virus: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53, type: 3}
   totalVirus: 0
   currentWave: 0
   nextWave: 0
-  searchTimer: 0
+  searchTimer: 5
   originalTimer: 0
   state: 1
   foundEnemy: 0
   newWave: 0
-  waves: []
+  waves:
+  - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
+      type: 3}
+    minVirus: 1
+    maxVirus: 2
+    spawnerRate: 1
+  - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
+      type: 3}
+    minVirus: 2
+    maxVirus: 3
+    spawnerRate: 1
+  - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
+      type: 3}
+    minVirus: 3
+    maxVirus: 4
+    spawnerRate: 1
 --- !u!1 &1915362908
 GameObject:
   m_ObjectHideFlags: 0
