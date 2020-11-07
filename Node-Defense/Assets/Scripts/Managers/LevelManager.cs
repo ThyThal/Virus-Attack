@@ -45,7 +45,6 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnVirus(GameObject enemyToSpawn)
     {
-        Instantiate(enemyToSpawn, nodeInternet.transform);
         enemyToSpawn.transform.position = nodeInternet.transform.position;
     }
 
