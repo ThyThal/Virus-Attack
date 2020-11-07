@@ -31,7 +31,6 @@ public class LevelManager : MonoBehaviour
         int i = 0; // Lo creo afuera para saber cual es la posicion de ultimo vertice
         for (; i < NodeManager.instance.vertex.Length; i++)
         {
-            basicNode.transform.localPosition = position;
             nodesGraph.AddVertex(NodeManager.instance.vertex[i]);
         }
 
