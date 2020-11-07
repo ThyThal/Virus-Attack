@@ -5,7 +5,7 @@ using UnityEngine;
 public class VirusManager : MonoBehaviour
 {
     private const int QUEUE_LIMIT = 5;
-    private const int QUEUE_POSITION_DIFERENCESS = 85;
+    private const int QUEUE_POSITION_DIFERENCESS = 2;
 
     static public VirusManager instance;
 
@@ -26,7 +26,7 @@ public class VirusManager : MonoBehaviour
 
         for (int i = 0; i < QUEUE_LIMIT; i++)
         {
-            queuePositions.Add(new Vector2(-200, queuePositions.Count == 0 ? 260 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
+            queuePositions.Add(new Vector2(-8, queuePositions.Count == 0 ? 4 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
         }
     }
 

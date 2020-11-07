@@ -28,54 +28,31 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.score = 0;
         waveManager = GetComponent<WaveManager>();
         nodesGraph = new Grafo();
-        int i = 0;
-        var internet = Instantiate(nodesPrefabs[1], nodesParent);
-        Vector2 position = new Vector2(-300, 0);
-        internet.transform.localPosition = position;
-        internet.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[0];
-        nodeInternet = internet.GetComponent<GameNode>();
-        nodesGraph.AddVertex(nodeInternet.Vertex);
-        i++;
-        int j = NODES_FOR_Y;
-        for (; i < NodeManager.instance.vertex.Length-1; i++)
+        int i = 0; // Lo creo afuera para saber cual es la posicion de ultimo vertice
+        for (; i < NodeManager.instance.vertex.Length; i++)
         {
-            j++;
-            if (j >= NODES_FOR_Y)
-            {
-                position.x += NODE_POSITION_DIFERENCESS;
-                j = 0;
-            }
-            position.y = Random.Range(-200, 200);
-            var basicNode = Instantiate(nodesPrefabs[0], nodesParent);
             basicNode.transform.localPosition = position;
-            basicNode.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[i];
-            nodesGraph.AddVertex(basicNode.GetComponent<GameNode>().Vertex);
+            nodesGraph.AddVertex(NodeManager.instance.vertex[i]);
         }
-        position.x += NODE_POSITION_DIFERENCESS;
-        position.y = 0;
-        var server = Instantiate(nodesPrefabs[2], nodesParent);
-        server.transform.localPosition = position;
-        server.GetComponent<GameNode>().Vertex = NodeManager.instance.vertex[i];
-        nodeServer = server.GetComponent<GameNode>();
-        nodesGraph.AddVertex(nodeServer.Vertex);
 
         for (int k = 0; k < NodeManager.instance.edges.Count; k++)
         {
             nodesGraph.AddEdge(k, (int)NodeManager.instance.edges[k].x, (int)NodeManager.instance.edges[k].y, (int)NodeManager.instance.edges[k].z);// Id, From, To, Weight.
         }
+
+        NodeManager.instance.nodesDictionary.TryGetValue(NodeManager.instance.vertex[0], out nodeInternet);
+        NodeManager.instance.nodesDictionary.TryGetValue(NodeManager.instance.vertex[i-1], out nodeServer);
     }
 
     public void SpawnVirus(GameObject enemyToSpawn)
     {
         Instantiate(enemyToSpawn, nodeInternet.transform);
-        //enemyToSpawn.transform.position = nodeInternet.transform.position;
-        var gameNode = nodeInternet.GetComponent<GameNode>();
-        gameNode.virus.Add(enemyToSpawn);
+        enemyToSpawn.transform.position = nodeInternet.transform.position;
     }
 
     public void RemoveVirus(GameObject virus)
     {
-        nodeInternet.GetComponent<GameNode>().virus.Remove(virus);
+        //nodeInternet.GetComponent<GameNode>().virus.Remove(virus);
     }
 
     private void Update()

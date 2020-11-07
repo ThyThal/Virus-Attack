@@ -29,11 +29,15 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private float spacing;
     [SerializeField] private float minY;
     [SerializeField] private float maxY;
+    
+    private const int NODES_FOR_Y = 3;
+
+    public Dictionary<int, GameNode> nodesDictionary;
 
     private void Awake()
     {
         instance = this;
-
+        nodesDictionary = new Dictionary<int, GameNode>();
         // Creamos la cantidad de vertices a inicializar.
         for (int i = 0; i < Random.Range(minRandom, maxRandom); i++)
         {
@@ -42,20 +46,31 @@ public class NodeManager : MonoBehaviour
 
         // Inicializamos los vertices.
         vertex = new int[vertexInit.Count];
-        
+
         // Instanciar Nodo Internet.
+        vertex[0] = vertexInit[0];
         CreateInternet(position);
+
         position.x = position.x + spacing; // Agregar Espacio Entre Nodos.
 
+        int j = 0;
         // Instanciar Nodos Basicos.
         for (int i = 1; i < vertexInit.Count-1; i++)
         {
+            j++;
+            if (j >= NODES_FOR_Y)
+            {
+                position.x += spacing;// Agregar Espacio Entre Nodos.
+                j = 0;
+            }
             vertex[i] = vertexInit[i];
-            CreateNode(position);
-            position.x = position.x + spacing; // Agregar Espacio Entre Nodos.
+            CreateNode(position, vertex[i]);
+            //position.x = position.x + spacing; // Agregar Espacio Entre Nodos.
         }
 
+        position.x += spacing;// Agregar Espacio Entre Nodos.
         // Instanciar Nodo Servidor.
+        vertex[vertex.Count()-1] = vertexInit.Last();
         CreateServer(position);
 
         int lastVertex = vertexInit[vertexInit.Count - 1]; // Ultimo vertice que va a tener conexiones.
@@ -92,29 +107,33 @@ public class NodeManager : MonoBehaviour
     private void CreateInternet(Vector2 p)
     {
         var node = Instantiate(nodeInternet, nodesParent);
+        node.GetComponent<GameNode>().Vertex = vertex.First();
         var nodeTransform = node.transform;
         RandomizePosition(nodeTransform, position);
+        nodesDictionary.Add(vertex.First(), node.GetComponent<GameNode>());
     }
 
-    private void CreateNode(Vector2 p)
+    private void CreateNode(Vector2 p, int id)
     {
         var node = Instantiate(nodeBasic, nodesParent);
+        node.GetComponent<GameNode>().Vertex = id;
         var nodeTransform = node.transform;
         RandomizePosition(nodeTransform, position);
+        nodesDictionary.Add(id, node.GetComponent<GameNode>());
     }
 
     private void CreateServer(Vector2 p)
     {
         var node = Instantiate(nodeServer, nodesParent);
+        node.GetComponent<GameNode>().Vertex = vertex.Last();
         var nodeTransform = node.transform;
         RandomizePosition(nodeTransform, position);
-
+        nodesDictionary.Add(vertex.Last(), node.GetComponent<GameNode>());
     }
 
-    private Vector2 RandomizePosition(Transform t, Vector2 p)
+    private void RandomizePosition(Transform t, Vector2 p)
     {
         t.position = new Vector2(p.x, Random.Range(minY, maxY));
         p.x = p.x + spacing;
-        return p;
     }
 }

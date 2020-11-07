@@ -18,7 +18,6 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] public GameNodeType Type;
     [SerializeField] int life;
     [SerializeField] public bool isInfected;
-    [SerializeField] public List<GameObject> virus;
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float timer;
     [SerializeField] private float originalTimer;
@@ -87,28 +86,6 @@ public class GameNode : MonoBehaviour, IGameNode
                 timer = originalTimer;
             }
         }
-        /*foreach (GameObject v in virus)
-        {
-            targetVirus = v;
-            Virus scriptVirus = v.GetComponent<Virus>();
-
-            if (targetVirus.target == null)
-            {
-                var nextNode = NextNode().gameNode;
-                targetVirus.target = nextNode;
-            }
-
-            if (targetVirus != null)
-            {
-                if (timer <= 0)
-                {
-                    //Attack(targetVirus);
-                    timer = 2;
-                }
-            }
-
-
-        }*/
     }
 
     private void Attack(Virus v)
@@ -117,12 +94,6 @@ public class GameNode : MonoBehaviour, IGameNode
         if (powerUp != null && powerUp.type == PowerUpType.Antivirus)
             damage = damage * 2;
         v.GetDamage(damageDone);
-    }
-
-    public GameNode NextNode()
-    {
-        //Node nextNode = LevelManager.instance.FindNext(); 
-        return null;
     }
 
     public void GetDamage(int damage)

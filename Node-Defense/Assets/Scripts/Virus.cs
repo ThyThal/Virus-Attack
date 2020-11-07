@@ -5,7 +5,7 @@ using UnityEngine;
 public class Virus : MonoBehaviour
 {
     [SerializeField] private ITree init;
-    [SerializeField] public GameObject target;
+    [SerializeField] public GameNode target;
     [SerializeField] private Vector2 direction;
     [SerializeField] private float distance;
     [SerializeField] private float speed;
@@ -92,7 +92,7 @@ public class Virus : MonoBehaviour
 
         else
         {
-            target = GameObject.FindGameObjectWithTag("Node");
+            target = GameObject.FindGameObjectWithTag("Node").GetComponent<GameNode>();
             return false;
         }
     }
