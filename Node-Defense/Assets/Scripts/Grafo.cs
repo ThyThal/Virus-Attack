@@ -6,12 +6,13 @@ using UnityEngine;
 public class Grafo : IGrafo
 {
     NodeGraph origin;
-
+    public int totalNodes;
 
     // Inicializar el grafo.
     public void Initialization()
     {
         origin = null;
+        totalNodes = 0;
     }
 
     /*
@@ -23,6 +24,7 @@ public class Grafo : IGrafo
         aux.edge = null;
         aux.nextNode = origin;
         origin = aux;
+        totalNodes++;
     }
 
     /*
@@ -44,6 +46,8 @@ public class Grafo : IGrafo
                 aux.nextNode = aux.nextNode.nextNode;
             }
             aux = aux.nextNode;
+
+            totalNodes--;
         }
     }
 
@@ -73,7 +77,7 @@ public class Grafo : IGrafo
 
     /*
      */
-    private NodeGraph VertexToNode(int v)
+    public NodeGraph VertexToNode(int v)
     {
         NodeGraph aux = origin;
         if (aux != null && aux.nodeValue != v)

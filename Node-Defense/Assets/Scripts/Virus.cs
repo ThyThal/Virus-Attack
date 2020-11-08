@@ -38,14 +38,36 @@ public class Virus : MonoBehaviour
 
     private void FindNext()
     {
-        if (LevelManager.instance.isServerInfected == false)
+        // Si no tiene target es porque todavia no se invoco a internet
+        if (target != null && LevelManager.instance.isServerInfected == false)
         {
-            // TODO algoritmo para buscar siguiente
-            /*var targetNode = target.GetComponent<GameNode>().NextNode();
-            if(targetNode != null)
-                target = targetNode.gameNode; */
+            AlgDijkstra.Dijkstra(LevelManager.instance.nodesGraph, LevelManager.instance.nodeInternet.Vertex);
+            string[] caminos = AlgDijkstra.nodos;
+            List<string> caminosDispo = new List<string>();
+            int nextVertex = target.Vertex;
+
+            // Me guardo los caminos disponibles
+            for (int i = 0; i < caminos.Length; i++)
+            {
+                if(caminos[i] != null)
+                {
+                    caminosDispo.Add(caminos[i]);
+                }                
+            }
+            // Agarro un camino random
+            string[] camino = null;
+            while (camino == null)
+            {
+                camino = caminosDispo[Random.Range(0, caminosDispo.Count)].Split(',');
+                if (camino.Length >= 2 && camino[0] == camino[1]) //Validacion para evitar que el target siguiente sea el mismo al actual
+                    camino = null;
+                else if (camino.Length <= 1 && camino[0] == camino[1]) // Si queda una sola opcion, muy probable que este en ultimo nodo
+                    break;
+            }
+            nextVertex = int.Parse(camino[1]);
+            NodeManager.instance.nodesDictionary.TryGetValue(nextVertex, out target);
         }
-        if (LevelManager.instance.isServerInfected == true)
+        else if (LevelManager.instance.isServerInfected == true)
         {
             HasDied();
         }
@@ -92,14 +114,13 @@ public class Virus : MonoBehaviour
 
         else
         {
-            target = GameObject.FindGameObjectWithTag("Node").GetComponent<GameNode>();
             return false;
         }
     }
 
     public bool IsTargetInfected()
     {
-        if (target.GetComponent<GameNode>().isInfected)
+        if (target.isInfected)
         {
             return true;
         }

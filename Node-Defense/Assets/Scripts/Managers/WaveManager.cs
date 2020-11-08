@@ -66,7 +66,7 @@ public class WaveManager : MonoBehaviour
         for (int i = 0; i < totalVirus; i++)
         {
             SpawnEnemy(VirusManager.instance.GetItem());
-            //SpawnEnemy(virus);
+            
             yield return new WaitForSeconds(1f * waveNumber.spawnerRate);
         }
 

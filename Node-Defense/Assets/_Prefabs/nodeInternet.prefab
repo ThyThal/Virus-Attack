@@ -63,8 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   life: 0
-  isInfected: 0
-  virus: []
+  isInfected: 1
   timer: 0
   originalTimer: 0
   damage: 0

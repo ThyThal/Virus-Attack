@@ -6,16 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public Grafo nodesGraph;
-    private GameNode nodeInternet;
-    private GameNode nodeServer;
-    private WaveManager waveManager;
+    public GrafoMA nodesGraph;
+    public GameNode nodeInternet;
+    public GameNode nodeServer;
     public bool isServerInfected;
     private const int NODES_FOR_Y = 3;
     private const int NODE_POSITION_DIFERENCESS = 100;
     public Transform nodesParent;
     private bool gameFinished;
-    public Dictionary<string, string> dictionary;
+    public Dictionary<string, string> dictionaryNodes;
     public List<GameObject> nodesPrefabs;
     static public LevelManager instance;
 
@@ -26,8 +25,8 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         GameManager.Instance.score = 0;
-        waveManager = GetComponent<WaveManager>();
-        nodesGraph = new Grafo();
+        nodesGraph = new GrafoMA();
+        nodesGraph.Initialization();
         int i = 0; // Lo creo afuera para saber cual es la posicion de ultimo vertice
         for (; i < NodeManager.instance.vertex.Length; i++)
         {
@@ -46,6 +45,7 @@ public class LevelManager : MonoBehaviour
     public void SpawnVirus(GameObject enemyToSpawn)
     {
         enemyToSpawn.transform.position = nodeInternet.transform.position;
+        enemyToSpawn.GetComponent<Virus>().target = nodeInternet;
     }
 
     public void RemoveVirus(GameObject virus)
