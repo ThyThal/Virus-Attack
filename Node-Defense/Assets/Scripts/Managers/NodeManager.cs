@@ -30,7 +30,7 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private float minY;
     [SerializeField] private float maxY;
     
-    private const int NODES_FOR_Y = 3;
+    private const int NODES_FOR_Y = 2;
 
     public Dictionary<int, GameNode> nodesDictionary;
 

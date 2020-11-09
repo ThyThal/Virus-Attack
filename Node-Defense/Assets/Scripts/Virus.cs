@@ -12,6 +12,8 @@ public class Virus : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float timer;
     [SerializeField] int life;
+    int[] way;
+    int actualPosWay;
 
     // Start is called before the first frame update
     void Start()
@@ -41,31 +43,39 @@ public class Virus : MonoBehaviour
         // Si no tiene target es porque todavia no se invoco a internet
         if (target != null && LevelManager.instance.isServerInfected == false)
         {
-            AlgDijkstra.Dijkstra(LevelManager.instance.nodesGraph, LevelManager.instance.nodeInternet.Vertex);
-            string[] caminos = AlgDijkstra.nodos;
-            List<string> caminosDispo = new List<string>();
-            int nextVertex = target.Vertex;
-
-            // Me guardo los caminos disponibles
-            for (int i = 0; i < caminos.Length; i++)
+            if(way != null && way.Length > 0)
             {
-                if(caminos[i] != null)
+                actualPosWay++;
+                if(actualPosWay >= way.Length)
                 {
-                    caminosDispo.Add(caminos[i]);
-                }                
+                    way = new int[0];
+                    FindNext();
+                    return;
+                }
             }
-            // Agarro un camino random
-            string[] camino = null;
-            while (camino == null)
-            {
-                camino = caminosDispo[Random.Range(0, caminosDispo.Count)].Split(',');
-                if (camino.Length >= 2 && camino[0] == camino[1]) //Validacion para evitar que el target siguiente sea el mismo al actual
-                    camino = null;
-                else if (camino.Length <= 1 && camino[0] == camino[1]) // Si queda una sola opcion, muy probable que este en ultimo nodo
-                    break;
+            else { 
+                AlgDijkstra.Dijkstra(LevelManager.instance.nodesGraph, LevelManager.instance.nodeInternet.Vertex);
+                string[] caminos = AlgDijkstra.nodos;
+                List<string> caminosDispo = new List<string>();
+
+                // Me guardo los caminos disponibles
+                for (int i = 0; i < caminos.Length; i++)
+                {
+                    if(caminos[i] != null)
+                    {
+                        caminosDispo.Add(caminos[i]);
+                    }                
+                }
+                // Agarro un camino random
+                string[] camino = caminosDispo[Random.Range(0, caminosDispo.Count)].Split(',');
+                way = new int[camino.Length];
+                for(int i = 0; i < camino.Length; i++)
+                {
+                    way[i] = int.Parse(camino[i]);
+                }
+                actualPosWay = 0;
             }
-            nextVertex = int.Parse(camino[1]);
-            NodeManager.instance.nodesDictionary.TryGetValue(nextVertex, out target);
+            NodeManager.instance.nodesDictionary.TryGetValue(way[actualPosWay], out target);
         }
         else if (LevelManager.instance.isServerInfected == true)
         {
