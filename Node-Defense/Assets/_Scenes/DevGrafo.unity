@@ -428,6 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c321a91ef2dd8644b9f9baaa51650cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nodeInternet: {fileID: 0}
+  nodeServer: {fileID: 0}
   isServerInfected: 0
   nodesParent: {fileID: 1917069706}
   nodesPrefabs:
@@ -489,19 +491,19 @@ MonoBehaviour:
   waves:
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
-    minVirus: 2
-    maxVirus: 3
-    spawnerRate: 1
-  - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
-      type: 3}
-    minVirus: 2
-    maxVirus: 3
-    spawnerRate: 1
+    minVirus: 3
+    maxVirus: 5
+    spawnerRate: 3
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
     minVirus: 3
-    maxVirus: 4
-    spawnerRate: 1
+    maxVirus: 5
+    spawnerRate: 3
+  - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
+      type: 3}
+    minVirus: 3
+    maxVirus: 5
+    spawnerRate: 3
 --- !u!1 &1915362908
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +600,7 @@ MonoBehaviour:
   vertex: 
   edges: []
   minRandom: 8
-  maxRandom: 13
+  maxRandom: 12
   minEdges: 1
   maxEdges: 3
   edgeAmount: 0
