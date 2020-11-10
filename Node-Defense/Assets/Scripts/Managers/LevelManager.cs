@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public Dictionary<string, string> dictionaryNodes;
     public List<GameObject> nodesPrefabs;
     static public LevelManager instance;
+    public List<Virus> viruses;
 
     void Awake()
     {
@@ -46,11 +47,12 @@ public class LevelManager : MonoBehaviour
     {
         enemyToSpawn.transform.position = nodeInternet.transform.position;
         enemyToSpawn.GetComponent<Virus>().target = nodeInternet;
+        viruses.Add(enemyToSpawn.GetComponent<Virus>());
     }
 
     public void RemoveVirus(GameObject virus)
     {
-        //nodeInternet.GetComponent<GameNode>().virus.Remove(virus);
+        viruses.Remove(virus.GetComponent<Virus>());
     }
 
     private void Update()
