@@ -57,6 +57,7 @@ public class PowerUpManager : MonoBehaviour
         var powerUp = powerUps.Pop() as GameObject; /* OBTIENE OBJETO Y REMUEVE DE LA PILA */
         activePowerUp = powerUp.GetComponent<PowerUp>();
         activePowerUp.transform.localPosition = powerUpActivePosition;
+        activePowerUp.inStack = false;
     }
 
     /* Si hay un power up activado destruye el power up sin aplicarlo a un objeto  */
@@ -65,6 +66,16 @@ public class PowerUpManager : MonoBehaviour
         if (PowerUpIsActive())
         {
             Destroy(activePowerUp.gameObject);
+            activePowerUp = null;
+
+            UpdateInteractableState(true);
+        }
+    }
+
+    public void DeActivePowerUp()
+    {
+        if (PowerUpIsActive())
+        {
             activePowerUp = null;
 
             UpdateInteractableState(true);
