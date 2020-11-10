@@ -436,6 +436,7 @@ MonoBehaviour:
   - {fileID: 1831571131393464871, guid: c2517f40904fedf4698b77077c9c0352, type: 3}
   - {fileID: 1831571131393464871, guid: 8554d8a47f8b5474f821ea893f35fda8, type: 3}
   - {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db, type: 3}
+  viruses: []
 --- !u!114 &1592136136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,12 +499,12 @@ MonoBehaviour:
       type: 3}
     minVirus: 3
     maxVirus: 5
-    spawnerRate: 3
+    spawnerRate: 2
   - enemyToSpawn: {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53,
       type: 3}
     minVirus: 3
     maxVirus: 5
-    spawnerRate: 3
+    spawnerRate: 1
 --- !u!1 &1915362908
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,8 +600,8 @@ MonoBehaviour:
   vertexInit: 
   vertex: 
   edges: []
-  minRandom: 8
-  maxRandom: 12
+  minRandom: 7
+  maxRandom: 8
   minEdges: 1
   maxEdges: 3
   edgeAmount: 0

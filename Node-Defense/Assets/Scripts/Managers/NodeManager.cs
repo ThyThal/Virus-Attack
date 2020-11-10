@@ -29,8 +29,7 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private float spacing;
     [SerializeField] private float minY;
     [SerializeField] private float maxY;
-    
-    private const int NODES_FOR_Y = 2;
+    [SerializeField] private int nodesY;
 
     public Dictionary<int, GameNode> nodesDictionary;
 
@@ -58,7 +57,7 @@ public class NodeManager : MonoBehaviour
         for (int i = 1; i < vertexInit.Count-1; i++)
         {
             j++;
-            if (j >= NODES_FOR_Y)
+            if (j >= nodesY)
             {
                 position.x += spacing;// Agregar Espacio Entre Nodos.
                 j = 0;
