@@ -5,7 +5,6 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [Header("Current Wave Info")]
-    [SerializeField] private GameObject virus;
     [SerializeField] public int totalVirus;
 
     [Header("Variables")]
@@ -23,7 +22,6 @@ public class WaveManager : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        [SerializeField] public GameObject enemyToSpawn;
         [SerializeField] public int minVirus;
         [SerializeField] public int maxVirus;
         [SerializeField] public float spawnerRate;

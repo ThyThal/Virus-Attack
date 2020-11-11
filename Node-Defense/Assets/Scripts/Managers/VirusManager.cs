@@ -15,6 +15,8 @@ public class VirusManager : MonoBehaviour
     public List<Vector2> queuePositions;
     public List<GameObject> prefabs;
     public Transform parent;
+	
+	public ABB virusTypes;
 
     void Awake()
     {
@@ -28,6 +30,8 @@ public class VirusManager : MonoBehaviour
         {
             queuePositions.Add(new Vector2(-8, queuePositions.Count == 0 ? 2 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
         }
+
+        virusTypes.InicializarArbol();
     }
 
     /* Almacena el power up en la cola */
@@ -76,6 +80,7 @@ public class VirusManager : MonoBehaviour
     {
         for(int i = 0; i< totalItems ; i++)
         {
+            //int typeVirus = virusTypes.HijoDer.
             var newItem = Instantiate(prefabs[Random.Range(0, prefabs.Count)], parent);
             EnqueueItem(newItem);
         }
