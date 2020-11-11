@@ -58,4 +58,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(conditionScene);
         hasWon = true;
     }
+
+    public void ScoreUpdate(int s)
+    {
+        score += s;
+        ManagerUI.Instance.UpdateScore();
+    }
 }

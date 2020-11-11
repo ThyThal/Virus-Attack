@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd0cae5dc6fb8343ac432aeb8729fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: -17
   Type: 1
   life: 200
   isInfected: 0
