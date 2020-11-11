@@ -132,7 +132,11 @@ public class NodeManager : MonoBehaviour
 
     private void RandomizePosition(Transform t, Vector2 p)
     {
-        t.position = new Vector2(p.x, Random.Range(minY, maxY));
+        Vector2 random;
+        random.x = Random.Range(-0.5f, 0.5f);
+        random.y = Random.Range(-0.5f, 0.5f);
+
+        t.position = new Vector2(p.x, Random.Range(minY, maxY)) + random;
         p.x = p.x + spacing;
     }
 }
