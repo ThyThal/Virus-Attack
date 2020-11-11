@@ -5,27 +5,25 @@ using UnityEngine.UI;
 
 public class PowerUpManager : MonoBehaviour
 {
-    private const int STACK_LIMIT = 5;
-    private const float STACK_POSITION_DIFERENCESS = 50f;
-    private const float STACK_POSITION_INIT = -100f;
 
     static public PowerUpManager instance;
 
-    public Stack powerUps;
-    public PowerUp activePowerUp; // power up seleccionado de pila y activo hasta aplicar en arma o muro
-    private Vector2 powerUpActivePosition;
-    public List<Vector2> stackPositions;
-
+    private int STACK_LIMIT;
+    private List<Vector2> stackPositions;
+    [SerializeField] public Stack powerUps;
+    [SerializeField] public PowerUp activePowerUp; // power up seleccionado de pila y activo hasta aplicar en arma o muro
+    [SerializeField] public Transform powerUpActivePosition;
+    [SerializeField] public List<Transform> positions;
 
     void Awake()
     {
         instance = this;
+        STACK_LIMIT = positions.Count;
         powerUps = new Stack();
-        powerUpActivePosition = new Vector2(-100, 200);
 
         for (int i = 0; i < STACK_LIMIT; i++)
         {
-            stackPositions.Add(new Vector2(0, stackPositions.Count == 0 ? STACK_POSITION_INIT : stackPositions[i - 1].y + STACK_POSITION_DIFERENCESS));
+            stackPositions.Add(positions[i].localPosition);
         }
     }
 
@@ -56,7 +54,7 @@ public class PowerUpManager : MonoBehaviour
     {
         var powerUp = powerUps.Pop() as GameObject; /* OBTIENE OBJETO Y REMUEVE DE LA PILA */
         activePowerUp = powerUp.GetComponent<PowerUp>();
-        activePowerUp.transform.localPosition = powerUpActivePosition;
+        activePowerUp.transform.localPosition = powerUpActivePosition.localPosition;
         activePowerUp.inStack = false;
     }
 

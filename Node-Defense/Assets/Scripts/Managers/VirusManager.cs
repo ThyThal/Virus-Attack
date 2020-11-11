@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class VirusManager : MonoBehaviour
 {
-    private const int QUEUE_LIMIT = 5;
-    private const int QUEUE_POSITION_DIFERENCESS = 2;
+    private int QUEUE_LIMIT;
 
     static public VirusManager instance;
 
@@ -15,6 +14,7 @@ public class VirusManager : MonoBehaviour
     public List<Vector2> queuePositions;
     public List<GameObject> prefabs;
     public Transform parent;
+    public List<Transform> positions;
 	
 	public ABB virusTypes;
 
@@ -25,12 +25,13 @@ public class VirusManager : MonoBehaviour
         items = new Queue();
         //items.InitializeQueue();
         itemsCount = 0;
+        QUEUE_LIMIT = positions.Count;
 
         for (int i = 0; i < QUEUE_LIMIT; i++)
         {
-            queuePositions.Add(new Vector2(-8, queuePositions.Count == 0 ? 2 : queuePositions[i - 1].y - QUEUE_POSITION_DIFERENCESS));
+            queuePositions.Add(positions[i].localPosition);
         }
-
+        virusTypes = new ABB();
         virusTypes.InicializarArbol();
     }
 
