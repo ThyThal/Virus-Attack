@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
+    [SerializeField] private int score;
     [SerializeField] private ITree init;
     [SerializeField] public GameNode target;
     [SerializeField] private Vector2 direction;
@@ -152,7 +153,7 @@ public class Virus : MonoBehaviour
 
     public void HasDied()
     {
-        GameManager.Instance.score += 100;
+        GameManager.Instance.ScoreUpdate(score);
         LevelManager.instance.RemoveVirus(gameObject);
         Destroy(gameObject);
     }

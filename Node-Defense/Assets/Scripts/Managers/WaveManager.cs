@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    [SerializeField] public static WaveManager Instance;
+
     [Header("Current Wave Info")]
     [SerializeField] private GameObject virus;
     [SerializeField] public int totalVirus;
 
     [Header("Variables")]
-    [SerializeField] private int currentWave;
+    [SerializeField] public int currentWave;
     [SerializeField] private int nextWave;
     [SerializeField] public float searchTimer;
     [SerializeField] private float originalTimer;
@@ -31,7 +33,13 @@ public class WaveManager : MonoBehaviour
 
     public void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         originalTimer = searchTimer;
+
     }
 
     public void Update()
@@ -58,6 +66,7 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator SpawnWave(Wave waveNumber)
     {
+        ManagerUI.Instance.UpdateRound();
         state = SpawnState.SPAWNING;
         newWave = true;
         totalVirus = Random.Range(waveNumber.minVirus, waveNumber.maxVirus);
