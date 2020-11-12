@@ -23,9 +23,9 @@ public class Virus : MonoBehaviour
         ActionNode move = new ActionNode(Move);
         ActionNode attack = new ActionNode(Attack);
 
-        QuestionNode isColliding = new QuestionNode(IsColliding, attack, move);
-        QuestionNode isInfected = new QuestionNode(IsTargetInfected, findNext, isColliding);
-        QuestionNode hasTarget = new QuestionNode(HasTarget, isInfected , findNext);
+        QuestionNode isInfected = new QuestionNode(IsTargetInfected, findNext, attack);
+        QuestionNode isColliding = new QuestionNode(IsColliding, isInfected, move);
+        QuestionNode hasTarget = new QuestionNode(HasTarget, isColliding, findNext);
 
         init = hasTarget;
     }
