@@ -1401,8 +1401,8 @@ MonoBehaviour:
   vertexInit: 
   vertex: 
   edges: []
-  minRandom: 7
-  maxRandom: 8
+  minRandom: 9
+  maxRandom: 10
   minEdges: 1
   maxEdges: 3
   edgeAmount: 0
@@ -1412,14 +1412,14 @@ MonoBehaviour:
     type: 3}
   nodeServer: {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db,
     type: 3}
-  distanceY: 2
+  distanceY: 3
   currentXnodes: []
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
   spacing: 6
   minY: -3
   maxY: 4
-  nodesY: 2
+  nodesY: 3
   lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
     type: 3}
 --- !u!1 &1968683426

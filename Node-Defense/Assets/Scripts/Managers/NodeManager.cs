@@ -25,7 +25,7 @@ public class NodeManager : MonoBehaviour
 
     [Header("Nodes Position")]
     [SerializeField] private float distanceY;
-    [SerializeField] private List<float> currentXnodes;
+    [SerializeField] private List<Vector2> currentXnodes;
     [SerializeField] private Transform nodesParent;
     [SerializeField] private Vector2 position;
     [SerializeField] private float spacing;
@@ -76,18 +76,18 @@ public class NodeManager : MonoBehaviour
             {
                 CreateNode(position, vertex[i]);
                 position = RandomizePosition(position);
-                currentXnodes.Add(position.y);
+                currentXnodes.Add(position);
             }
             else
             {
                 for (int k = 0; k < currentXnodes.Count; k++)
                 {
-                    var distance = Mathf.Abs(currentXnodes[k] - Mathf.Abs(position.y));
-
+                    //var distance = Mathf.Abs(currentXnodes[k] - Mathf.Abs(position.y));
+                    var distance = (currentXnodes[k] - position).magnitude;
                     while (distance <= distanceY)
                     {
                         position = RandomizePosition(position);
-                        distance = Mathf.Abs(currentXnodes[k] - Mathf.Abs(position.y));
+                        distance = (currentXnodes[k] - position).magnitude;
                     }
                 }
                 CreateNode(position, vertex[i]);
@@ -140,7 +140,7 @@ public class NodeManager : MonoBehaviour
         nodesDictionary.TryGetValue(destiny, out destinyNode);
         var lineEdge = Instantiate(lineEdgePrefab, currentNode.gameObject.transform);
         lineEdge.GetComponent<LineRenderer>().SetPosition(0, currentNode.transform.position);
-        Vector3 vectorToTarget = (destinyNode.transform.position - currentNode.transform.position) * 25;
+        Vector3 vectorToTarget = (destinyNode.transform.position - currentNode.transform.position) * 50;
         lineEdge.GetComponent<LineRenderer>().SetPosition(1, vectorToTarget);
         currentNode.edgesRenderers.Add(lineEdge);
     }

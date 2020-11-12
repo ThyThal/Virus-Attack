@@ -67,6 +67,8 @@ public class GameNode : MonoBehaviour, IGameNode
     {
         if (Type != GameNodeType.Internet)
             lineRenderer = GetComponent<LineRenderer>();
+        else
+            ChangeEdges();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalTimer = timer;
     }
@@ -119,6 +121,7 @@ public class GameNode : MonoBehaviour, IGameNode
     public void HasDied()
     {
         isInfected = true;
+        ChangeEdges();
         if (powerUp != null)
         {
             Destroy(powerUp.gameObject);
@@ -127,5 +130,16 @@ public class GameNode : MonoBehaviour, IGameNode
         GameManager.Instance.ScoreUpdate(score);
         this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
+    }
+
+    private void ChangeEdges()
+    {
+        LineRenderer edge;
+        for (int i = 0; i < edgesRenderers.Count; i++)
+        {
+            edge = edgesRenderers[i].GetComponent<LineRenderer>();
+            edge.startColor = (Color.red);
+            edge.endColor = (Color.magenta);
+        }
     }
 }
