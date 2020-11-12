@@ -75,7 +75,7 @@ public class GameNode : MonoBehaviour, IGameNode
         if(Type != GameNodeType.Internet)
             lineRenderer.SetPosition(1, Vector3.zero);
         targetVirus = GameObject.FindGameObjectWithTag("Virus");
-        if (targetVirus != null && !isInfected)
+        if (targetVirus != null && !isInfected && targetVirus.GetComponent<Virus>().target != null)
         {
             targetPos = targetVirus.transform.position;
             nodePos = transform.position;

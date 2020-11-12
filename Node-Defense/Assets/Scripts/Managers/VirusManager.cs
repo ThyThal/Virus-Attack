@@ -29,7 +29,7 @@ public class VirusManager : MonoBehaviour
 
         for (int i = 0; i < QUEUE_LIMIT; i++)
         {
-            queuePositions.Add(positions[i].localPosition);
+            queuePositions.Add(positions[i].position);
         }
         virusTypes = new ABB();
         virusTypes.InicializarArbol();
