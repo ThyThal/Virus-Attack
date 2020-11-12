@@ -24,18 +24,18 @@ public class LevelManager : MonoBehaviour
         nodesGraph = new GrafoMA();
         nodesGraph.Initialization();
         int i = 0; // Lo creo afuera para saber cual es la posicion de ultimo vertice
-        for (; i < NodeManager.instance.vertex.Length; i++)
+        for (; i < NodeManager.Instance.vertex.Length; i++)
         {
-            nodesGraph.AddVertex(NodeManager.instance.vertex[i]);
+            nodesGraph.AddVertex(NodeManager.Instance.vertex[i]);
         }
 
-        for (int k = 0; k < NodeManager.instance.edges.Count; k++)
+        for (int k = 0; k < NodeManager.Instance.edges.Count; k++)
         {
-            nodesGraph.AddEdge(k, (int)NodeManager.instance.edges[k].x, (int)NodeManager.instance.edges[k].y, (int)NodeManager.instance.edges[k].z);// Id, From, To, Weight.
+            nodesGraph.AddEdge(k, (int)NodeManager.Instance.edges[k].x, (int)NodeManager.Instance.edges[k].y, (int)NodeManager.Instance.edges[k].z);// Id, From, To, Weight.
         }
 
-        NodeManager.instance.nodesDictionary.TryGetValue(NodeManager.instance.vertex[0], out nodeInternet);
-        NodeManager.instance.nodesDictionary.TryGetValue(NodeManager.instance.vertex[i-1], out nodeServer);
+        NodeManager.Instance.nodesDictionary.TryGetValue(NodeManager.Instance.vertex[0], out nodeInternet);
+        NodeManager.Instance.nodesDictionary.TryGetValue(NodeManager.Instance.vertex[i-1], out nodeServer);
 
 
     }

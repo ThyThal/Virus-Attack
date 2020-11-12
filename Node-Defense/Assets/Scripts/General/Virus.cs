@@ -76,7 +76,7 @@ public class Virus : MonoBehaviour
                 }
                 actualPosWay = 0;
             }
-            NodeManager.instance.nodesDictionary.TryGetValue(way[actualPosWay], out target);
+            NodeManager.Instance.nodesDictionary.TryGetValue(way[actualPosWay], out target);
         }
         else if (LevelManager.instance.isServerInfected == true)
         {
