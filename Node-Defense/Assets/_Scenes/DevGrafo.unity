@@ -1386,13 +1386,13 @@ MonoBehaviour:
     type: 3}
   nodeServer: {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db,
     type: 3}
-  distanceY: 1
+  distanceY: 2
   currentXnodes: []
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
-  spacing: 5
+  spacing: 6
   minY: -3
-  maxY: 3
+  maxY: 4
   nodesY: 2
 --- !u!1 &1968683426
 GameObject:
@@ -2017,6 +2017,8 @@ MonoBehaviour:
   queuePositions: []
   prefabs:
   - {fileID: 6714575073109414554, guid: 2cc29c2017601264b8c31b05e5383a53, type: 3}
+  - {fileID: 2613914334943530638, guid: 59efc1ab96bf83441ae274b646d1736f, type: 3}
+  - {fileID: 573890700951882811, guid: f544294b970c0ba478ac6b4825992cd0, type: 3}
   parent: {fileID: 2112651894}
   positions:
   - {fileID: 1670509756}
