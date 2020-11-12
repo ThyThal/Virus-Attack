@@ -67,7 +67,27 @@ public class NodeManager : MonoBehaviour
             }
 
             vertex[i] = vertexInit[i];
-            CreateNode(position, vertex[i]);
+
+            // CHECK DISTANCE
+            if (currentXnodes.Count == 0)
+            {
+                CreateNode(position, vertex[i]);
+                currentXnodes.Add(position.y);
+            }
+
+            else
+            {
+                for (int k = 0; k < currentXnodes.Count; k++)
+                {
+                    var distance = Mathf.Abs(currentXnodes[k] - position.y);
+
+                    while (distance <= distanceY)
+                    {
+                        position.y = Random.Range(minY, maxY);
+                        distance = Mathf.Abs(currentXnodes[k] - position.y);
+                    }
+                }
+            }
         }
 
         position.x += spacing;// Agregar Espacio Entre Nodos.

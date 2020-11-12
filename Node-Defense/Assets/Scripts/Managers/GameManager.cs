@@ -59,31 +59,13 @@ public class GameManager : MonoBehaviour
     public void GameOver() // <====={ SCENE LOSE }
     {
         SceneManager.LoadScene(conditionScene);
-        if (scoreArray.Count < 5)
-        {
-            scoreArray.Add(score);
-        }
-
-        else
-        {
-            scoreArray[4] = score;
-        }
+        scoreArray.Add(score);
         hasWon = false;
     }
 
     public void Win() // <====={ SCENE WIN }
     {
         SceneManager.LoadScene(conditionScene);
-        if (scoreArray.Count < 5)
-        {
-            scoreArray.Add(score);
-        }
-
-        else
-        {
-            scoreArray[4] = score;
-        }
-
         hasWon = true;
     }
 

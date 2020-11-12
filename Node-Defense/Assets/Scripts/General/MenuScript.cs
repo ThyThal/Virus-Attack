@@ -48,10 +48,9 @@ public class MenuScript : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.menuScript = this.GetComponent<MenuScript>();
-
-        for (int i = 0; i < scoresPositions.Count; i++) // Load Scores
+        for (int i = 0; i < scoresPositions.Count; i++)
         {
-            scoresPositions[i].text = GameManager.Instance.scoreArray[i].ToString();
+
         }
 
     }
