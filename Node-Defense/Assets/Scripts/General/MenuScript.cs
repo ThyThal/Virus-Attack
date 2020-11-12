@@ -25,36 +25,30 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private AudioClip clickAudio;
     [SerializeField] public bool hasClicked;
 
-
-    public Queue scores;
-
-    private void Awake()
+    void Awake()
     {
-        if (GameManager.Instance.hasWon == true)
-        {
-            Debug.Log("Win");
-            conditionText = "You Win";
-            text.text = conditionText;
+        if(GameManager.Instance != null) { 
+            if (GameManager.Instance.hasWon == true)
+            {
+                Debug.Log("Win");
+                conditionText = "You Win";
+                text.text = conditionText;
+            }
+
+            if (GameManager.Instance.hasWon == false)
+            {
+                Debug.Log("Lose");
+                conditionText = "Game Over";
+                text.text = conditionText;
+            }
+
+            GameManager.Instance.menuScript = this.GetComponent<MenuScript>();
+
+            for (int i = 0; i < GameManager.Instance.scoreArray.Count; i++) // Load Scores
+            {
+                scoresPositions[i].text = GameManager.Instance.scoreArray[i].ToString();
+            }
         }
-
-        if (GameManager.Instance.hasWon == false)
-        {
-            Debug.Log("Lose");
-            conditionText = "Game Over";
-            text.text = conditionText;
-        }
-    }
-
-    private void Start()
-    {
-        GameManager.Instance.menuScript = this.GetComponent<MenuScript>();
-
-        for (int i = 0; i < GameManager.Instance.scoreArray.Count; i++) // Load Scores
-        {
-            // TODO usar quicksort
-            scoresPositions[i].text = GameManager.Instance.scoreArray[i].ToString();
-        }
-
     }
 
     public void OnClickPlay()

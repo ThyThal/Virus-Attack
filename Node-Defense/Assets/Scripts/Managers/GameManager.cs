@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,11 +29,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
         #if UNITY_EDITOR
@@ -59,32 +55,49 @@ public class GameManager : MonoBehaviour
     public void GameOver() // <====={ SCENE LOSE }
     {
         SceneManager.LoadScene(conditionScene);
+
         if (scoreArray.Count < 5)
         {
             scoreArray.Add(score);
         }
-
         else
         {
-            scoreArray[4] = score;
+            scoreArray[scoreArray.Count - 1] = score;
         }
+
+        if (scoreArray.Count > 1)
+            SortScores();
+
         hasWon = false;
     }
 
     public void Win() // <====={ SCENE WIN }
     {
         SceneManager.LoadScene(conditionScene);
+        
+
         if (scoreArray.Count < 5)
         {
             scoreArray.Add(score);
         }
-
         else
         {
-            scoreArray[4] = score;
+            scoreArray[scoreArray.Count -1] = score;
         }
 
+        if (scoreArray.Count > 1)
+            SortScores();
+
         hasWon = true;
+    }
+
+    public void SortScores()
+    {
+        int[] aux = scoreArray.ToArray();
+        QuickSort.quickSort(aux, scoreArray.IndexOf(scoreArray.First()), scoreArray.LastIndexOf(scoreArray.Last()));
+        scoreArray.Clear();
+        scoreArray = aux.OfType<int>().ToList();
+        scoreArray.Reverse();
     }
 
     public void ScoreUpdate(int s)
