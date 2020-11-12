@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpRespowner : MonoBehaviour
 {
-    public const int RESPAWN_TIME = 5;
+    public const int RESPAWN_TIME = 10;
 
     public List<GameObject> prefabs;
     public Transform parent;
