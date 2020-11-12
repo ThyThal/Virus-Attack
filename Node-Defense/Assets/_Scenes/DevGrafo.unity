@@ -1327,6 +1327,7 @@ MonoBehaviour:
   conditionScene: FinishScreen
   hasWon: 0
   menuScript: {fileID: 0}
+  scoreArray: 
   score: 0
 --- !u!1 &1917069705
 GameObject:
@@ -1385,6 +1386,8 @@ MonoBehaviour:
     type: 3}
   nodeServer: {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db,
     type: 3}
+  distanceY: 1
+  currentXnodes: []
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
   spacing: 5

@@ -24,6 +24,8 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private GameObject nodeServer;
 
     [Header("Nodes Position")]
+    [SerializeField] private float distanceY;
+    [SerializeField] private List<float> currentXnodes;
     [SerializeField] private Transform nodesParent;
     [SerializeField] private Vector2 position;
     [SerializeField] private float spacing;
@@ -57,14 +59,35 @@ public class NodeManager : MonoBehaviour
         for (int i = 1; i < vertexInit.Count-1; i++)
         {
             j++;
-            if (j >= nodesY)
+            if (j >= nodesY) // Pasa al siguiente
             {
                 position.x += spacing;// Agregar Espacio Entre Nodos.
+                currentXnodes.Clear();
                 j = 0;
             }
+
             vertex[i] = vertexInit[i];
-            CreateNode(position, vertex[i]);
-            //position.x = position.x + spacing; // Agregar Espacio Entre Nodos.
+
+            // CHECK DISTANCE
+            if (currentXnodes.Count == 0)
+            {
+                CreateNode(position, vertex[i]);
+                currentXnodes.Add(position.y);
+            }
+
+            else
+            {
+                for (int k = 0; k < currentXnodes.Count; k++)
+                {
+                    var distance = Mathf.Abs(currentXnodes[k] - position.y);
+
+                    while (distance <= distanceY)
+                    {
+                        position.y = Random.Range(minY, maxY);
+                        distance = Mathf.Abs(currentXnodes[k] - position.y);
+                    }
+                }
+            }
         }
 
         position.x += spacing;// Agregar Espacio Entre Nodos.
