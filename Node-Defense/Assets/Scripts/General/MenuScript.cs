@@ -49,8 +49,9 @@ public class MenuScript : MonoBehaviour
     {
         GameManager.Instance.menuScript = this.GetComponent<MenuScript>();
 
-        for (int i = 0; i < scoresPositions.Count; i++) // Load Scores
+        for (int i = 0; i < GameManager.Instance.scoreArray.Count; i++) // Load Scores
         {
+            // TODO usar quicksort
             scoresPositions[i].text = GameManager.Instance.scoreArray[i].ToString();
         }
 
