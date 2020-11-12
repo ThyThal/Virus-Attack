@@ -1400,6 +1400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertexInit: 
   vertex: 
+  visited: 
   edges: []
   minRandom: 9
   maxRandom: 10
@@ -1417,8 +1418,8 @@ MonoBehaviour:
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
   spacing: 6
-  minY: -3
-  maxY: 4
+  minY: -8
+  maxY: 8
   nodesY: 3
   lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
     type: 3}
