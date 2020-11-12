@@ -33,6 +33,7 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private float minY;
     [SerializeField] private float maxY;
     [SerializeField] private int nodesY;
+    [SerializeField] private float scale;
 
 
     public GameObject lineEdgePrefab;
@@ -176,8 +177,8 @@ public class NodeManager : MonoBehaviour
         nodesDictionary.TryGetValue(origin, out currentNode);
         nodesDictionary.TryGetValue(destiny, out destinyNode);
         var lineEdge = Instantiate(lineEdgePrefab, currentNode.gameObject.transform);
-        lineEdge.GetComponent<LineRenderer>().SetPosition(0, currentNode.transform.position);
-        Vector3 vectorToTarget = (destinyNode.transform.position - currentNode.transform.position) * 48;
+        lineEdge.GetComponent<LineRenderer>().SetPosition(0, Vector3.zero);
+        Vector3 vectorToTarget = (destinyNode.transform.position - currentNode.transform.position) * scale;
         lineEdge.GetComponent<LineRenderer>().SetPosition(1, vectorToTarget);
         currentNode.edgesRenderers.Add(lineEdge);
     }
