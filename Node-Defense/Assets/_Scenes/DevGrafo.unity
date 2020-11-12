@@ -740,10 +740,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433d122a561e6fd48b79fd5f50480e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RESPAWN_TIME: 0
   prefabs:
   - {fileID: 1196495647859976120, guid: a8684522fd00e2f43b6103fdad530fe8, type: 3}
   - {fileID: 1196495647859976120, guid: 2ec6d51c8d0a0864a98590077bea7be6, type: 3}
   parent: {fileID: 787941584}
+  timer: 0
   inGame: 1
 --- !u!4 &1196458796
 Transform:
@@ -1413,15 +1415,15 @@ MonoBehaviour:
     type: 3}
   nodeServer: {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db,
     type: 3}
-  distanceY: 55
+  distanceY: 5
   currentXnodes: []
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
-  spacing: 6
-  minY: -9
-  maxY: 10
+  spacing: 5
+  minY: -7
+  maxY: 7
   nodesY: 3
-  scale: 51
+  scale: 50
   lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
     type: 3}
 --- !u!1 &1968683426
