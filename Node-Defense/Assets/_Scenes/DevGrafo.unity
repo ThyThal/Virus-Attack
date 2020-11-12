@@ -261,6 +261,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &413238410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413238411}
+  m_Layer: 5
+  m_Name: Edges
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413238411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413238410}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2086515417}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &456310231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,12 +1199,8 @@ MonoBehaviour:
   nodeInternet: {fileID: 0}
   nodeServer: {fileID: 0}
   isServerInfected: 0
-  nodesParent: {fileID: 1917069706}
-  nodesPrefabs:
-  - {fileID: 1831571131393464871, guid: c2517f40904fedf4698b77077c9c0352, type: 3}
-  - {fileID: 1831571131393464871, guid: 8554d8a47f8b5474f821ea893f35fda8, type: 3}
-  - {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db, type: 3}
-  viruses: []
+  nodesParent: {fileID: 0}
+  nodesPrefabs: []
 --- !u!114 &1592136138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1394,6 +1420,8 @@ MonoBehaviour:
   minY: -3
   maxY: 4
   nodesY: 2
+  lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
+    type: 3}
 --- !u!1 &1968683426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,6 +1976,7 @@ RectTransform:
   - {fileID: 787941584}
   - {fileID: 675323769}
   - {fileID: 1327463388}
+  - {fileID: 413238411}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

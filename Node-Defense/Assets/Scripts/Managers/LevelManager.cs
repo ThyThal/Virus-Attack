@@ -10,14 +10,9 @@ public class LevelManager : MonoBehaviour
     public GameNode nodeInternet;
     public GameNode nodeServer;
     public bool isServerInfected;
-    private const int NODES_FOR_Y = 3;
-    private const int NODE_POSITION_DIFERENCESS = 100;
     public Transform nodesParent;
-    private bool gameFinished;
-    public Dictionary<string, string> dictionaryNodes;
     public List<GameObject> nodesPrefabs;
     static public LevelManager instance;
-    public List<Virus> viruses;
 
     void Awake()
     {
@@ -41,18 +36,20 @@ public class LevelManager : MonoBehaviour
 
         NodeManager.instance.nodesDictionary.TryGetValue(NodeManager.instance.vertex[0], out nodeInternet);
         NodeManager.instance.nodesDictionary.TryGetValue(NodeManager.instance.vertex[i-1], out nodeServer);
+
+
     }
 
+     
     public void SpawnVirus(GameObject enemyToSpawn)
     {
         enemyToSpawn.transform.position = nodeInternet.transform.position;
         enemyToSpawn.GetComponent<Virus>().target = nodeInternet;
-        viruses.Add(enemyToSpawn.GetComponent<Virus>());
     }
 
     public void RemoveVirus(GameObject virus)
     {
-        viruses.Remove(virus.GetComponent<Virus>());
+
     }
 
     private void Update()

@@ -33,6 +33,9 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private Vector3 nodePos;
     [SerializeField] private float scale;
 
+    [Header("Edges")]
+    [SerializeField] public List<GameObject> edgesRenderers;
+
     public int Vertex
     {
         get

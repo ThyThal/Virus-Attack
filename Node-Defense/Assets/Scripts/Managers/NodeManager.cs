@@ -33,6 +33,9 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private float maxY;
     [SerializeField] private int nodesY;
 
+
+    public GameObject lineEdgePrefab;
+
     public Dictionary<int, GameNode> nodesDictionary;
 
     private void Awake()
@@ -110,6 +113,7 @@ public class NodeManager : MonoBehaviour
                 //Debug.Log("index " + index);
                 //Debug.Log(string.Join(", " ,vertexInit));
                 edges.Add(new Vector3(currentVertex, vertexInit[index], 1)); // From, To, Weight.
+                InstantiateEdge(currentVertex, vertexInit[index]);
                 if (vertexInit.Count <= 1) break;
                 int aux1 = index;
 
@@ -125,6 +129,20 @@ public class NodeManager : MonoBehaviour
         }
 
         edges.Add(new Vector3(currentVertex, lastVertex, 1));
+        InstantiateEdge(currentVertex, lastVertex);
+    }
+
+    private void InstantiateEdge(int origin, int destiny)
+    {
+        GameNode currentNode;
+        GameNode destinyNode;
+        nodesDictionary.TryGetValue(origin, out currentNode);
+        nodesDictionary.TryGetValue(destiny, out destinyNode);
+        var lineEdge = Instantiate(lineEdgePrefab, currentNode.gameObject.transform);
+        lineEdge.GetComponent<LineRenderer>().SetPosition(0, currentNode.transform.position);
+        Vector3 vectorToTarget = (destinyNode.transform.position - currentNode.transform.position) * 25;
+        lineEdge.GetComponent<LineRenderer>().SetPosition(1, vectorToTarget);
+        currentNode.edgesRenderers.Add(lineEdge);
     }
 
     private void CreateInternet(Vector2 p)
