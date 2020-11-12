@@ -1583,7 +1583,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Honeypot
+  m_Text: Virus Attack
 --- !u!222 &1934880139
 CanvasRenderer:
   m_ObjectHideFlags: 0
