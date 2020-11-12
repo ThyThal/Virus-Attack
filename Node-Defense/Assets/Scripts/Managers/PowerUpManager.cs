@@ -55,7 +55,7 @@ public class PowerUpManager : MonoBehaviour
     {
         var powerUp = powerUps.Pop() as GameObject; /* OBTIENE OBJETO Y REMUEVE DE LA PILA */
         activePowerUp = powerUp.GetComponent<PowerUp>();
-        activePowerUp.transform.localPosition = powerUpActivePosition.localPosition;
+        activePowerUp.transform.position = powerUpActivePosition.position;
         activePowerUp.inStack = false;
     }
 

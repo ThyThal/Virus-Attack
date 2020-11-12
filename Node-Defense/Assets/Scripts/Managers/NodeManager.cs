@@ -72,21 +72,22 @@ public class NodeManager : MonoBehaviour
             if (currentXnodes.Count == 0)
             {
                 CreateNode(position, vertex[i]);
+                position = RandomizePosition(position);
                 currentXnodes.Add(position.y);
             }
-
             else
             {
                 for (int k = 0; k < currentXnodes.Count; k++)
                 {
-                    var distance = Mathf.Abs(currentXnodes[k] - position.y);
+                    var distance = Mathf.Abs(currentXnodes[k] - Mathf.Abs(position.y));
 
                     while (distance <= distanceY)
                     {
-                        position.y = Random.Range(minY, maxY);
-                        distance = Mathf.Abs(currentXnodes[k] - position.y);
+                        position = RandomizePosition(position);
+                        distance = Mathf.Abs(currentXnodes[k] - Mathf.Abs(position.y));
                     }
                 }
+                CreateNode(position, vertex[i]);
             }
         }
 
@@ -131,7 +132,7 @@ public class NodeManager : MonoBehaviour
         var node = Instantiate(nodeInternet, nodesParent);
         node.GetComponent<GameNode>().Vertex = vertex.First();
         var nodeTransform = node.transform;
-        RandomizePosition(nodeTransform, position);
+        nodeTransform.position = p;
         nodesDictionary.Add(vertex.First(), node.GetComponent<GameNode>());
     }
 
@@ -140,7 +141,7 @@ public class NodeManager : MonoBehaviour
         var node = Instantiate(nodeBasic, nodesParent);
         node.GetComponent<GameNode>().Vertex = id;
         var nodeTransform = node.transform;
-        RandomizePosition(nodeTransform, position);
+        nodeTransform.position = p;
         nodesDictionary.Add(id, node.GetComponent<GameNode>());
     }
 
@@ -149,17 +150,17 @@ public class NodeManager : MonoBehaviour
         var node = Instantiate(nodeServer, nodesParent);
         node.GetComponent<GameNode>().Vertex = vertex.Last();
         var nodeTransform = node.transform;
-        RandomizePosition(nodeTransform, position);
+        nodeTransform.position = p;
         nodesDictionary.Add(vertex.Last(), node.GetComponent<GameNode>());
     }
 
-    private void RandomizePosition(Transform t, Vector2 p)
+    private Vector2 RandomizePosition(Vector2 p)
     {
         Vector2 random;
         random.x = Random.Range(-0.5f, 0.5f);
         random.y = Random.Range(-0.5f, 0.5f);
 
-        t.position = new Vector2(p.x, Random.Range(minY, maxY)) + random;
-        p.x = p.x + spacing;
+        p = new Vector2(p.x, Random.Range(minY, maxY)) + random;
+        return p;
     }
 }
