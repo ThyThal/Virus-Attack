@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class ManagerUI : MonoBehaviour
 {
-    [SerializeField] public static ManagerUI Instance;
+    static public ManagerUI instance;
     [SerializeField] private Text round;
     [SerializeField] private Text score;
 
-    private void Start()
+    void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
 
         round.text = $"Round: 0";
@@ -23,7 +23,7 @@ public class ManagerUI : MonoBehaviour
 
     public void UpdateRound()
     {
-        round.text = $"Round: {WaveManager.Instance.currentWave + 1}";
+        round.text = $"Round: {WaveManager.instance.currentWave + 1}";
     }
     public void UpdateScore()
     {

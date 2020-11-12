@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] public static WaveManager Instance;
+    static public WaveManager instance;
 
     [Header("Current Wave Info")]
     [SerializeField] public int totalVirus;
@@ -29,11 +29,11 @@ public class WaveManager : MonoBehaviour
         [SerializeField] public float spawnerRate;
     }
 
-    public void Start()
+    public void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
 
         originalTimer = searchTimer;
@@ -64,7 +64,7 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator SpawnWave(Wave waveNumber)
     {
-        ManagerUI.Instance.UpdateRound();
+        ManagerUI.instance.UpdateRound();
         state = SpawnState.SPAWNING;
         newWave = true;
         totalVirus = Random.Range(waveNumber.minVirus, waveNumber.maxVirus);

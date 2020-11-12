@@ -20,6 +20,7 @@ public class PowerUpManager : MonoBehaviour
         instance = this;
         STACK_LIMIT = positions.Count;
         powerUps = new Stack();
+        stackPositions = new List<Vector2>();
 
         for (int i = 0; i < STACK_LIMIT; i++)
         {

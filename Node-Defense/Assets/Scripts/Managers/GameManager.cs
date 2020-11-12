@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string conditionScene;
     [SerializeField] public bool hasWon;
     [SerializeField] public MenuScript menuScript;
-    public int score;
+
+    [SerializeField] public List<int> scoreArray;
+    [SerializeField] public int score;
 
     public static GameManager Instance;
     private void Awake()
@@ -34,10 +36,17 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         #if UNITY_EDITOR
+
+        if (Input.GetKeyDown(KeyCode.Q)) // <==========[DEBUG SCORE] 
+        {
+            ScoreDebug();
+        }
+
         if (Input.GetKeyDown(KeyCode.P)) // <==========[AUTOMATIC WIN] 
         {
             Win();
         }
+
         
         if (Input.GetKeyDown(KeyCode.O)) // <==========[AUTOMATIC LOSE] 
         {
@@ -50,6 +59,7 @@ public class GameManager : MonoBehaviour
     public void GameOver() // <====={ SCENE LOSE }
     {
         SceneManager.LoadScene(conditionScene);
+        scoreArray.Add(score);
         hasWon = false;
     }
 
@@ -62,6 +72,12 @@ public class GameManager : MonoBehaviour
     public void ScoreUpdate(int s)
     {
         score += s;
-        ManagerUI.Instance.UpdateScore();
+        ManagerUI.instance.UpdateScore();
+    }
+
+    private void ScoreDebug()
+    {
+        score += Random.Range(25, 137);
+        ManagerUI.instance.UpdateScore();
     }
 }
