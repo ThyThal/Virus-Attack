@@ -55,7 +55,7 @@ public class Virus : MonoBehaviour
                 }
             }
             else { 
-                AlgDijkstra.Dijkstra(LevelManager.instance.nodesGraph, LevelManager.instance.nodeInternet.Vertex);
+                AlgDijkstra.Dijkstra(LevelManager.instance.nodesGraph, target.Vertex);
                 string[] caminos = AlgDijkstra.nodos;
                 List<string> caminosDispo = new List<string>();
 
