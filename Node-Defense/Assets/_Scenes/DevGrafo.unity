@@ -1413,13 +1413,13 @@ MonoBehaviour:
     type: 3}
   nodeServer: {fileID: 1831571131393464871, guid: 8044fe421c7e00741bbcd7808a58e7db,
     type: 3}
-  distanceY: 3
+  distanceY: 55
   currentXnodes: []
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
   spacing: 6
-  minY: -8
-  maxY: 8
+  minY: -9
+  maxY: 10
   nodesY: 3
   lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
     type: 3}
