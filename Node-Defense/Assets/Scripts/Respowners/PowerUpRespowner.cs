@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PowerUpRespowner : MonoBehaviour
 {
-    public const int RESPAWN_TIME = 10;
+    [SerializeField] public int RESPAWN_TIME;
 
-    public List<GameObject> prefabs;
-    public Transform parent;
+    [SerializeField] public List<GameObject> prefabs;
+    [SerializeField] public Transform parent;
 
-    private float timer;
-    public bool inGame;
+    [SerializeField] private float timer;
+    [SerializeField] public bool inGame;
 
 
     void Update()
