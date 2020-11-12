@@ -908,11 +908,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdc2cc716ce1914ebeaf925f0c38d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: MainGame
+  gameScene: DevGrafo
   menuScene: MainMenu
   conditionScene: FinishScreen
   hasWon: 0
   menuScript: {fileID: 0}
+  scoreArray: 
   score: 0
 --- !u!4 &871936495
 Transform:
