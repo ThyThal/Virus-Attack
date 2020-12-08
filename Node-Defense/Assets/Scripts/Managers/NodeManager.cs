@@ -21,8 +21,10 @@ public class NodeManager : MonoBehaviour
 
     [Header("Nodes")]
     [SerializeField] private GameObject nodeInternet;
-    [SerializeField] private GameObject nodeBasic;
+    [SerializeField] private Transform nodeInternetPosition;
     [SerializeField] private GameObject nodeServer;
+    [SerializeField] private Transform nodeServerPosition;
+    [SerializeField] private GameObject nodeBasic;
 
     [Header("Nodes Position")]
     [SerializeField] private float distanceY;
@@ -185,7 +187,7 @@ public class NodeManager : MonoBehaviour
 
     private void CreateInternet(Vector2 p)
     {
-        var node = Instantiate(nodeInternet, nodesParent);
+        var node = Instantiate(nodeInternet, nodeInternetPosition);
         node.GetComponent<GameNode>().Vertex = vertex.First();
         var nodeTransform = node.transform;
         nodeTransform.position = p;
@@ -203,7 +205,7 @@ public class NodeManager : MonoBehaviour
 
     private void CreateServer(Vector2 p)
     {
-        var node = Instantiate(nodeServer, nodesParent);
+        var node = Instantiate(nodeServer, nodeServerPosition);
         node.GetComponent<GameNode>().Vertex = vertex.Last();
         var nodeTransform = node.transform;
         nodeTransform.position = p;
