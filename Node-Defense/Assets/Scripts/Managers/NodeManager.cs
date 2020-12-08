@@ -118,10 +118,6 @@ public class NodeManager : MonoBehaviour
                 edgeAmount = Random.Range(minEdges, maxEdges);
             } // Si el maximo de conexiones es mayor que los items, se genera lo mayor posible.
 
-            /*edges.Add(new Vector3(currentVertex, vertexInit[index], 1)); // From, To, Weight.
-            InstantiateEdge(currentVertex, vertexInit[index]); // Añadimos la visualizacion de
-            visited.Add(index);*/
-
             // Agregar conexion de "currentVertex" con el nodo "index".
             for (int i = 0; i < edgeAmount; i++)
             {  
@@ -140,18 +136,8 @@ public class NodeManager : MonoBehaviour
                 edges.Add(new Vector3(currentVertex, vertexInit[index], 1)); // From, To, Weight.
                 InstantiateEdge(currentVertex, vertexInit[index]); // Añadimos la visualizacion de
                 visited.Add(index);
-
-                //edges.Add(new Vector3(currentVertex, vertexInit[index], 1)); // From, To, Weight.
-                //InstantiateEdge(currentVertex, vertexInit[index]);
-                /*if (vertexInit.Count <= 1) break;
-                int aux1 = index;
-
-                while (index == aux1)
-                {
-                    index = Random.Range(0, vertexInit.Count);
-                }
-                */
             }
+
             int aux = currentVertex;
             currentVertex = vertexInit[index];
             vertexInit.Remove(aux);
