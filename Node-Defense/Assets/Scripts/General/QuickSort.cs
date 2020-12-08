@@ -26,17 +26,19 @@ public class QuickSort
 			{
 				right--;
 			}
-			if (left < right)
+			if (left >= right)
+			{               
+				// este es el valor que devuelvo como proxima posicion de
+				// la particion en el siguiente paso del algoritmo
+				return right;
+			}
+			else
 			{
 				int temp = arr[right];
 				arr[right] = arr[left];
 				arr[left] = temp;
-			}
-			else
-			{
-				// este es el valor que devuelvo como proxima posicion de
-				// la particion en el siguiente paso del algoritmo
-				return right;
+				left++;
+				right--;
 			}
 		}
 	}
