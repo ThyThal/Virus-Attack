@@ -57,7 +57,9 @@ public class NodeManager : MonoBehaviour
         for (int i = 1; i < vertexInit.Count-1; i++)
         {
             vertex[i] = vertexInit[i];
-            CreateBasicNode(vertex[i], transforms[i-1]);
+            var transformIndex = Random.Range(1, transforms.Count - 1);
+            CreateBasicNode(vertex[i], transforms[transformIndex]);
+            transforms.RemoveAt(transformIndex);
         }        
         
         CreateNodeServer(); // Instanciar Nodo Servidor.
