@@ -3246,11 +3246,11 @@ MonoBehaviour:
   currentXnodes: []
   nodesParent: {fileID: 508679156}
   position: {x: -12, y: 0}
-  spacing: 6
-  minY: -9
-  maxY: 10
+  spacing: 5
+  minY: -7
+  maxY: 7
   nodesY: 3
-  scale: 51
+  scale: 50
   lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
     type: 3}
 --- !u!1 &1968683426

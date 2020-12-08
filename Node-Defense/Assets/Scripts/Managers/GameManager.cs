@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public MenuScript menuScript;
 
     [SerializeField] public List<int> scoreArray;
+    public Database database;
     [SerializeField] public int score;
 
     public static GameManager Instance;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
         {
+            database = new Database();
             Instance = this;
             DontDestroyOnLoad(this);
         }
@@ -56,17 +58,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(conditionScene);
 
-        if (scoreArray.Count < 5)
-        {
-            scoreArray.Add(score);
-        }
-        else
-        {
-            scoreArray[scoreArray.Count - 1] = score;
-        }
-
-        if (scoreArray.Count > 1)
-            SortScores();
+        RankingModel ranking = new RankingModel("Perdio", WaveManager.instance.currentWave, score);
+        database.AddRankingRecord(ranking);
+        GetScores();
+        SortScores();
 
         hasWon = false;
     }
@@ -74,21 +69,22 @@ public class GameManager : MonoBehaviour
     public void Win() // <====={ SCENE WIN }
     {
         SceneManager.LoadScene(conditionScene);
-        
 
-        if (scoreArray.Count < 5)
-        {
-            scoreArray.Add(score);
-        }
-        else
-        {
-            scoreArray[scoreArray.Count -1] = score;
-        }
-
-        if (scoreArray.Count > 1)
-            SortScores();
+        RankingModel ranking = new RankingModel("Gano", WaveManager.instance.currentWave, score);
+        database.AddRankingRecord(ranking);
+        GetScores();
+        SortScores();
 
         hasWon = true;
+    }
+
+    public void GetScores()
+    {
+        List<RankingModel> allRanking = database.GetAllRankingRecords();
+        scoreArray.Clear();
+        foreach (RankingModel ranking in allRanking) {
+            scoreArray.Add(ranking.ScoreValue);
+        }
     }
 
     public void SortScores()
@@ -98,6 +94,8 @@ public class GameManager : MonoBehaviour
         scoreArray.Clear();
         scoreArray = aux.OfType<int>().ToList();
         scoreArray.Reverse();
+        if (scoreArray.Count > 5)
+            scoreArray.RemoveRange(5, scoreArray.Count - 5);
     }
 
     public void ScoreUpdate(int s)
