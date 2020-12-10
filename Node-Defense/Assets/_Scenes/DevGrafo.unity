@@ -973,8 +973,8 @@ MonoBehaviour:
   - {fileID: 1340608879}
   - {fileID: 111567117}
   - {fileID: 570469752}
-  minRandom: 9
-  maxRandom: 10
+  minRandom: 8
+  maxRandom: 9
   minEdges: 1
   maxEdges: 3
   edgeAmount: 0
@@ -994,7 +994,32 @@ MonoBehaviour:
   minY: -7
   maxY: 7
   nodesY: 3
-  scale: 500
+  scale: 50
+  transforms1:
+  - {fileID: 1409562466}
+  - {fileID: 1842321444}
+  - {fileID: 677567600}
+  transforms2:
+  - {fileID: 1449444959}
+  - {fileID: 834354603}
+  - {fileID: 1087899977}
+  transforms3:
+  - {fileID: 1697901833}
+  - {fileID: 1157075006}
+  - {fileID: 80450707}
+  transforms4:
+  - {fileID: 1564413440}
+  - {fileID: 1757291992}
+  - {fileID: 1340608879}
+  transforms5:
+  - {fileID: 1077644418}
+  - {fileID: 1972492749}
+  - {fileID: 111567117}
+  transforms6:
+  - {fileID: 756643504}
+  - {fileID: 853397130}
+  - {fileID: 570469752}
+  returnTransforms: []
   lineEdgePrefab: {fileID: 2004820961331336111, guid: 176dd37d3e989b04989bb19dc9c769e3,
     type: 3}
 --- !u!1 &756643503
@@ -1855,12 +1880,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433d122a561e6fd48b79fd5f50480e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RESPAWN_TIME: 0
+  RESPAWN_TIME: 5
   prefabs:
   - {fileID: 1196495647859976120, guid: a8684522fd00e2f43b6103fdad530fe8, type: 3}
   - {fileID: 1196495647859976120, guid: 2ec6d51c8d0a0864a98590077bea7be6, type: 3}
   parent: {fileID: 787941584}
-  timer: 0
+  timer: 5
   inGame: 1
 --- !u!4 &1196458796
 Transform:

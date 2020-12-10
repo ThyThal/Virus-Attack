@@ -38,6 +38,15 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private int nodesY;
     [SerializeField] private float scale;
 
+    [Header("Transforms")]
+    [SerializeField] private List<Transform> transforms1;
+    [SerializeField] private List<Transform> transforms2;
+    [SerializeField] private List<Transform> transforms3;
+    [SerializeField] private List<Transform> transforms4;
+    [SerializeField] private List<Transform> transforms5;
+    [SerializeField] private List<Transform> transforms6;
+    [SerializeField] private List<Transform> returnTransforms;
+
 
     public GameObject lineEdgePrefab;
 
@@ -51,15 +60,35 @@ public class NodeManager : MonoBehaviour
         } // Instance.
         nodesDictionary = new Dictionary<int, GameNode>();
                 
-        CreateInitialNodes(); // Creamos la cantidad de vertices a inicializar.
-        
+        CreateInitialNodes(); // Creamos la cantidad de vertices a inicializar.        
         CreateNodeInternet(); // Instanciar Nodo Internet.
+        var basicNodes = vertexInit.Count - 2;
+        var spawnedNodes = 0;
+        var nodeID = 1;
+
         for (int i = 1; i < vertexInit.Count-1; i++)
-        {
-            vertex[i] = vertexInit[i];
-            var transformIndex = Random.Range(1, transforms.Count - 1);
-            CreateBasicNode(vertex[i], transforms[transformIndex]);
-            transforms.RemoveAt(transformIndex);
+        {            
+            GetGrid(i); // Get Current Grid Column.
+
+            var maxNodesInColumn = Random.Range(1, 3);
+            var j = 0;
+            for (j = 0; j < maxNodesInColumn; j++) // Crear mas nodos en la misma columna.
+            {
+                vertex[nodeID] = vertexInit[nodeID];
+                if (spawnedNodes == basicNodes)
+                {
+                    Debug.Log("Finish");
+                }
+
+                else
+                {
+                    var transformIndex = Random.Range(0, returnTransforms.Count);
+                    CreateBasicNode(vertex[nodeID], returnTransforms[transformIndex]);
+                    spawnedNodes++;
+                    nodeID++;
+                    returnTransforms.RemoveAt(transformIndex);
+                }
+            }
         }        
         
         CreateNodeServer(); // Instanciar Nodo Servidor.
@@ -110,6 +139,39 @@ public class NodeManager : MonoBehaviour
 
         edges.Add(new Vector3(currentVertex, lastVertex, 1));
         InstantiateEdge(currentVertex, lastVertex);
+    }
+
+    private List<Transform> GetGrid(int iteration)
+    {
+        switch (iteration)
+        {
+            case 1:
+                returnTransforms = transforms1;
+                return returnTransforms;
+
+            case 2:
+                returnTransforms = transforms2;
+                return returnTransforms;
+
+            case 3:
+                returnTransforms = transforms3;
+                return returnTransforms;
+
+            case 4:
+                returnTransforms = transforms4;
+                return returnTransforms;
+
+            case 5:
+                returnTransforms = transforms5;
+                return returnTransforms;
+
+            case 6:
+                returnTransforms = transforms6;
+                return returnTransforms;
+
+            default:
+                return null;
+        }
     }
 
     private void CreateInitialNodes()
