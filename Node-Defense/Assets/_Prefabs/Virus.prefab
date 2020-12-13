@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 100
+  hierarchy: 8
   target: {fileID: 0}
   direction: {x: 0, y: 0}
   distance: 0

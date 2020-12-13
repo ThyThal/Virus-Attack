@@ -4,11 +4,11 @@ using UnityEngine;
 
 public interface IABB 
 {
-    int Raiz();
+    Virus Raiz();
     NodoABB HijoIzq();
     NodoABB HijoDer();
     bool ArbolVacio();
     void InicializarArbol();
-    void AgregarElem(ref NodoABB n, int x);
-    void EliminarElem(ref NodoABB n, int x);
+    void AgregarElem(ref NodoABB n, Virus x);
+    void EliminarElem(ref NodoABB n, Virus x);
 }

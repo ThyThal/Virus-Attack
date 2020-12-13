@@ -5,6 +5,7 @@ using UnityEngine;
 public class Virus : MonoBehaviour
 {
     [SerializeField] private int score;
+    [SerializeField] public int hierarchy;
     [SerializeField] private ITree init;
     [SerializeField] public GameNode target;
     [SerializeField] private Vector2 direction;
