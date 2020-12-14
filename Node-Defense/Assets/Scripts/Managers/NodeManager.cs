@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NodeManager : MonoBehaviour
 {
@@ -207,6 +208,7 @@ public class NodeManager : MonoBehaviour
         gameNode.Vertex = id;
         nodesDictionary.Add(id, gameNode);
 
+        nodeBasicPosition.GetComponent<Image>().enabled = true;
     }
 
     private void InstantiateEdge(int origin, int destiny)
