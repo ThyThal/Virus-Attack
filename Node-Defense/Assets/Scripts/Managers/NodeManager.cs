@@ -224,7 +224,7 @@ public class NodeManager : MonoBehaviour
 
         if (vectorToTarget == Vector3.zero) {
             Debug.Log(vectorToTarget); }
-        
+
         lineEdge.GetComponent<LineRenderer>().SetPosition(1, vectorToTarget);
         currentNode.edgesRenderers.Add(lineEdge);
     }
