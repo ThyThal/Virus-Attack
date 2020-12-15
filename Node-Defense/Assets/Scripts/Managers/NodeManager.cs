@@ -2,23 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NodeManager : MonoBehaviour
 {
     static public NodeManager Instance;
+    private List<int> vertexInit = new List<int>();
+    private List<int> visited = new List<int>();
 
-    [SerializeField] private List<int> vertexInit = new List<int>();
-    [SerializeField] public int[] vertex;
-    [SerializeField] private List<int> visited;
-    [SerializeField] public List<Vector3> edges;
+    [Header("Public Node Info")]
+    public List<Vector3> edges;
+    public int[] vertex;
 
-    [Header("Nodes Info")]
-    [SerializeField] private List<Transform> transforms;
-    [SerializeField] private int minRandom;
-    [SerializeField] private int maxRandom;
-    [SerializeField] private int minEdges;
-    [SerializeField] private int maxEdges;
-    [SerializeField] private int edgeAmount;
+    [Header("Node Manager Info")]
+    [SerializeField] private int _minNodes;
+    [SerializeField] private int _maxNodes;
+    [SerializeField] private int _minEdges;
+    [SerializeField] private int _maxEdges;
+    private int _edgeAmount;
+
+    [Header("Line Renderer Info")]
+    [SerializeField] private GameObject _foundOrigin;
+    [SerializeField] private GameObject _foundDestiny;
+    [SerializeField] private float _scale;
+    [SerializeField] private GameObject lineEdgePrefab;
 
     [Header("Nodes")]
     [SerializeField] private GameObject nodeInternet;
@@ -28,18 +35,17 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private GameObject nodeBasic;
     [SerializeField] private Transform nodeBasicPosition;
 
-    [Header("Nodes Position")]
-    [SerializeField] private float distanceY;
-    [SerializeField] private List<Vector2> currentXnodes;
-    [SerializeField] private Vector2 position;
-    [SerializeField] private float spacing;
-    [SerializeField] private float minY;
-    [SerializeField] private float maxY;
-    [SerializeField] private int nodesY;
-    [SerializeField] private float scale;
+    [Header("Transforms")]
+    [SerializeField] private List<Transform> transforms1;
+    [SerializeField] private List<Transform> transforms2;
+    [SerializeField] private List<Transform> transforms3;
+    [SerializeField] private List<Transform> transforms4;
+    [SerializeField] private List<Transform> transforms5;
+    [SerializeField] private List<Transform> transforms6;
+    private List<Transform> returnTransforms;
 
 
-    public GameObject lineEdgePrefab;
+    
 
     public Dictionary<int, GameNode> nodesDictionary;
 
@@ -51,15 +57,35 @@ public class NodeManager : MonoBehaviour
         } // Instance.
         nodesDictionary = new Dictionary<int, GameNode>();
                 
-        CreateInitialNodes(); // Creamos la cantidad de vertices a inicializar.
-        
+        CreateInitialNodes(); // Creamos la cantidad de vertices a inicializar.        
         CreateNodeInternet(); // Instanciar Nodo Internet.
+        var basicNodes = vertexInit.Count - 2;
+        var spawnedNodes = 0;
+        var nodeID = 1;
+
         for (int i = 1; i < vertexInit.Count-1; i++)
-        {
-            vertex[i] = vertexInit[i];
-            var transformIndex = Random.Range(1, transforms.Count - 1);
-            CreateBasicNode(vertex[i], transforms[transformIndex]);
-            transforms.RemoveAt(transformIndex);
+        {            
+            GetGrid(i); // Get Current Grid Column.
+
+            var maxNodesInColumn = Random.Range(1, 3);
+            var j = 0;
+            for (j = 0; j < maxNodesInColumn; j++) // Crear mas nodos en la misma columna.
+            {
+                vertex[nodeID] = vertexInit[nodeID];
+                if (spawnedNodes == basicNodes)
+                {
+                    Debug.Log("Finish");
+                }
+
+                else
+                {
+                    var transformIndex = Random.Range(0, returnTransforms.Count);
+                    CreateBasicNode(vertex[nodeID], returnTransforms[transformIndex]);
+                    spawnedNodes++;
+                    nodeID++;
+                    returnTransforms.RemoveAt(transformIndex);
+                }
+            }
         }        
         
         CreateNodeServer(); // Instanciar Nodo Servidor.
@@ -73,18 +99,18 @@ public class NodeManager : MonoBehaviour
         {            
             int index = Random.Range(0, vertexInit.Count); // Seleccionar un nodo aleatorio para conectarlo.
 
-            if (vertexInit.Count <= maxEdges) 
+            if (vertexInit.Count <= _maxEdges) 
             {
-                edgeAmount = Random.Range(minEdges, vertexInit.Count);
+                _edgeAmount = Random.Range(_minEdges, vertexInit.Count);
             } // Generamos la cantidad de conexiones a generar en index.
 
             else
             {
-                edgeAmount = Random.Range(minEdges, maxEdges);
+                _edgeAmount = Random.Range(_minEdges, _maxEdges);
             } // Si el maximo de conexiones es mayor que los items, se genera lo mayor posible.
 
             // Agregar conexion de "currentVertex" con el nodo "index".
-            for (int i = 0; i < edgeAmount; i++)
+            for (int i = 0; i < _edgeAmount; i++)
             {  
 
                 // Recorremos todos los nodos visitados para no volver atras.
@@ -112,16 +138,50 @@ public class NodeManager : MonoBehaviour
         InstantiateEdge(currentVertex, lastVertex);
     }
 
+    private List<Transform> GetGrid(int iteration)
+    {
+        switch (iteration)
+        {
+            case 1:
+                returnTransforms = transforms1;
+                return returnTransforms;
+
+            case 2:
+                returnTransforms = transforms2;
+                return returnTransforms;
+
+            case 3:
+                returnTransforms = transforms3;
+                return returnTransforms;
+
+            case 4:
+                returnTransforms = transforms4;
+                return returnTransforms;
+
+            case 5:
+                returnTransforms = transforms5;
+                return returnTransforms;
+
+            case 6:
+                returnTransforms = transforms6;
+                return returnTransforms;
+
+            default:
+                return null;
+        }
+    }
+
     private void CreateInitialNodes()
     {
         // Creamos la cantidad de vertices a inicializar.
-        for (int i = 0; i < Random.Range(minRandom, maxRandom); i++)
+        for (int i = 0; i < Random.Range(_minNodes, _maxNodes); i++)
         {
             vertexInit.Add(i + 1);
         }
 
         vertex = new int[vertexInit.Count]; // Inicializamos los vertices.
     }
+
     private void CreateNodeInternet()
     {
         vertex[0] = vertexInit[0];
@@ -129,6 +189,8 @@ public class NodeManager : MonoBehaviour
         var gameNode = node.GetComponent<GameNode>();
         gameNode.Vertex = vertex.First();
         nodesDictionary.Add(vertex.First(), gameNode);
+
+        
     }
     private void CreateNodeServer()
     {
@@ -137,6 +199,7 @@ public class NodeManager : MonoBehaviour
         var gameNode = node.GetComponent<GameNode>();
         gameNode.Vertex = vertex.Last();
         nodesDictionary.Add(vertex.Last(), gameNode);
+
     }
     private void CreateBasicNode(int id, Transform nodeBasicPosition)
     {
@@ -144,7 +207,10 @@ public class NodeManager : MonoBehaviour
         var gameNode = node.GetComponent<GameNode>();
         gameNode.Vertex = id;
         nodesDictionary.Add(id, gameNode);
+
+        nodeBasicPosition.GetComponent<Image>().enabled = true;
     }
+
     private void InstantiateEdge(int origin, int destiny)
     {
         GameNode currentNode;
@@ -152,20 +218,25 @@ public class NodeManager : MonoBehaviour
         nodesDictionary.TryGetValue(origin, out currentNode);
         nodesDictionary.TryGetValue(destiny, out destinyNode);
 
-        var lineEdge = Instantiate(lineEdgePrefab, currentNode.gameObject.transform); // Prefab del LineRenderer.
+        FindNodeObject(currentNode, destinyNode);
+        var lineEdge = Instantiate(lineEdgePrefab, _foundOrigin.transform); // Prefab del LineRenderer.
         lineEdge.GetComponent<LineRenderer>().SetPosition(0, Vector3.zero); // Posicion de Origen.
 
+        Vector3 vectorToTarget = (_foundDestiny.transform.position - _foundOrigin.transform.position) * _scale; // FALLA
 
-
-        Vector3 vectorToTarget = (destinyNode.transform.localPosition - currentNode.transform.localPosition) * scale; // FALLA
-
-        if (vectorToTarget == Vector3.zero) { 
-            vectorToTarget = (Vector3.one) * scale; }
-        
-
-
+        if (vectorToTarget == Vector3.zero) {
+            Debug.Log(vectorToTarget); }
 
         lineEdge.GetComponent<LineRenderer>().SetPosition(1, vectorToTarget);
         currentNode.edgesRenderers.Add(lineEdge);
+    }
+
+    private void FindNodeObject(GameNode originEdgeObject, GameNode destinyEdgeObject)
+    {
+        var originString = originEdgeObject.transform.parent.name;
+        _foundOrigin = GameObject.Find(originString);
+
+        var destinyString = destinyEdgeObject.transform.parent.name;
+        _foundDestiny = GameObject.Find(destinyString);
     }
 }

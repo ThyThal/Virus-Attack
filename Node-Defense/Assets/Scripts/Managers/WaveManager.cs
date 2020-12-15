@@ -6,10 +6,11 @@ public class WaveManager : MonoBehaviour
 {
     static public WaveManager instance;
 
-    [Header("Current Wave Info")]
-    [SerializeField] public int totalVirus;
+    [Header("Scale Difficulty")]
+    [SerializeField] private float difficultyIncrease = 5;
 
     [Header("Variables")]
+    [SerializeField] private int totalVirus;
     [SerializeField] public int currentWave;
     [SerializeField] private int nextWave;
     [SerializeField] public float searchTimer;
@@ -24,8 +25,7 @@ public class WaveManager : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        [SerializeField] public int minVirus;
-        [SerializeField] public int maxVirus;
+        [SerializeField] public int virusAmount;
         [SerializeField] public float spawnerRate;
     }
 
@@ -67,7 +67,8 @@ public class WaveManager : MonoBehaviour
         ManagerUI.instance.UpdateRound();
         state = SpawnState.SPAWNING;
         newWave = true;
-        totalVirus = Random.Range(waveNumber.minVirus, waveNumber.maxVirus);
+
+        totalVirus = waveNumber.virusAmount;
         VirusManager.instance.InstanstiateQueue(totalVirus);
 
         for (int i = 0; i < totalVirus; i++)
@@ -83,6 +84,10 @@ public class WaveManager : MonoBehaviour
 
     public void SpawnEnemy(GameObject virus)
     {
+        var stats = virus.GetComponent<Virus>();
+        stats.speed += difficultyIncrease;
+        stats.damage += difficultyIncrease;
+
         LevelManager.instance.SpawnVirus(virus);
     }
 
@@ -114,9 +119,20 @@ public class WaveManager : MonoBehaviour
         currentWave = nextWave;
         if (nextWave + 1 > waves.Length - 1)
         {
+            IncreaseStats();
             nextWave = 0;
         }
-        nextWave += 1;
+
+        else
+        {
+            nextWave += 1;
+        }
+    }
+
+    private void IncreaseStats()
+    {
+        nextWave = 0;
+        difficultyIncrease += difficultyIncrease;
     }
 
 }

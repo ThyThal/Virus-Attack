@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
+    [Header("Combat Stats")]
+    [SerializeField] int life;
+    [SerializeField] private float weakness;
+    [SerializeField] public float damage;
+    [SerializeField] public float speed;
+    [SerializeField] private float attackTimer = 2;
+
+    [Header("Extras")]
+    [SerializeField] public bool hasSpawned;
+    [SerializeField] private ProgressBar _healthBar;
     [SerializeField] private int score;
     [SerializeField] public int hierarchy;
     [SerializeField] private ITree init;
     [SerializeField] public GameNode target;
     [SerializeField] private Vector2 direction;
     [SerializeField] private float distance;
-    [SerializeField] private float speed;
-    [SerializeField] private int damage;
-    [SerializeField] private float timer;
-    [SerializeField] int life;
+    [SerializeField] private float originalAttackTimer;
+
     int[] way;
     int actualPosWay;
 
@@ -28,13 +36,14 @@ public class Virus : MonoBehaviour
         QuestionNode isColliding = new QuestionNode(IsColliding, isInfected, move);
         QuestionNode hasTarget = new QuestionNode(HasTarget, isColliding, findNext);
 
+        originalAttackTimer = attackTimer;
         init = hasTarget;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
         if (target != null)
             distance = (target.transform.position - transform.position).magnitude;
         init.Execute();
@@ -96,10 +105,10 @@ public class Virus : MonoBehaviour
 
     private void Attack()
     {
-        if (timer <= 0)
+        if (attackTimer <= 0)
         {
-            target.GetComponent<GameNode>().GetDamage(damage);
-            timer = 2;
+            attackTimer = originalAttackTimer;
+            target.GetComponent<GameNode>().GetDamage((int)damage);
         }
     }
 
@@ -146,7 +155,12 @@ public class Virus : MonoBehaviour
     public void GetDamage(int damage)
     {
         if (life > 0)
+        {
+            damage = (int)(damage * weakness);
             life -= damage;
+            _healthBar.current = life;
+        }
+            
 
         if (life <= 0)
             HasDied();

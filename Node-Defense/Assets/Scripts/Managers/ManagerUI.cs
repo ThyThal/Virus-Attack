@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ManagerUI : MonoBehaviour
 {
     static public ManagerUI instance;
+    [SerializeField] private int _round;
     [SerializeField] private Text round;
     [SerializeField] private Text score;
 
@@ -16,14 +17,16 @@ public class ManagerUI : MonoBehaviour
             instance = this;
         }
 
-        round.text = $"Round: 0";
+        _round = 0;
+        round.text = $"Get Ready!";
         score.text = $"Score: 0";
     }
 
 
     public void UpdateRound()
     {
-        round.text = $"Round: {WaveManager.instance.currentWave + 1}";
+        _round += 1;
+        round.text = $"Round: {_round}";
     }
     public void UpdateScore()
     {

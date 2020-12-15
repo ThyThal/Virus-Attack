@@ -13,18 +13,21 @@ public enum GameNodeType
 
 public class GameNode : MonoBehaviour, IGameNode
 {
-    [SerializeField] private int score;
-
-    private int vertex;
-    private PowerUp powerUp;
-    [SerializeField] public GameNodeType Type;
+    [Header("Combat Stats")]
     [SerializeField] int life;
-    [SerializeField] public bool isInfected;
-    private SpriteRenderer spriteRenderer;
-    [SerializeField] private float timer;
-    [SerializeField] private float originalTimer;
+    [SerializeField] private float resistance;
     [SerializeField] private int damage;
+    [SerializeField] private int damageMultiplier = 2;
+    [SerializeField] private float attackTimer;
+    [SerializeField] private int score;
+    [SerializeField] private ProgressBar healthBar;
+
+    [Header("Extras")]
+    [SerializeField] public GameNodeType Type;
+    [SerializeField] public bool isInfected;
+    [SerializeField] private float originalAttackTimer;
     [SerializeField] private GameObject targetVirus;
+    [SerializeField] private Virus currentTarget;
 
     [Header("Line Renderer")]
     [SerializeField] private LineRenderer lineRenderer;
@@ -32,9 +35,14 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private Vector3 targetPos;
     [SerializeField] private Vector3 nodePos;
     [SerializeField] private float scale;
+    [SerializeField] private float originalDamage;
+    [SerializeField]private PowerUp powerUp;
 
     [Header("Edges")]
     [SerializeField] public List<GameObject> edgesRenderers;
+
+    private int vertex;
+    private SpriteRenderer spriteRenderer;
 
     public int Vertex
     {
@@ -66,50 +74,89 @@ public class GameNode : MonoBehaviour, IGameNode
     void Start()
     {
         if (Type != GameNodeType.Internet)
+        {
             lineRenderer = GetComponent<LineRenderer>();
+            healthBar.current = 100;
+        }
         else
+        {
             ChangeEdges();
+            healthBar.current = 0;
+        }
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        originalTimer = timer;
+        var delay = Random.Range(0f, 1f);
+        originalDamage = damage;
+        originalAttackTimer = attackTimer + delay;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        timer -= Time.deltaTime;
+    {        
         if(Type != GameNodeType.Internet)
-            lineRenderer.SetPosition(1, Vector3.zero);
-        targetVirus = GameObject.FindGameObjectWithTag("Virus");
-        if (targetVirus != null && !isInfected && targetVirus.GetComponent<Virus>().target != null)
         {
-            targetPos = targetVirus.transform.position;
+            lineRenderer.SetPosition(1, Vector3.zero);
+        }
+
+        FindTargetVirus();
+        
+        if (currentTarget != null && !isInfected)
+        {
+            attackTimer -= Time.deltaTime;
+            targetPos = currentTarget.transform.position;
             nodePos = transform.position;
             vectorToTarget = (targetPos - nodePos) * scale;
+
             if (Type != GameNodeType.Internet)
-                lineRenderer.SetPosition(1, vectorToTarget);
-            if (timer <= 0)
             {
-                Attack(targetVirus.GetComponent<Virus>());
-                timer = originalTimer;
+                lineRenderer.SetPosition(1, vectorToTarget);
+            }
+
+            if (attackTimer <= 0 && currentTarget.hasSpawned)
+            {
+                attackTimer = originalAttackTimer;
+                Attack(currentTarget);
+            }
+        }
+    }
+
+    private void FindTargetVirus()
+    {
+        if (currentTarget == null)
+        {
+            targetVirus = GameObject.FindGameObjectWithTag("Virus");
+
+            if (targetVirus != null)
+            {
+                currentTarget = targetVirus.GetComponent<Virus>();
             }
         }
     }
 
     private void Attack(Virus v)
     {
-        int damageDone = damage;
-        if (powerUp != null && powerUp.type == PowerUpType.Antivirus)
-            damage = damage * 2;
-        v.GetDamage(damageDone);
+        if (powerUp != null)
+        {
+            if (powerUp.type == PowerUpType.Antivirus)
+            {
+                damage = (int)(originalDamage * damageMultiplier);
+            }
+        }
+
+        v.GetDamage(damage);
     }
 
     public void GetDamage(int damage)
     {
         if (life > 0)
         {
+            damage = (int)(damage / resistance);
+
             if (powerUp != null && powerUp.type == PowerUpType.FireWall)
                 damage = damage / 2;
+
             life -= damage;
+            healthBar.current = life;
         }
 
         if (life <= 0)
@@ -130,6 +177,7 @@ public class GameNode : MonoBehaviour, IGameNode
         GameManager.Instance.ScoreUpdate(score);
         this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
+        healthBar.transform.GetComponent<Image>().color = new Color(1f, 0.47f, 0.47f);
     }
 
     private void ChangeEdges()
