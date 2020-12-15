@@ -27,6 +27,7 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] public bool isInfected;
     [SerializeField] private float originalAttackTimer;
     [SerializeField] private GameObject targetVirus;
+    [SerializeField] private Virus currentTarget;
 
     [Header("Line Renderer")]
     [SerializeField] private LineRenderer lineRenderer;
@@ -34,12 +35,13 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private Vector3 targetPos;
     [SerializeField] private Vector3 nodePos;
     [SerializeField] private float scale;
+    [SerializeField] private float originalDamage;
+    [SerializeField]private PowerUp powerUp;
 
     [Header("Edges")]
     [SerializeField] public List<GameObject> edgesRenderers;
 
     private int vertex;
-    private PowerUp powerUp;
     private SpriteRenderer spriteRenderer;
 
     public int Vertex
@@ -84,36 +86,63 @@ public class GameNode : MonoBehaviour, IGameNode
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         var delay = Random.Range(0f, 1f);
+        originalDamage = damage;
         originalAttackTimer = attackTimer + delay;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        attackTimer -= Time.deltaTime;
+    {        
         if(Type != GameNodeType.Internet)
-            lineRenderer.SetPosition(1, Vector3.zero);
-        targetVirus = GameObject.FindGameObjectWithTag("Virus");
-        if (targetVirus != null && !isInfected && targetVirus.GetComponent<Virus>().target != null)
         {
-            targetPos = targetVirus.transform.position;
+            lineRenderer.SetPosition(1, Vector3.zero);
+        }
+
+        FindTargetVirus();
+        
+        if (currentTarget != null && !isInfected)
+        {
+            attackTimer -= Time.deltaTime;
+            targetPos = currentTarget.transform.position;
             nodePos = transform.position;
             vectorToTarget = (targetPos - nodePos) * scale;
+
             if (Type != GameNodeType.Internet)
+            {
                 lineRenderer.SetPosition(1, vectorToTarget);
-            if (attackTimer <= 0)
+            }
+
+            if (attackTimer <= 0 && currentTarget.hasSpawned)
             {
                 attackTimer = originalAttackTimer;
-                Attack(targetVirus.GetComponent<Virus>());
+                Attack(currentTarget);
+            }
+        }
+    }
+
+    private void FindTargetVirus()
+    {
+        if (currentTarget == null)
+        {
+            targetVirus = GameObject.FindGameObjectWithTag("Virus");
+
+            if (targetVirus != null)
+            {
+                currentTarget = targetVirus.GetComponent<Virus>();
             }
         }
     }
 
     private void Attack(Virus v)
     {
-        Debug.Log("Attack");
-        if (powerUp != null && powerUp.type == PowerUpType.Antivirus)
-            damage = damage * damageMultiplier;
+        if (powerUp != null)
+        {
+            if (powerUp.type == PowerUpType.Antivirus)
+            {
+                damage = (int)(originalDamage * damageMultiplier);
+            }
+        }
+
         v.GetDamage(damage);
     }
 

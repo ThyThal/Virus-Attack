@@ -43,8 +43,10 @@ public class LevelManager : MonoBehaviour
      
     public void SpawnVirus(GameObject enemyToSpawn)
     {
+
         enemyToSpawn.transform.position = nodeInternet.transform.position;
         enemyToSpawn.GetComponent<Virus>().target = nodeInternet;
+        enemyToSpawn.GetComponent<Virus>().hasSpawned = true;
     }
 
     public void RemoveVirus(GameObject virus)

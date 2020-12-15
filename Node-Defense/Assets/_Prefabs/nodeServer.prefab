@@ -151,20 +151,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 100
   resistance: 2
-  damage: 5
+  damage: 10
   damageMultiplier: 2
   attackTimer: 1.5
   score: -17
   healthBar: {fileID: 4570844296042820432}
-  Type: 1
+  Type: 3
   isInfected: 0
   originalAttackTimer: 0
   targetVirus: {fileID: 0}
+  currentTarget: {fileID: 0}
   lineRenderer: {fileID: 0}
   vectorToTarget: {x: 0, y: 0, z: 0}
   targetPos: {x: 0, y: 0, z: 0}
   nodePos: {x: 0, y: 0, z: 0}
   scale: 100
+  originalDamage: 0
+  powerUp: {fileID: 0}
   edgesRenderers: []
 --- !u!114 &1831571131393464856
 MonoBehaviour:

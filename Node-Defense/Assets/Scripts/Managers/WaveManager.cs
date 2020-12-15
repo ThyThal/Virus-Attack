@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
     static public WaveManager instance;
 
     [Header("Scale Difficulty")]
-    [SerializeField] private float difficultyIncrease = 1;
+    [SerializeField] private float difficultyIncrease = 5;
 
     [Header("Variables")]
     [SerializeField] private int totalVirus;
@@ -122,7 +122,11 @@ public class WaveManager : MonoBehaviour
             IncreaseStats();
             nextWave = 0;
         }
-        nextWave += 1;
+
+        else
+        {
+            nextWave += 1;
+        }
     }
 
     private void IncreaseStats()

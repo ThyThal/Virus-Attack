@@ -12,6 +12,7 @@ public class Virus : MonoBehaviour
     [SerializeField] private float attackTimer = 2;
 
     [Header("Extras")]
+    [SerializeField] public bool hasSpawned;
     [SerializeField] private ProgressBar _healthBar;
     [SerializeField] private int score;
     [SerializeField] private ITree init;
