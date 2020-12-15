@@ -9,8 +9,8 @@ public class Virus : MonoBehaviour
     [SerializeField] public GameNode target;
     [SerializeField] private Vector2 direction;
     [SerializeField] private float distance;
-    [SerializeField] private float speed;
-    [SerializeField] private int damage;
+    [SerializeField] public float speed;
+    [SerializeField] public float damage;
     [SerializeField] private float timer;
     [SerializeField] int life;
     int[] way;
@@ -97,7 +97,7 @@ public class Virus : MonoBehaviour
     {
         if (timer <= 0)
         {
-            target.GetComponent<GameNode>().GetDamage(damage);
+            target.GetComponent<GameNode>().GetDamage((int)damage);
             timer = 2;
         }
     }

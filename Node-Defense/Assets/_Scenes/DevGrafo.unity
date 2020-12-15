@@ -3335,7 +3335,7 @@ GameObject:
   - component: {fileID: 1592136138}
   - component: {fileID: 1592136134}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: Wave Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3384,7 +3384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a87b8bce6af03489f767f72e28fa17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalVirus: 0
+  difficultyIncrease: 1.5
+  totalVirus: 1
   currentWave: 0
   nextWave: 0
   searchTimer: 5
@@ -3393,14 +3394,15 @@ MonoBehaviour:
   foundEnemy: 0
   newWave: 0
   waves:
-  - minVirus: 3
-    maxVirus: 5
-    spawnerRate: 3
-  - minVirus: 3
-    maxVirus: 5
-    spawnerRate: 2
-  - minVirus: 3
-    maxVirus: 5
+  - virusAmount: 1
+    spawnerRate: 1
+  - virusAmount: 2
+    spawnerRate: 1
+  - virusAmount: 3
+    spawnerRate: 1
+  - virusAmount: 4
+    spawnerRate: 1
+  - virusAmount: 5
     spawnerRate: 1
 --- !u!1 &1670509755
 GameObject:

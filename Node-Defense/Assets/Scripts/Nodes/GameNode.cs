@@ -13,6 +13,9 @@ public enum GameNodeType
 
 public class GameNode : MonoBehaviour, IGameNode
 {
+    [SerializeField] private ProgressBar healthBar;
+
+    [SerializeField] private int damageMultiplier = 2;
     [SerializeField] private int score;
 
     private int vertex;
@@ -66,9 +69,16 @@ public class GameNode : MonoBehaviour, IGameNode
     void Start()
     {
         if (Type != GameNodeType.Internet)
+        {
             lineRenderer = GetComponent<LineRenderer>();
+            healthBar.current = 100;
+        }
         else
+        {
             ChangeEdges();
+            healthBar.current = 0;
+        }
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originalTimer = timer;
     }
@@ -99,7 +109,7 @@ public class GameNode : MonoBehaviour, IGameNode
     {
         int damageDone = damage;
         if (powerUp != null && powerUp.type == PowerUpType.Antivirus)
-            damage = damage * 2;
+            damage = damage * damageMultiplier;
         v.GetDamage(damageDone);
     }
 
@@ -110,6 +120,7 @@ public class GameNode : MonoBehaviour, IGameNode
             if (powerUp != null && powerUp.type == PowerUpType.FireWall)
                 damage = damage / 2;
             life -= damage;
+            healthBar.current = life;
         }
 
         if (life <= 0)
@@ -130,6 +141,7 @@ public class GameNode : MonoBehaviour, IGameNode
         GameManager.Instance.ScoreUpdate(score);
         this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
+        healthBar.transform.GetComponent<Image>().color = new Color(1f, 0.47f, 0.47f);
     }
 
     private void ChangeEdges()
