@@ -97,14 +97,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8512d291e73acec46872f92c573f1d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
+  life: 100
+  weakness: 2
+  damage: 7
+  speed: 3
+  attackTimer: 1.5
+  _healthBar: {fileID: 1193613192271706052}
+  score: 35
   target: {fileID: 0}
   direction: {x: 0, y: 0}
   distance: 0
-  speed: 3
-  damage: 15
-  timer: 1
-  life: 30
+  originalAttackTimer: 0
 --- !u!58 &2337115850751348183
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -294,3 +297,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8681366795662820719}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1193613192271706052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7560129549011890859, guid: 4583e31d23c31a84c85f86a819b0c7c1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8681366795662820719}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec71b1e9c304476449cb0067ee0bd9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

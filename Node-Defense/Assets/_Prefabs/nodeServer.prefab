@@ -126,7 +126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.2, y: -1.2}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1831571131393464859
@@ -149,15 +149,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd0cae5dc6fb8343ac432aeb8729fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 4570844296042820432}
+  life: 100
+  resistance: 2
+  damage: 5
   damageMultiplier: 2
+  attackTimer: 1.5
   score: -17
+  healthBar: {fileID: 4570844296042820432}
   Type: 1
-  life: 200
   isInfected: 0
-  timer: 3
-  originalTimer: 0
-  damage: 6
+  originalAttackTimer: 0
   targetVirus: {fileID: 0}
   lineRenderer: {fileID: 0}
   vectorToTarget: {x: 0, y: 0, z: 0}

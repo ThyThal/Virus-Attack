@@ -13,20 +13,19 @@ public enum GameNodeType
 
 public class GameNode : MonoBehaviour, IGameNode
 {
+    [Header("Combat Stats")]
+    [SerializeField] int life;
+    [SerializeField] private float resistance;
+    [SerializeField] private int damage;
+    [SerializeField] private int damageMultiplier = 2;
+    [SerializeField] private float attackTimer;
+    [SerializeField] private int score;
     [SerializeField] private ProgressBar healthBar;
 
-    [SerializeField] private int damageMultiplier = 2;
-    [SerializeField] private int score;
-
-    private int vertex;
-    private PowerUp powerUp;
+    [Header("Extras")]
     [SerializeField] public GameNodeType Type;
-    [SerializeField] int life;
     [SerializeField] public bool isInfected;
-    private SpriteRenderer spriteRenderer;
-    [SerializeField] private float timer;
-    [SerializeField] private float originalTimer;
-    [SerializeField] private int damage;
+    [SerializeField] private float originalAttackTimer;
     [SerializeField] private GameObject targetVirus;
 
     [Header("Line Renderer")]
@@ -38,6 +37,10 @@ public class GameNode : MonoBehaviour, IGameNode
 
     [Header("Edges")]
     [SerializeField] public List<GameObject> edgesRenderers;
+
+    private int vertex;
+    private PowerUp powerUp;
+    private SpriteRenderer spriteRenderer;
 
     public int Vertex
     {
@@ -80,13 +83,14 @@ public class GameNode : MonoBehaviour, IGameNode
         }
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        originalTimer = timer;
+        var delay = Random.Range(0f, 1f);
+        originalAttackTimer = attackTimer + delay;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
         if(Type != GameNodeType.Internet)
             lineRenderer.SetPosition(1, Vector3.zero);
         targetVirus = GameObject.FindGameObjectWithTag("Virus");
@@ -97,28 +101,31 @@ public class GameNode : MonoBehaviour, IGameNode
             vectorToTarget = (targetPos - nodePos) * scale;
             if (Type != GameNodeType.Internet)
                 lineRenderer.SetPosition(1, vectorToTarget);
-            if (timer <= 0)
+            if (attackTimer <= 0)
             {
+                attackTimer = originalAttackTimer;
                 Attack(targetVirus.GetComponent<Virus>());
-                timer = originalTimer;
             }
         }
     }
 
     private void Attack(Virus v)
     {
-        int damageDone = damage;
+        Debug.Log("Attack");
         if (powerUp != null && powerUp.type == PowerUpType.Antivirus)
             damage = damage * damageMultiplier;
-        v.GetDamage(damageDone);
+        v.GetDamage(damage);
     }
 
     public void GetDamage(int damage)
     {
         if (life > 0)
         {
+            damage = (int)(damage / resistance);
+
             if (powerUp != null && powerUp.type == PowerUpType.FireWall)
                 damage = damage / 2;
+
             life -= damage;
             healthBar.current = life;
         }

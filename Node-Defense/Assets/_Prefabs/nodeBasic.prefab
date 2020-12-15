@@ -62,15 +62,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd0cae5dc6fb8343ac432aeb8729fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 3346214687239687231}
-  damageMultiplier: 10
-  score: -17
-  Type: 1
   life: 100
+  resistance: 1
+  damage: 2
+  damageMultiplier: 2
+  attackTimer: 1.5
+  score: -17
+  healthBar: {fileID: 3346214687239687231}
+  Type: 1
   isInfected: 0
-  timer: 4
-  originalTimer: 0
-  damage: 5
+  originalAttackTimer: 0
   targetVirus: {fileID: 0}
   lineRenderer: {fileID: 0}
   vectorToTarget: {x: 0, y: 0, z: 0}
@@ -184,8 +185,8 @@ LineRenderer:
   m_SortingLayer: 3
   m_SortingOrder: -1
   m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 50, y: 50, z: 0}
+  - {x: 50, y: 50, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

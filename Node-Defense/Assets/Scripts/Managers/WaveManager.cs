@@ -127,6 +127,7 @@ public class WaveManager : MonoBehaviour
 
     private void IncreaseStats()
     {
+        nextWave = 0;
         difficultyIncrease += difficultyIncrease;
     }
 }
