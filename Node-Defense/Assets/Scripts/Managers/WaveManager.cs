@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
     static public WaveManager instance;
 
     [Header("Scale Difficulty")]
-    [SerializeField] private float difficultyIncrease = 5;
+    [SerializeField] private float difficultyIncrease = 1;
 
     [Header("Variables")]
     [SerializeField] private int totalVirus;
@@ -85,7 +85,7 @@ public class WaveManager : MonoBehaviour
     public void SpawnEnemy(GameObject virus)
     {
         var stats = virus.GetComponent<Virus>();
-        stats.speed += difficultyIncrease;
+        stats.speed += difficultyIncrease/10;
         stats.damage += difficultyIncrease;
 
         LevelManager.instance.SpawnVirus(virus);

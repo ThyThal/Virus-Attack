@@ -85,7 +85,8 @@ public class PowerUpManager : MonoBehaviour
     {
         if (PowerUpIsActive())
         {
-            Destroy(activePowerUp.gameObject);
+            activePowerUp.gameObject.SetActive(false);
+            activePowerUp = null;           
 
             UpdateInteractableState(true);
         }

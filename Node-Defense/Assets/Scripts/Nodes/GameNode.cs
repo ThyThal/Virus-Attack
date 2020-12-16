@@ -127,7 +127,7 @@ public class GameNode : MonoBehaviour, IGameNode
         {
             targetVirus = GameObject.FindGameObjectWithTag("Virus");
 
-            if (targetVirus != null)
+            if ((targetVirus != null) && (targetVirus.GetComponent<Virus>().hasSpawned == true))
             {
                 currentTarget = targetVirus.GetComponent<Virus>();
             }

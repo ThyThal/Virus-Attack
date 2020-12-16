@@ -3384,7 +3384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a87b8bce6af03489f767f72e28fa17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyIncrease: 1.5
+  difficultyIncrease: 1
   totalVirus: 1
   currentWave: 0
   nextWave: 0
@@ -3395,15 +3395,15 @@ MonoBehaviour:
   newWave: 0
   waves:
   - virusAmount: 1
-    spawnerRate: 1
+    spawnerRate: 3
   - virusAmount: 2
-    spawnerRate: 1
+    spawnerRate: 3
   - virusAmount: 3
-    spawnerRate: 1
+    spawnerRate: 3
   - virusAmount: 4
-    spawnerRate: 1
+    spawnerRate: 3
   - virusAmount: 5
-    spawnerRate: 1
+    spawnerRate: 3
 --- !u!1 &1670509755
 GameObject:
   m_ObjectHideFlags: 0

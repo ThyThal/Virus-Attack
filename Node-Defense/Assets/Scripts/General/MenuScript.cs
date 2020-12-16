@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private Button backButton;
     [SerializeField] private Button menuButton;
-    [SerializeField] private Text text;
+    [SerializeField] private TextMeshProUGUI text;
 
 
     [SerializeField] private AudioSource soundButton;
