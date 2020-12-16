@@ -38,6 +38,8 @@ public class Virus : MonoBehaviour
         QuestionNode isColliding = new QuestionNode(IsColliding, isInfected, move);
         QuestionNode hasTarget = new QuestionNode(HasTarget, isColliding, findNext);
 
+        _healthBar.maximum = life;
+        _healthBar.current = life;
         originalAttackTimer = attackTimer;
         init = hasTarget;
     }

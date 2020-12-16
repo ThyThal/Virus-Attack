@@ -84,7 +84,8 @@ public class GameNode : MonoBehaviour, IGameNode
         if (Type != GameNodeType.Internet)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            healthBar.current = 100;
+            healthBar.maximum = life;
+            healthBar.current = life;
         }
         else
         {

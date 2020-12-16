@@ -18,8 +18,8 @@ public class ProgressBar : MonoBehaviour
 #endif
 
     [SerializeField] public int current;
+    [SerializeField] public int maximum;
     [SerializeField] private int _minimun;
-    [SerializeField] private int _maximum;
     [SerializeField] private Image _mask;
     [SerializeField] private Image _fill;
     [SerializeField] private Color _color;
@@ -32,7 +32,7 @@ public class ProgressBar : MonoBehaviour
     private void GetCurrentFill()
     {
         float currentOffset = current - _minimun;
-        float maximumOffset = _maximum - _minimun;
+        float maximumOffset = maximum - _minimun;
         float fillAmount = currentOffset / maximumOffset;
         _mask.fillAmount = fillAmount;
         _fill.color = _color;

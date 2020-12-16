@@ -3512,6 +3512,7 @@ MonoBehaviour:
   state: 1
   foundEnemy: 0
   newWave: 0
+  waveCounter: 0
   waves:
   - virusAmount: 1
     spawnerRate: 1

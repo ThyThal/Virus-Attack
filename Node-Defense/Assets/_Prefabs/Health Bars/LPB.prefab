@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 497622097178705101}
   - component: {fileID: 381800734979359779}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Linear Progress Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 100
+  maximum: 0
   _minimun: 0
-  _maximum: 100
   _mask: {fileID: 7066873114365178479}
   _fill: {fileID: 1719098285197544162}
   _color: {r: 1, g: 0, b: 0, a: 0.49411765}
