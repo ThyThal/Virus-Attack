@@ -18,7 +18,7 @@ public class PowerUpManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        STACK_LIMIT = positions.Count;
+        STACK_LIMIT = positions.Count; 
         powerUps = new Stack();
         stackPositions = new List<Vector2>();
 
@@ -76,6 +76,16 @@ public class PowerUpManager : MonoBehaviour
         if (PowerUpIsActive())
         {
             activePowerUp = null;
+
+            UpdateInteractableState(true);
+        }
+    }
+
+    public void DeActiveDestroyPowerUp()
+    {
+        if (PowerUpIsActive())
+        {
+            Destroy(activePowerUp.gameObject);
 
             UpdateInteractableState(true);
         }

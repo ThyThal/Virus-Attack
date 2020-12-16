@@ -36,7 +36,8 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private Vector3 nodePos;
     [SerializeField] private float scale;
     [SerializeField] private float originalDamage;
-    [SerializeField]private PowerUp powerUp;
+    [SerializeField] private PowerUp powerUp;
+    [SerializeField] public int powerUpLevel;
 
     [Header("Edges")]
     [SerializeField] public List<GameObject> edgesRenderers;
@@ -139,23 +140,24 @@ public class GameNode : MonoBehaviour, IGameNode
         {
             if (powerUp.type == PowerUpType.Antivirus)
             {
-                damage = (int)(originalDamage * damageMultiplier);
+                damage = (int)(originalDamage * (damageMultiplier + powerUpLevel));
             }
         }
 
         v.GetDamage(damage);
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(int dmg)
     {
         if (life > 0)
         {
-            damage = (int)(damage / resistance);
+            var ogDamage = dmg;
+            dmg = (int)(dmg / (resistance + (powerUpLevel/2)));
 
             if (powerUp != null && powerUp.type == PowerUpType.FireWall)
-                damage = damage / 2;
+                dmg = dmg / 2;
 
-            life -= damage;
+            life -= dmg;
             healthBar.current = life;
         }
 
