@@ -706,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cdc2cc716ce1914ebeaf925f0c38d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: DevGrafo
+  gameScene: GameScene
   menuScene: MainMenu
   conditionScene: FinishScreen
   hasWon: 0
