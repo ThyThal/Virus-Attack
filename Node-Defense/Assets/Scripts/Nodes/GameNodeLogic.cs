@@ -22,17 +22,19 @@ public class GameNodeLogic : MonoBehaviour
                 gameNode.powerUpLevel += 1;
                 levelText.text = $"Level: {gameNode.powerUpLevel}";
                 PowerUpManager.instance.DeActivePowerUp();
-                return;
             }
         }
 
-        if (gameNode.PowerUp.type == PowerUpManager.instance.activePowerUp.type && gameNode.Type != GameNodeType.Internet)
+        if (PowerUpManager.instance.activePowerUp != null)
         {
-            gameNode._sourceUpgrade.PlayOneShot(gameNode._upgradeAudio);
-            gameNode.powerUpLevel += 1;
-            levelText.text = $"Level: {gameNode.powerUpLevel}";
-            PowerUpManager.instance.activePowerUp.gameObject.SetActive(false);
-            PowerUpManager.instance.DeActiveDestroyPowerUp();
+            if (gameNode.PowerUp.type == PowerUpManager.instance.activePowerUp.type && gameNode.Type != GameNodeType.Internet)
+            {
+                gameNode._sourceUpgrade.PlayOneShot(gameNode._upgradeAudio);
+                gameNode.powerUpLevel += 1;
+                levelText.text = $"Level: {gameNode.powerUpLevel}";
+                PowerUpManager.instance.activePowerUp.gameObject.SetActive(false);
+                PowerUpManager.instance.DeActiveDestroyPowerUp();
+            }
         }
     }
 }
