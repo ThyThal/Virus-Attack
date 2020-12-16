@@ -74,7 +74,7 @@ public class NodeManager : MonoBehaviour
                 vertex[nodeID] = vertexInit[nodeID];
                 if (spawnedNodes == basicNodes)
                 {
-                    Debug.Log("Finish");
+
                 }
 
                 else
@@ -223,9 +223,6 @@ public class NodeManager : MonoBehaviour
         lineEdge.GetComponent<LineRenderer>().SetPosition(0, Vector3.zero); // Posicion de Origen.
 
         Vector3 vectorToTarget = (_foundDestiny.transform.position - _foundOrigin.transform.position) * _scale; // FALLA
-
-        if (vectorToTarget == Vector3.zero) {
-            Debug.Log(vectorToTarget); }
 
         lineEdge.GetComponent<LineRenderer>().SetPosition(1, vectorToTarget);
         currentNode.edgesRenderers.Add(lineEdge);
