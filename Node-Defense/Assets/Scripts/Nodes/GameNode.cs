@@ -39,6 +39,13 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private PowerUp powerUp;
     [SerializeField] public int powerUpLevel;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource _sourceAttack;
+    [SerializeField] private AudioSource _sourceDie;
+    [SerializeField] public AudioSource _sourceUpgrade;
+    [SerializeField] public AudioClip _upgradeAudio;
+
+
     [Header("Edges")]
     [SerializeField] public List<GameObject> edgesRenderers;
 
@@ -144,6 +151,7 @@ public class GameNode : MonoBehaviour, IGameNode
             }
         }
 
+        _sourceAttack.Play();
         v.GetDamage(damage);
     }
 
@@ -179,6 +187,7 @@ public class GameNode : MonoBehaviour, IGameNode
         GameManager.Instance.ScoreUpdate(score);
         this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
+        _sourceDie.Play();
         healthBar.transform.GetComponent<Image>().color = new Color(1f, 0.47f, 0.47f);
     }
 

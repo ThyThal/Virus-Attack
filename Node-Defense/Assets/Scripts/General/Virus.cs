@@ -7,11 +7,13 @@ public class Virus : MonoBehaviour
     [Header("Combat Stats")]
     [SerializeField] int life;
     [SerializeField] private float weakness;
+    [SerializeField] public float defense = 4f;
     [SerializeField] public float damage;
     [SerializeField] public float speed;
     [SerializeField] private float attackTimer = 2;
 
     [Header("Extras")]
+    [SerializeField] private AudioSource _dieSource;
     [SerializeField] public bool hasSpawned;
     [SerializeField] private ProgressBar _healthBar;
     [SerializeField] private int score;
@@ -156,7 +158,7 @@ public class Virus : MonoBehaviour
     {
         if (life > 0)
         {
-            damage = (int)(damage * weakness);
+            damage = (int)(damage * weakness)/ (int)(defense/4);
             life -= damage;
             _healthBar.current = life;
         }
@@ -168,6 +170,8 @@ public class Virus : MonoBehaviour
 
     public void HasDied()
     {
+
+        GameManager.Instance.PlayEnemyDie();
         GameManager.Instance.ScoreUpdate(score);
         LevelManager.instance.RemoveVirus(gameObject);
         Destroy(gameObject);

@@ -8,8 +8,13 @@ public class PowerUp : MonoBehaviour
 
     [SerializeField] public PowerUpType type;
     [SerializeField] public Text levelText;
+    [SerializeField] public AudioSource audioSource;
     public bool inStack;
 
+    public void PlaySelect()
+    {
+        audioSource.Play();
+    }
 
 }
 

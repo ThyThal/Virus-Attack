@@ -28,18 +28,23 @@ public class MenuScript : MonoBehaviour
 
     void Awake()
     {
-        if(GameManager.Instance != null) { 
+        if(GameManager.Instance != null)
+        {
+            
+
             if (GameManager.Instance.hasWon == true)
             {
+                if (text == null) return;
                 Debug.Log("Win");
-                conditionText = "You Win";
+                conditionText = "YOU WIN";
                 text.text = conditionText;
             }
 
             if (GameManager.Instance.hasWon == false)
             {
+                if (text == null) return;
                 Debug.Log("Lose");
-                conditionText = "Game Over";
+                conditionText = "GAME OVER";
                 text.text = conditionText;
             }
 
