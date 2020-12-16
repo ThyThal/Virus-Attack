@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 50
+  hierarchy: 8
   weakness: 1.5
   damage: 10
   speed: 2

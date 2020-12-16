@@ -6,7 +6,7 @@ public class ABB : IABB
 {
     public NodoABB raiz;
 
-    public int Raiz()
+    public Virus Raiz()
     {
         return raiz.info;
     }
@@ -31,24 +31,24 @@ public class ABB : IABB
         return raiz.hijoIzq;
     }
 
-    public void AgregarElem(ref NodoABB raiz, int x)
+    public void AgregarElem(ref NodoABB raiz, Virus x)
     {
         if (raiz == null)
         {
             raiz = new NodoABB();
             raiz.info = x;
         }
-        else if (raiz.info > x)
+        else if (raiz.info.hierarchy > x.hierarchy)
         {
             AgregarElem(ref raiz.hijoIzq, x);
         }
-        else if (raiz.info < x)
+        else if (raiz.info.hierarchy < x.hierarchy)
         {
             AgregarElem(ref raiz.hijoDer, x);
         }
     }
 
-    public void EliminarElem(ref NodoABB raiz, int x)
+    public void EliminarElem(ref NodoABB raiz, Virus x)
     {
         if (raiz != null)
         {
@@ -66,7 +66,7 @@ public class ABB : IABB
                 raiz.info = this.menor(raiz.hijoDer);
                 EliminarElem(ref raiz.hijoDer, raiz.info);
             }
-            else if (raiz.info < x)
+            else if (raiz.info.hierarchy < x.hierarchy)
             {
                 EliminarElem(ref raiz.hijoDer, x);
             }
@@ -77,7 +77,7 @@ public class ABB : IABB
         }
     }
 
-    public int mayor(NodoABB a)
+    public Virus mayor(NodoABB a)
     {
         if (a.hijoDer == null)
         {
@@ -89,7 +89,7 @@ public class ABB : IABB
         }
     }
 
-    public int menor(NodoABB a)
+    public Virus menor(NodoABB a)
     {
         if (a.hijoIzq == null)
         {

@@ -33,6 +33,11 @@ public class VirusManager : MonoBehaviour
         }
         virusTypes = new ABB();
         virusTypes.InicializarArbol();
+
+        foreach(GameObject virusGo in prefabs)
+        {
+            virusTypes.AgregarElem(ref virusTypes.raiz, virusGo.GetComponent<Virus>());
+        }
     }
 
     /* Almacena el power up en la cola */
@@ -81,8 +86,8 @@ public class VirusManager : MonoBehaviour
     {
         for(int i = 0; i< totalItems ; i++)
         {
-            //int typeVirus = virusTypes.HijoDer.
-            var newItem = Instantiate(prefabs[Random.Range(0, prefabs.Count)], parent);
+            int typeVirus = Random.Range(0, 9);
+            var newItem = Instantiate(GetVirus(typeVirus).gameObject, parent);
             EnqueueItem(newItem);
         }
     }
@@ -92,4 +97,34 @@ public class VirusManager : MonoBehaviour
         items.Clear();
     }
 
+    private Virus GetVirus(int hierachy)
+    {
+        return GetVirusNodeABB(virusTypes.raiz, hierachy);
+    }
+
+    private Virus GetVirusNodeABB(NodoABB node, int hierachy)
+    {
+        if (node != null) { 
+            Virus virus;
+            if (node.info.hierarchy == hierachy)
+                return node.info;
+            else if(node.info.hierarchy < hierachy)
+            {
+                virus = GetVirusNodeABB(node.hijoDer, hierachy);
+                if (virus != null)
+                    return virus;
+                else
+                    return null;
+            }
+            else
+            {
+                virus = GetVirusNodeABB(node.hijoIzq, hierachy);
+                if (virus != null)
+                    return virus;
+                else
+                    return node.info;
+            }
+        }
+        return null;
+    }
 }
