@@ -102,8 +102,9 @@ MonoBehaviour:
   damage: 7
   speed: 3
   attackTimer: 1.5
+  hasSpawned: 0
   _healthBar: {fileID: 1193613192271706052}
-  score: 35
+  score: 45
   hierarchy: 6
   target: {fileID: 0}
   direction: {x: 0, y: 0}
