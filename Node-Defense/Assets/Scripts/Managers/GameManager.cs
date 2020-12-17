@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string conditionScene;
     [SerializeField] public bool hasWon;
     [SerializeField] public MenuScript menuScript;
+    [SerializeField] private AudioSource _dieSource;
 
     [SerializeField] public List<int> scoreArray;
     public Database database;
@@ -108,5 +109,11 @@ public class GameManager : MonoBehaviour
     {
         score += Random.Range(25, 137);
         ManagerUI.instance.UpdateScore();
+    }
+
+    public void PlayEnemyDie()
+    {
+        if (_dieSource != null)
+            _dieSource.Play();
     }
 }

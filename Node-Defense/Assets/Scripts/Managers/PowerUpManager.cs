@@ -18,7 +18,7 @@ public class PowerUpManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        STACK_LIMIT = positions.Count;
+        STACK_LIMIT = positions.Count; 
         powerUps = new Stack();
         stackPositions = new List<Vector2>();
 
@@ -55,6 +55,7 @@ public class PowerUpManager : MonoBehaviour
     {
         var powerUp = powerUps.Pop() as GameObject; /* OBTIENE OBJETO Y REMUEVE DE LA PILA */
         activePowerUp = powerUp.GetComponent<PowerUp>();
+        activePowerUp.PlaySelect();
         activePowerUp.transform.position = powerUpActivePosition.position;
         activePowerUp.inStack = false;
     }
@@ -76,6 +77,17 @@ public class PowerUpManager : MonoBehaviour
         if (PowerUpIsActive())
         {
             activePowerUp = null;
+
+            UpdateInteractableState(true);
+        }
+    }
+
+    public void DeActiveDestroyPowerUp()
+    {
+        if (PowerUpIsActive())
+        {
+            activePowerUp.gameObject.SetActive(false);
+            activePowerUp = null;           
 
             UpdateInteractableState(true);
         }

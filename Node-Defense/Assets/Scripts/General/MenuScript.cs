@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
@@ -11,14 +12,18 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public string conditionText;
     [SerializeField] public List<Text> scoresPositions;
 
+    [Header("Menus")]
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private GameObject _helpMenu;
+    [SerializeField] private Animator _helpAnimator;
+    [SerializeField] private bool _isHelp;
+
     [Header("Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button helpButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button backButton;
-    [SerializeField] private Button menuButton;
-    [SerializeField] private Text text;
-
+    [SerializeField] private TextMeshProUGUI text;
 
     [SerializeField] private AudioSource soundButton;
     [SerializeField] private AudioClip hoverAudio;
@@ -27,20 +32,27 @@ public class MenuScript : MonoBehaviour
 
     [SerializeField] public Animator transition;
 
+    private static readonly int Show = Animator.StringToHash("Show");
+
     void Awake()
     {
-        if(GameManager.Instance != null) { 
+        if(GameManager.Instance != null)
+        {
+            
+
             if (GameManager.Instance.hasWon == true)
             {
+                if (text == null) return;
                 Debug.Log("Win");
-                conditionText = "You Win";
+                conditionText = "YOU WIN";
                 text.text = conditionText;
             }
 
             if (GameManager.Instance.hasWon == false)
             {
+                if (text == null) return;
                 Debug.Log("Lose");
-                conditionText = "Game Over";
+                conditionText = "GAME OVER";
                 text.text = conditionText;
             }
 
@@ -63,16 +75,20 @@ public class MenuScript : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(scene);
+        ClickSound();
     }
 
     public void OnClickMenu()
     {
         StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
+        ClickSound();
     }
 
     public void OnClickHelp()
     {
-        StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
+        _isHelp = true;
+        _helpAnimator.SetBool(Show, true);
+        ClickSound();
     }
 
     public void OnClickExit()
@@ -80,13 +96,16 @@ public class MenuScript : MonoBehaviour
         #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 
-        #endif
+#endif
+        ClickSound();
         Application.Quit();
     }
 
     public void OnClickBack()
     {
-
+        _helpAnimator.SetBool(Show, false);
+        _isHelp = false;
+        ClickSound();
     }
 
     public void ClickSound()
@@ -103,5 +122,15 @@ public class MenuScript : MonoBehaviour
         {
             soundButton.PlayOneShot(hoverAudio);
         }
+    }
+
+    public void MainMenuHide()
+    {
+        _mainMenu.SetActive(false);
+    }
+
+    public void MainMenuShow()
+    {
+        _mainMenu.SetActive(true);
     }
 }

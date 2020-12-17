@@ -36,7 +36,15 @@ public class GameNode : MonoBehaviour, IGameNode
     [SerializeField] private Vector3 nodePos;
     [SerializeField] private float scale;
     [SerializeField] private float originalDamage;
-    [SerializeField]private PowerUp powerUp;
+    [SerializeField] private PowerUp powerUp;
+    [SerializeField] public int powerUpLevel;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource _sourceAttack;
+    [SerializeField] private AudioSource _sourceDie;
+    [SerializeField] public AudioSource _sourceUpgrade;
+    [SerializeField] public AudioClip _upgradeAudio;
+
 
     [Header("Edges")]
     [SerializeField] public List<GameObject> edgesRenderers;
@@ -76,7 +84,8 @@ public class GameNode : MonoBehaviour, IGameNode
         if (Type != GameNodeType.Internet)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            healthBar.current = 100;
+            healthBar.maximum = life;
+            healthBar.current = life;
         }
         else
         {
@@ -126,7 +135,7 @@ public class GameNode : MonoBehaviour, IGameNode
         {
             targetVirus = GameObject.FindGameObjectWithTag("Virus");
 
-            if (targetVirus != null)
+            if ((targetVirus != null) && (targetVirus.GetComponent<Virus>().hasSpawned == true))
             {
                 currentTarget = targetVirus.GetComponent<Virus>();
             }
@@ -139,23 +148,25 @@ public class GameNode : MonoBehaviour, IGameNode
         {
             if (powerUp.type == PowerUpType.Antivirus)
             {
-                damage = (int)(originalDamage * damageMultiplier);
+                damage = (int)(originalDamage * (damageMultiplier + powerUpLevel));
             }
         }
 
+        _sourceAttack.Play();
         v.GetDamage(damage);
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(int dmg)
     {
         if (life > 0)
         {
-            damage = (int)(damage / resistance);
+            var ogDamage = dmg;
+            dmg = (int)(dmg / (resistance + (powerUpLevel/2)));
 
             if (powerUp != null && powerUp.type == PowerUpType.FireWall)
-                damage = damage / 2;
+                dmg = dmg / 2;
 
-            life -= damage;
+            life -= dmg;
             healthBar.current = life;
         }
 
@@ -177,6 +188,7 @@ public class GameNode : MonoBehaviour, IGameNode
         GameManager.Instance.ScoreUpdate(score);
         this.GetComponent<Button>().interactable = false;
         spriteRenderer.color = new Color(1f, 0.47f, 0.47f);
+        _sourceDie.Play();
         healthBar.transform.GetComponent<Image>().color = new Color(1f, 0.47f, 0.47f);
     }
 

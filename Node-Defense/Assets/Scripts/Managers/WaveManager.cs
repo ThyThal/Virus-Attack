@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
     static public WaveManager instance;
 
     [Header("Scale Difficulty")]
-    [SerializeField] private float difficultyIncrease = 5;
+    [SerializeField] private float difficultyIncrease = 1;
 
     [Header("Variables")]
     [SerializeField] private int totalVirus;
@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private SpawnState state = SpawnState.WAITING;
     [SerializeField] private bool foundEnemy;
     [SerializeField] private bool newWave;
+    [SerializeField] private int waveCounter = 0;
 
     public enum SpawnState { SPAWNING, WAITING }
     [SerializeField] public Wave[] waves;
@@ -78,6 +79,7 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(1f * waveNumber.spawnerRate);
         }
 
+        waveCounter = waveCounter + 1;
         state = SpawnState.WAITING;
         newWave = false;
     }
@@ -85,8 +87,13 @@ public class WaveManager : MonoBehaviour
     public void SpawnEnemy(GameObject virus)
     {
         var stats = virus.GetComponent<Virus>();
-        stats.speed += difficultyIncrease;
-        stats.damage += difficultyIncrease;
+
+        if (waveCounter >= 5)
+        {
+            stats.speed += difficultyIncrease/10;
+            stats.defense += difficultyIncrease * 5;
+            stats.damage += difficultyIncrease;
+        }
 
         LevelManager.instance.SpawnVirus(virus);
     }
