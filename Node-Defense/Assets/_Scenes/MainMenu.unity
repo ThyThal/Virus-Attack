@@ -1678,11 +1678,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Transition
       objectReference: {fileID: 0}
-    - target: {fileID: 2642404632976137396, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8480480680319882980, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1736,36 +1731,6 @@ PrefabInstance:
     - target: {fileID: 8480480680319882980, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8625404393763480006, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8625404393763480006, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8625404393763480006, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8625404393763480006, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8625404393763480011, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8625404393920893832, guid: 4e4ac57d9866b454f9a0a8c2861575d9,
-        type: 3}
-      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2598,6 +2563,11 @@ PrefabInstance:
       propertyPath: _dieSource
       value: 
       objectReference: {fileID: 792321870}
+    - target: {fileID: 7923608573697991069, guid: c6ff27ff9d9e40b4ebcafdc32f8a43ae,
+        type: 3}
+      propertyPath: transition
+      value: 
+      objectReference: {fileID: 286188703}
     - target: {fileID: 7923608573697991070, guid: c6ff27ff9d9e40b4ebcafdc32f8a43ae,
         type: 3}
       propertyPath: m_Name

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string conditionScene;
     [SerializeField] public bool hasWon;
     [SerializeField] public MenuScript menuScript;
+    [SerializeField] public Animator transition;
     [SerializeField] private AudioSource _dieSource;
 
     [SerializeField] public List<int> scoreArray;
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() // <====={ SCENE LOSE }
     {
-        SceneManager.LoadScene(conditionScene);
+        StartCoroutine(TransitionScene(conditionScene));
 
         RankingModel ranking = new RankingModel("Perdio", WaveManager.instance.currentWave, score);
         database.AddRankingRecord(ranking);
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void Win() // <====={ SCENE WIN }
     {
-        SceneManager.LoadScene(conditionScene);
+        StartCoroutine(TransitionScene(conditionScene));
 
         RankingModel ranking = new RankingModel("Gano", WaveManager.instance.currentWave, score);
         database.AddRankingRecord(ranking);
@@ -115,5 +116,12 @@ public class GameManager : MonoBehaviour
     {
         if (_dieSource != null)
             _dieSource.Play();
+    }
+
+    public IEnumerator TransitionScene(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(scene);
     }
 }
