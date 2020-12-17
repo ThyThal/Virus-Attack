@@ -12,19 +12,25 @@ public class MenuScript : MonoBehaviour
     [SerializeField] public string conditionText;
     [SerializeField] public List<Text> scoresPositions;
 
+    [Header("Menus")]
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private GameObject _helpMenu;
+    [SerializeField] private Animator _helpAnimator;
+    [SerializeField] private bool _isHelp;
+
     [Header("Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button helpButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button backButton;
-    [SerializeField] private Button menuButton;
     [SerializeField] private TextMeshProUGUI text;
-
 
     [SerializeField] private AudioSource soundButton;
     [SerializeField] private AudioClip hoverAudio;
     [SerializeField] private AudioClip clickAudio;
     [SerializeField] public bool hasClicked;
+
+    private static readonly int Show = Animator.StringToHash("Show");
 
     void Awake()
     {
@@ -60,16 +66,20 @@ public class MenuScript : MonoBehaviour
     public void OnClickPlay()
     {
         SceneManager.LoadScene(GameManager.Instance.gameScene);
+        ClickSound();
     }
 
     public void OnClickMenu()
     {
         SceneManager.LoadScene(GameManager.Instance.menuScene);
+        ClickSound();
     }
 
     public void OnClickHelp()
     {
-
+        _isHelp = true;
+        _helpAnimator.SetBool(Show, true);
+        ClickSound();
     }
 
     public void OnClickExit()
@@ -77,13 +87,16 @@ public class MenuScript : MonoBehaviour
         #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 
-        #endif
+#endif
+        ClickSound();
         Application.Quit();
     }
 
     public void OnClickBack()
     {
-
+        _helpAnimator.SetBool(Show, false);
+        _isHelp = false;
+        ClickSound();
     }
 
     public void ClickSound()
@@ -100,5 +113,15 @@ public class MenuScript : MonoBehaviour
         {
             soundButton.PlayOneShot(hoverAudio);
         }
+    }
+
+    public void MainMenuHide()
+    {
+        _mainMenu.SetActive(false);
+    }
+
+    public void MainMenuShow()
+    {
+        _mainMenu.SetActive(true);
     }
 }
