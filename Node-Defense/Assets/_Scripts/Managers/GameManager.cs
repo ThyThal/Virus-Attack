@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string menuScene;
     [SerializeField] public string conditionScene;
     [SerializeField] public bool hasWon;
+    [SerializeField] private bool isDead;
+    [SerializeField] public int deadVirus;
     [SerializeField] public MenuScript menuScript;
+    [SerializeField] public Animator transition;
     [SerializeField] private AudioSource _dieSource;
 
     [SerializeField] public List<int> scoreArray;
@@ -57,25 +60,31 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() // <====={ SCENE LOSE }
     {
-        SceneManager.LoadScene(conditionScene);
+        if (!isDead)
+        {
+            StartCoroutine(TransitionScene(conditionScene));
+            isDead = true;
 
-        RankingModel ranking = new RankingModel("Perdio", WaveManager.instance.currentWave, score);
-        database.AddRankingRecord(ranking);
-        GetScores();
-        SortScores();
+            RankingModel ranking = new RankingModel("Perdio", WaveManager.instance.currentWave, score);
+            database.AddRankingRecord(ranking);
+            GetScores();
+            SortScores();
 
-        hasWon = false;
+            isDead = true;
+            hasWon = false;
+        }
     }
 
     public void Win() // <====={ SCENE WIN }
     {
-        SceneManager.LoadScene(conditionScene);
+        StartCoroutine(TransitionScene(conditionScene));
 
         RankingModel ranking = new RankingModel("Gano", WaveManager.instance.currentWave, score);
         database.AddRankingRecord(ranking);
         GetScores();
         SortScores();
 
+        isDead = false;
         hasWon = true;
     }
 
@@ -113,7 +122,21 @@ public class GameManager : MonoBehaviour
 
     public void PlayEnemyDie()
     {
+        deadVirus = deadVirus + 1;
         if (_dieSource != null)
             _dieSource.Play();
+    }
+
+    public IEnumerator TransitionScene(string scene)
+    {
+        if (scene == "GameScene")
+        {
+            isDead = false;
+            deadVirus = 0;
+        }
+
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(scene);
     }
 }

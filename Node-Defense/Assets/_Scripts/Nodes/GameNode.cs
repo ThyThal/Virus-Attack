@@ -15,7 +15,7 @@ public class GameNode : MonoBehaviour, IGameNode
 {
     [Header("Combat Stats")]
     [SerializeField] int life;
-    [SerializeField] private float resistance;
+    [SerializeField] private float resistance = 1;
     [SerializeField] private int damage;
     [SerializeField] private int damageMultiplier = 2;
     [SerializeField] private float attackTimer;
@@ -148,7 +148,7 @@ public class GameNode : MonoBehaviour, IGameNode
         {
             if (powerUp.type == PowerUpType.Antivirus)
             {
-                damage = (int)(originalDamage * (damageMultiplier + powerUpLevel));
+                damage = (int)(originalDamage * (damageMultiplier + powerUpLevel/2));
             }
         }
 
@@ -161,7 +161,7 @@ public class GameNode : MonoBehaviour, IGameNode
         if (life > 0)
         {
             var ogDamage = dmg;
-            dmg = (int)(dmg / (resistance + (powerUpLevel/2)));
+            dmg = (int)(dmg / (resistance + (powerUpLevel/3))); // GET DAMAGE FORMULA
 
             if (powerUp != null && powerUp.type == PowerUpType.FireWall)
                 dmg = dmg / 2;

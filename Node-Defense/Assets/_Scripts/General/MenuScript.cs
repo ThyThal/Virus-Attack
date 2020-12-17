@@ -68,20 +68,13 @@ public class MenuScript : MonoBehaviour
     public void OnClickPlay()
     {
         ClickSound();
-        StartCoroutine(TransitionScene(GameManager.Instance.gameScene));
-    }
-
-    IEnumerator TransitionScene(string scene)
-    {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(scene);
+        StartCoroutine(GameManager.Instance.TransitionScene(GameManager.Instance.gameScene));
     }
 
     public void OnClickMenu()
     {
         ClickSound();
-        StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
+        StartCoroutine(GameManager.Instance.TransitionScene(GameManager.Instance.menuScene));
     }
 
     public void OnClickHelp()

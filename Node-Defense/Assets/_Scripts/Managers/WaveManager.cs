@@ -7,8 +7,11 @@ public class WaveManager : MonoBehaviour
     static public WaveManager instance;
 
     [Header("Scale Difficulty")]
+    [SerializeField] private ProgressBar _healthBar;
+    [SerializeField] private Animator _levelIncrease;
     [SerializeField] private float difficultyIncrease = 1;
-
+    [SerializeField] private float originalDifficultyIncrease;
+    
     [Header("Variables")]
     [SerializeField] private int totalVirus;
     [SerializeField] public int currentWave;
@@ -36,13 +39,13 @@ public class WaveManager : MonoBehaviour
         {
             instance = this;
         }
-
         originalTimer = searchTimer;
-
+        originalDifficultyIncrease = difficultyIncrease;
     }
 
     public void Update()
     {
+        _healthBar.current = GameManager.Instance.deadVirus;
         if (state == SpawnState.WAITING)
         {
             if (!EnemyIsAlive() && !newWave)
@@ -59,6 +62,12 @@ public class WaveManager : MonoBehaviour
 
         if (state != SpawnState.SPAWNING)
         {
+            if (currentWave == 0 && GameManager.Instance.deadVirus == 15)
+            {
+                GameManager.Instance.deadVirus = 0;
+                _levelIncrease.SetTrigger("ShowMessage");
+            }
+
             StartCoroutine(SpawnWave(waves[currentWave]));
         }
     }
@@ -92,7 +101,8 @@ public class WaveManager : MonoBehaviour
         {
             stats.speed += difficultyIncrease/10;
             stats.defense += difficultyIncrease * 5;
-            stats.damage += difficultyIncrease;
+            stats.damage += difficultyIncrease + difficultyIncrease/3;
+            waveCounter = 0;
         }
 
         LevelManager.instance.SpawnVirus(virus);
@@ -139,7 +149,7 @@ public class WaveManager : MonoBehaviour
     private void IncreaseStats()
     {
         nextWave = 0;
-        difficultyIncrease += difficultyIncrease;
+        difficultyIncrease += originalDifficultyIncrease;
     }
 
 }

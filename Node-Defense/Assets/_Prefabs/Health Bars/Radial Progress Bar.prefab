@@ -70,7 +70,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -237,9 +237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec71b1e9c304476449cb0067ee0bd9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: 0
+  current: 50
+  maximum: 100
   _minimun: 0
-  _maximum: 100
   _mask: {fileID: 4967652549287027436}
   _fill: {fileID: 4967652549287027436}
   _color: {r: 1, g: 0, b: 0, a: 1}
