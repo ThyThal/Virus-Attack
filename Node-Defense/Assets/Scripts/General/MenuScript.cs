@@ -25,6 +25,8 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private AudioClip clickAudio;
     [SerializeField] public bool hasClicked;
 
+    [SerializeField] public Animator transition;
+
     void Awake()
     {
         if(GameManager.Instance != null) { 
@@ -53,17 +55,24 @@ public class MenuScript : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.LoadScene(GameManager.Instance.gameScene);
+        StartCoroutine(TransitionScene(GameManager.Instance.gameScene));
+    }
+
+    IEnumerator TransitionScene(string scene)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(scene);
     }
 
     public void OnClickMenu()
     {
-        SceneManager.LoadScene(GameManager.Instance.menuScene);
+        StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
     }
 
     public void OnClickHelp()
     {
-
+        StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
     }
 
     public void OnClickExit()
