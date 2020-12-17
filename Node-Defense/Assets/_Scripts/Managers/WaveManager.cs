@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
 
     [Header("Scale Difficulty")]
     [SerializeField] private ProgressBar _healthBar;
+    [SerializeField] private Animator _levelIncrease;
     [SerializeField] private float difficultyIncrease = 1;
     [SerializeField] private float originalDifficultyIncrease;
     
@@ -63,9 +64,10 @@ public class WaveManager : MonoBehaviour
 
         if (state != SpawnState.SPAWNING)
         {
-            if (currentWave == 0)
+            if (currentWave == 0 && GameManager.Instance.deadVirus == 15)
             {
                 GameManager.Instance.deadVirus = 0;
+                _levelIncrease.SetTrigger("ShowMessage");
             }
 
             StartCoroutine(SpawnWave(waves[currentWave]));
