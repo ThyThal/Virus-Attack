@@ -86,7 +86,7 @@ public class VirusManager : MonoBehaviour
     {
         for(int i = 0; i< totalItems ; i++)
         {
-            int typeVirus = Random.Range(0, 9);
+            int typeVirus = Random.Range(0, 10);
             var newItem = Instantiate(GetVirus(typeVirus).gameObject, parent);
             EnqueueItem(newItem);
         }

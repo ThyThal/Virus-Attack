@@ -80,7 +80,7 @@ public class Database
             dbconn.Open();
 
             IDbCommand dbcmd = dbconn.CreateCommand();
-            string sqlQuery = "SELECT Id, Name, Wave, Score FROM RankingRecords";
+            string sqlQuery = "SELECT Id, Name, Wave, Score FROM RankingRecords WHERE Score > 0";
             dbcmd.CommandText = sqlQuery;
 
             IDataReader reader = dbcmd.ExecuteReader();
