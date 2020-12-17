@@ -67,6 +67,7 @@ public class MenuScript : MonoBehaviour
 
     public void OnClickPlay()
     {
+        ClickSound();
         StartCoroutine(TransitionScene(GameManager.Instance.gameScene));
     }
 
@@ -75,13 +76,12 @@ public class MenuScript : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(scene);
-        ClickSound();
     }
 
     public void OnClickMenu()
     {
-        StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
         ClickSound();
+        StartCoroutine(TransitionScene(GameManager.Instance.menuScene));
     }
 
     public void OnClickHelp()
@@ -95,8 +95,7 @@ public class MenuScript : MonoBehaviour
     {
         #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
-
-#endif
+        #endif
         ClickSound();
         Application.Quit();
     }
