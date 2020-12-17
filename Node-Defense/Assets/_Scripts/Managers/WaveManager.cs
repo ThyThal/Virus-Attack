@@ -39,10 +39,8 @@ public class WaveManager : MonoBehaviour
         {
             instance = this;
         }
-
         originalTimer = searchTimer;
         originalDifficultyIncrease = difficultyIncrease;
-
     }
 
     public void Update()
