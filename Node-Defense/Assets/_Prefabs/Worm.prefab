@@ -98,12 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8512d291e73acec46872f92c573f1d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 60
+  life: 100
   weakness: 2
   defense: 4
   damage: 7
   speed: 3
-  attackTimer: 1.5
+  attackTimer: 1
   _dieSource: {fileID: 4186734605912528349}
   hasSpawned: 0
   _healthBar: {fileID: 980783213518509940}

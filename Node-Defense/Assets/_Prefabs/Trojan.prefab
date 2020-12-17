@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8512d291e73acec46872f92c573f1d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 130
+  life: 150
   weakness: 1
   defense: 4
   damage: 17

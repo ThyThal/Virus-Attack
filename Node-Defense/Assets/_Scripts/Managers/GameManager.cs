@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public string menuScene;
     [SerializeField] public string conditionScene;
     [SerializeField] public bool hasWon;
+    [SerializeField] public int deadVirus;
     [SerializeField] public MenuScript menuScript;
     [SerializeField] public Animator transition;
     [SerializeField] private AudioSource _dieSource;
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayEnemyDie()
     {
+        deadVirus = deadVirus + 1;
         if (_dieSource != null)
             _dieSource.Play();
     }
