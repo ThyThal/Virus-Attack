@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
         if (scene == "GameScene")
         {
             isDead = false;
+            deadVirus = 0;
         }
 
         transition.SetTrigger("Start");
